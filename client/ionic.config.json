@@ -1,0 +1,8 @@
+{
+  "name": "opticloset",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "id": "9633566a"
+}
