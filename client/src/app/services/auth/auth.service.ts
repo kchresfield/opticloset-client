@@ -10,8 +10,8 @@ export class AuthService {
   isLoggedIn$ = new Subject();
   isLoggedIn: Boolean = false;
   auth0 = new auth0.WebAuth({
-    clientID: process.env.AUTH0_CLIENT_ID,
-    domain: process.env.AUTH0_AUTH_DOMAIN,
+    clientID: 'ZKdP2yOEq4jyuK2IlTe0pvDSP5zXAPB4',
+    domain: 'opticloset.auth0.com',
     responseType: 'token id_token',
     // audience: 'https://YOUR_AUTH_DOMAIN/userinfo',
     redirectUri: 'http://localhost:8100/callback',
