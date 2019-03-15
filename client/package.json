@@ -29,6 +29,7 @@
     "@ionic/pro": "2.0.4",
     "@types/auth0-js": "^8.11.11",
     "auth0-js": "^9.10.0",
+    "aws-sdk": "^2.422.0",
     "cordova-android": "7.1.4",
     "cordova-browser": "5.0.4",
     "cordova-ios": "4.5.5",
