@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http'; // DND
 import { HttpModule } from '@angular/http';
+import { Camera } from '@ionic-native/camera/ngx';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { HttpModule } from '@angular/http';
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, HttpModule],
   providers: [
     StatusBar,
+    Camera,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
