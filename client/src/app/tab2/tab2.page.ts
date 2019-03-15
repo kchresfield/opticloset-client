@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-tab2',
@@ -7,22 +8,29 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-  photoTaken:any;
-  constructor(private camera: Camera) { }
-  opencamera(){
+  currentImage:any;
+  imgTxt: Text;
+  constructor(private camera: Camera, private http: HttpClient) { }
+  takePicture() {
     const options: CameraOptions = {
       quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
+      destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }
 
     this.camera.getPicture(options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64 (DATA_URL):
-      this.photoTaken = 'data:image/jpeg;base64,' + imageData;
+      this.currentImage = 'data:image/jpeg;base64,' + imageData;
+      this.imgTxt = imageData;
+      return this.currentImage;
     }, (err) => {
       // Handle error
-    });
+      console.log("Camera issue:" + err);
+    })
+      .then((picture) => {
+        this.http.post('http://localhost:8080/clothingImage', { picture }, {responseType: 'text'}).subscribe((response) => {
+            console.log(response);
+          });
+        })
   }
 }

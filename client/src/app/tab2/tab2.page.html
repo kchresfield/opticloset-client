@@ -7,6 +7,12 @@
 </ion-header>
 
 <ion-content>
-  <button ion-button (click)="opencamera()">Open Camera</button>
-  <p><img src="{{ photoTaken }}"></p>
+  <img [src]="currentImage" *ngIf="currentImage">
+  
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button (click)="takePicture()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+<div>{{imgTxt}}</div>
 </ion-content>
