@@ -14,7 +14,7 @@ export class AuthService {
     domain: 'opticloset.auth0.com',
     responseType: 'token id_token',
     // audience: 'https://YOUR_AUTH_DOMAIN/userinfo',
-    redirectUri: 'http://localhost:8100/callback',
+    redirectUri: 'http://localhost:8100/home',
     scope: 'openid'
   });
 
