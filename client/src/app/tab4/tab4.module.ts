@@ -25,7 +25,7 @@ export class Tab4PageModule {
   
   
   constructor(private http: HttpClient) {
-    this.http.get('http://localhost:8080', { responseType: 'text' }).subscribe((response) => {
+    this.http.get('http://localhost:8080', {responseType: 'text'}).subscribe((response) => {
       console.log(response);
     });
   }
