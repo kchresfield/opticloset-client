@@ -17,4 +17,15 @@ export class ApiService {
     callback(data);
     });
   }
+
+  addClothingItem(callback) {
+    this.httpClient.post(`${this.apiURL}/closet/1`, {
+      id_category: 1,
+      price: 120,
+      id_image: 1,
+      count_word: 0,
+    }).subscribe((data) => {
+      callback(data);
+    });
+  }
 }
