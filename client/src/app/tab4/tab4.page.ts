@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ClothingListK } from '../clothing-item-list';
+import { ClothingItem } from '../clothing-item';
 import { ApiService } from '../services/api/api.service';
 
 
@@ -9,6 +11,7 @@ import { ApiService } from '../services/api/api.service';
 })
 export class Tab4Page implements OnInit {
   closet: any;
+  closetK = ClothingListK;
   constructor(private apiService: ApiService) {}
 
   ngOnInit() {

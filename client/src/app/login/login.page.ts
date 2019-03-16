@@ -10,7 +10,7 @@ import { switchMap } from 'rxjs/operators';
 })
 export class LoginPage implements OnInit {
 
-  constructor( private authService: AuthService ) {
+  constructor(private authService: AuthService) {
   }
 
   ngOnInit() {

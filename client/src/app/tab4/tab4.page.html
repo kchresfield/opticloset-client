@@ -1,1 +1,28 @@
-<ion-content></ion-content>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Closet
+    </ion-title>
+    <!-- <ion-item ngFor="posts"></ion-item> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ul class="closetK" > 
+    <li *ngFor="let clothingItem of closetK">
+      <div class="clothingItem">{{clothingItem.type}}</div>
+      <img [src]="clothingItem.img" height="200" width="fixed">
+    </li> -->
+  </ul>
+    <ul class="closet">
+      <li *ngFor="let clothingItem of closet">
+        <div class="clothingItem">{{clothingItem.category}}</div>
+        <img [src]="clothingItem.imageUrl" height="200" width="fixed">
+      </li>
+    </ul>
+</ion-content>
+
+<!-- line 11/12 : *ngIf="(closet | async)" -->
+<!-- <li *ngFor="let clothing-item of (closet | async)"></li> -->
+<!-- *ngIf="clothingItem.img" -->
+<!-- *ngIf="clothingItem.type" -->
