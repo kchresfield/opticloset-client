@@ -23,16 +23,4 @@ import { HttpClient } from '@angular/common/http';
 
 
 
-export class Tab4PageModule { 
-  
-  
-  constructor(private http: HttpClient) {
-    // this.http.get('http://localhost:8080/closet/:userId', {responseType: 'text'}).subscribe((response) => {
-    //   console.log(response);
-    // });
-  }
-  
-
-  
-
-}
+export class Tab4PageModule { }

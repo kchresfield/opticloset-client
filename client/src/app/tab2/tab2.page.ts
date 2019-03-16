@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { HttpClient } from '@angular/common/http';
 import { FileUploader } from 'ng2-file-upload';
+import { ApiService } from '../services/api/api.service';
+
 
 const URL = 'https://api.cloudinary.com/v1_1/opticloset/auto/upload';
 @Component({
@@ -18,14 +20,15 @@ export class Tab2Page {
 
   public uploader: FileUploader = new FileUploader({ url: URL });
   
-  constructor(private camera: Camera, private http: HttpClient) { }
+  constructor(private camera: Camera, private http: HttpClient, private apiService: ApiService) { }
+  
   takePicture() {
     const options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
-    }
+    };
 
     this.camera.getPicture(options).then((imageData) => {
       this.currentImage = 'data:image/jpeg;base64,' + imageData;
@@ -50,6 +53,12 @@ export class Tab2Page {
           console.log(response);
         })
       })
+  }
+
+  addItem() {
+    this.apiService.addClothingItem((data) => {
+      // console.log(data);
+    });
   }
 
   /* Tester
