@@ -17,7 +17,18 @@ export class TabsPage implements OnInit {
     this.apiService.getConditions(data => {
       console.log(data);
       this.temperature = data.temp;
-      this.conditions = data.weather;
+      if (data.weather.includes('rain')) {
+        this.conditions = 'rainy';
+      }
+      if (data.weather.includes('cloud')) {
+        this.conditions = 'cloud';
+      }
+      if (data.weather.includes('storm')) {
+        this.conditions = 'thunderstorm';
+      }
+      if (data.weather.includes('sun')) {
+        this.conditions = 'sun';
+      }
     });
     // debugger;
   }

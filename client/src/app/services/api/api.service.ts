@@ -14,7 +14,6 @@ export class ApiService {
 
   getConditions(callback) {
     this.httpClient.get(`${this.apiURL}/weather`).subscribe((data) => {
-    console.log(data);
     callback(data);
     });
   }
