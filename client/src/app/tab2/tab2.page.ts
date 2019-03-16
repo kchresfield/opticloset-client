@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { HttpClient } from '@angular/common/http';
-import * as AWS from 'aws-sdk/global';
-import * as S3 from 'aws-sdk/clients/s3';
 import { FileUploader } from 'ng2-file-upload';
 
 const URL = 'https://api.cloudinary.com/v1_1/opticloset/auto/upload';
