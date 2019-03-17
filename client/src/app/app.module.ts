@@ -19,7 +19,13 @@ import { ApiService } from './services/api/api.service';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, HttpModule],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    HttpClientModule,
+    HttpModule,
+  ],
   providers: [
     StatusBar,
     Camera,

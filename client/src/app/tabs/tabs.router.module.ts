@@ -40,7 +40,7 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: '../tab4/tab4.module#Tab4PageModule'
-          }
+          },
         ]
       },
       {

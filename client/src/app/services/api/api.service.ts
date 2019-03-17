@@ -6,7 +6,7 @@ import { WeatherConditions } from '../../weather-conditions';
   providedIn: 'root'
 })
 export class ApiService {
-  apiURL = 'http://172.24.9.131:8080';
+  apiURL = 'http://localhost:8080';
 
   constructor(private httpClient: HttpClient) {}
 

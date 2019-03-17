@@ -9,7 +9,7 @@
 
 <ion-content>
   <ul class="closetK" > 
-    <li *ngFor="let clothingItem of closetK">
+    <li (click)="presentModal()" *ngFor="let clothingItem of closetK">
       <div class="clothingItem">{{clothingItem.type}}</div>
       <img [src]="clothingItem.img" height="200" width="fixed">
     </li> -->
