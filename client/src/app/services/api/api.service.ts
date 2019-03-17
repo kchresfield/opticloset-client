@@ -6,7 +6,7 @@ import { WeatherConditions } from '../../weather-conditions';
   providedIn: 'root'
 })
 export class ApiService {
-  apiURL = 'http://172.24.9.131:8080';
+  apiURL = `http://localhost:8080`;
 
   constructor(private httpClient: HttpClient) {}
 
@@ -23,7 +23,7 @@ export class ApiService {
       id_category: 1,
       price: 120,
       id_image: 1,
-      count_word: 0,
+      count_worn: 0,
     }).subscribe((data) => {
       callback(data);
     });
