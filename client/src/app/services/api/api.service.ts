@@ -16,7 +16,7 @@ export class ApiService {
     this.httpClient.get(`${this.apiURL}/weather`).subscribe(data => {
       callback(data);
     });
-  }
+  } 
 
   addClothingItem(callback) {
     this.httpClient

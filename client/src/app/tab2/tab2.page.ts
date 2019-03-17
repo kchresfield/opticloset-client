@@ -3,6 +3,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { HttpClient } from '@angular/common/http';
 import { FileUploader } from 'ng2-file-upload';
 import { ApiService } from '../services/api/api.service';
+import { Router } from '@angular/router';
 
 
 const URL = 'https://api.cloudinary.com/v1_1/opticloset/auto/upload';
@@ -20,7 +21,7 @@ export class Tab2Page {
 
   public uploader: FileUploader = new FileUploader({ url: URL });
   
-  constructor(private camera: Camera, private http: HttpClient, private apiService: ApiService) { }
+  constructor(private camera: Camera, private http: HttpClient, private apiService: ApiService, private router: Router) { }
   
   takePicture() {
     const options: CameraOptions = {
@@ -29,6 +30,8 @@ export class Tab2Page {
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     };
+
+    this.router.navigateByUrl('attribute');
 
     this.camera.getPicture(options).then((imageData) => {
       this.currentImage = 'data:image/jpeg;base64,' + imageData;
@@ -44,35 +47,34 @@ export class Tab2Page {
           upload_preset: "opticloset",
         }).subscribe((response) => {
             console.log(response);
+            return response;
           });
         })
       .then((cloudResponse) => {
+        let url = cloudResponse
         this.http.post('http://localhost:8080/clothingImage', {
-          response: cloudResponse,
+          cloudinaryUrl: url,
         }, { responseType: 'text' }).subscribe((response) => {
           console.log(response);
         })
       })
+      
   }
 
-  addItem() {
-    this.apiService.addClothingItem((data) => {
-      // console.log(data);
-    });
-  }
 
-  /* Tester
+  // Tester
   sendToCloud() {
     this.http.post('https://api.cloudinary.com/v1_1/opticloset/image/upload', {
       file: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAAAAAA6mKC9AAAAOklEQVR4AXWMhxEAMAgCf/+pmCy9hxO7gugDyhXKkHu3FgDBwiTh0027FwC+cIk97fsrMZU7+cIlHwpF66etRhJpFgAAAABJRU5ErkJggg==",
       upload_preset: "opticloset",
     }).subscribe((response) => {
-      this.http.post('http://localhost:8080/clothingImage', {
+      console.log(response, 'cloudinary', response);
+      this.http.post('http://localhost:8080/clothingImage/:UserId', {
         response: response,
       }, { responseType: 'text' }).subscribe((response) => {
-        console.log(response);
+        console.log(response, 'server response');
       })
     })
-  } */
+  }
   
 }

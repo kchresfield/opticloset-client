@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api/api.service';
-import { ClothingItem } from '../clothing-item';
+import { ClothingItemK } from '../clothing-item';
+import { NG_MODEL_WITH_FORM_CONTROL_WARNING } from '@angular/forms/src/directives';
 
 @Component({
   selector: 'app-tab5',
@@ -9,7 +10,10 @@ import { ClothingItem } from '../clothing-item';
 })
 export class Tab5Page implements OnInit { 
   closet: any;
-  sort: any;
+  filteredCloset: any;
+  startDate: Date;
+  endDate: Date;
+
   constructor(private apiService: ApiService) { }
 
   ngOnInit() {
@@ -20,7 +24,7 @@ export class Tab5Page implements OnInit {
       this.closet.forEach(clothing => {
         clothing.lastUpdated = new Date(clothing.updatedAt).toString().slice(3, 15);
       })
-      console.log(this.closet)
+      this.filteredCloset = [...this.closet];
     });
   }
 
@@ -36,4 +40,18 @@ export class Tab5Page implements OnInit {
       })
     }
   }
+
+  setFilter() {
+    const copyCloset = [...this.closet];
+    this.filteredCloset = copyCloset.filter((clothing) => {
+      // checks if startDate and endDate have been selected
+      if (this.startDate && this.endDate) {
+        // checks if clothing worn date is in between startDate and endDate
+        return new Date(this.startDate.valueOf()) < new Date(clothing.updatedAt.valueOf()) &&
+          new Date(this.endDate.valueOf()) > new Date(clothing.updatedAt.valueOf())
+      }
+      return true;
+    })
+  }
+
 }
