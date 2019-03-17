@@ -20,9 +20,10 @@ export class ItemOptionsModal {
     // componentProps can also be accessed at construction time using NavParams
   }
 
-  removeFromCloset(item) {
-    this.apiService.deleteClothingItem(data => {
-      // console.log(data);
+  removeFromCloset() {
+    console.log(this.navParams.data.itemId);
+    this.apiService.deleteClothingItem(this.navParams.data.itemId, data => {
+      console.log('test', data);
     });
   }
 }

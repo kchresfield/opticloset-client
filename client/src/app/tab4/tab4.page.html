@@ -8,14 +8,14 @@
 </ion-header>
 
 <ion-content>
-  <ul class="closetK" > 
-    <li id="modal"(click)="presentModal()" *ngFor="let clothingItem of closetK">
+  <!-- <ul class="closetK" > 
+    <li id="modal"(click)="presentModal(clothingItem.id_clothing_item)" *ngFor="let clothingItem of closetK">
       <div class="clothingItem">{{clothingItem.type}}</div>
       <img [src]="clothingItem.img" height="200" width="fixed">
     </li> -->
-  </ul>
+  <!-- </ul> --> -->
     <ul class="closet">
-      <li *ngFor="let clothingItem of closet">
+      <li id="modal"(click)="presentModal(clothingItem.id_clothing_item)" *ngFor="let clothingItem of closet">
         <div class="clothingItem">{{clothingItem.category}}</div>
         <img [src]="clothingItem.imageUrl" height="200" width="fixed">
       </li>

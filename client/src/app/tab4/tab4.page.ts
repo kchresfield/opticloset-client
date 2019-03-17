@@ -31,10 +31,10 @@ export class Tab4Page implements OnInit {
     });
   }
 
-  async presentModal() {
+  async presentModal(id) {
     const modal = await this.modalController.create({
       component: ItemOptionsModal,
-      componentProps: { value: 123 }
+      componentProps: { itemId: id }
     });
     return await modal.present();
   }
