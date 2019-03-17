@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api/api.service';
-import { ClothingItem } from '../clothing-item';
+import { ClothingItemK } from '../clothing-item';
 
 @Component({
   selector: 'app-tab5',
