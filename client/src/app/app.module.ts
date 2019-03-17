@@ -11,6 +11,9 @@ import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http'; // DND
 import { HttpModule } from '@angular/http';
+import { Camera } from '@ionic-native/camera/ngx';
+
+import { ApiService } from './services/api/api.service';
 
 
 @NgModule({
@@ -19,7 +22,9 @@ import { HttpModule } from '@angular/http';
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, HttpModule],
   providers: [
     StatusBar,
+    Camera,
     SplashScreen,
+    ApiService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
