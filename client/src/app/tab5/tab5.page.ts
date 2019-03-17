@@ -11,9 +11,12 @@ export class Tab5Page implements OnInit {
   constructor(private apiService: ApiService) { }
 
   ngOnInit() {
-    this.apiService.getCloset(data => {
-      console.log(data);
-      this.closet = data;
+    this.apiService.getCloset(clothes => {
+      this.closet = clothes;
+      this.closet.forEach(clothing => {
+        clothing.lastUpdated = new Date(clothing.updatedAt).toString().slice(3, 15);
+      })
+      console.log(this.closet)
     });
   }
 }
