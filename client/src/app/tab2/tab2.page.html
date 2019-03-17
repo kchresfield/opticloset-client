@@ -65,19 +65,15 @@
 
   
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-    <ion-fab-button (click)="takePicture()">
+    <ion-fab-button routerLink="/home/tabs/tab2" (click)="takePicture()">
       <ion-icon name="camera"></ion-icon>
     </ion-fab-button>
     <!-- Test Button -->
-    <!-- <ion-fab-button (click)="sendToCloud()"> -->
-      <!-- <ion-icon name="shirt"></ion-icon> -->
-    <!-- </ion-fab-button> -->
+    <!-- <ion-fab-button (click)="sendToCloud()">
+      <ion-icon name="shirt"></ion-icon>
+    </ion-fab-button> -->
   </ion-fab>
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button (click)="addItem()">
-        <ion-icon name="save"></ion-icon>
-      </ion-fab-button> 
-    </ion-fab>
-<div>{{imgTxt}}</div>
+    
+
 <!-- <ion-icon name="save" size="large" (click)="addItem()"></ion-icon> -->
 </ion-content>
