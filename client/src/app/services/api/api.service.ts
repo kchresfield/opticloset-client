@@ -23,7 +23,7 @@ export class ApiService {
       id_category: 1,
       price: 120,
       id_image: 1,
-      count_word: 0,
+      count_worn: 0,
     }).subscribe((data) => {
       callback(data);
     });
@@ -42,5 +42,4 @@ export class ApiService {
       callback(data);
     });
   }
-  
 }
