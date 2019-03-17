@@ -9,7 +9,6 @@ import { ClothingItem } from '../clothing-item';
 })
 export class Tab5Page implements OnInit { 
   closet: any;
-  sort: any;
   constructor(private apiService: ApiService) { }
 
   ngOnInit() {
@@ -20,7 +19,6 @@ export class Tab5Page implements OnInit {
       this.closet.forEach(clothing => {
         clothing.lastUpdated = new Date(clothing.updatedAt).toString().slice(3, 15);
       })
-      console.log(this.closet)
     });
   }
 
@@ -35,5 +33,9 @@ export class Tab5Page implements OnInit {
         return a.count_worn - b.count_worn;
       })
     }
+  }
+
+  filterCloset(method) {
+    console.log(method, 'connected');
   }
 }

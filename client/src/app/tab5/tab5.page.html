@@ -1,26 +1,40 @@
 <ion-content>
     <ion-radio-group>
+      <!-- Sort title -->
       <ion-list-header>
         Sort By
       </ion-list-header>
-    
+      <!-- Sort methods -->
       <ion-item>
         <ion-label>Least to Most Worn</ion-label>
         <ion-radio (ionSelect)="sortCloset('least2Most')" checked></ion-radio>
       </ion-item>
-    
       <ion-item>
         <ion-label>Most to Least Worn</ion-label>
           <ion-radio (ionSelect)="sortCloset('most2Least')"></ion-radio>
       </ion-item>
     </ion-radio-group>
+    <!-- date picker title -->
+    <ion-list-header>
+      Filter
+    </ion-list-header>
+    <!-- date picker -->
+    <ion-item>
+      <ion-label>Start Date</ion-label>
+      <ion-datetime display-format="MMM YYYY" picker-format="MMMM YYYY"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>End Date</ion-label>
+      <ion-datetime display-format="MMM YYYY" picker-format="MMMM YYYY"></ion-datetime>
+    </ion-item>
 
+    <!-- clothing item rendering -->
   <ion-item *ngFor="let clothing of closet">
-
+    <!-- clothing image -->
     <ion-label>
       <ion-img [src]="clothing.imageUrl"></ion-img>
     </ion-label>
-
+    <!-- clothing stats -->
     <ion-list>
       <ion-item>
         <ion-label>Last Worn: {{clothing.lastUpdated}}</ion-label>
@@ -35,6 +49,5 @@
         <ion-label>Price per Wear: {{clothing.count_worn === 0 ? clothing.price : clothing.price/clothing.count_worn}}</ion-label>
       </ion-item>
     </ion-list>
-
   </ion-item>
 </ion-content>
