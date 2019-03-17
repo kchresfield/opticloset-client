@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {Subject} from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import * as auth0 from 'auth0-js';
 import { AUTH_CONFIG } from './auth.config';
 
@@ -14,12 +16,14 @@ export class AuthService {
     clientID: AUTH_CONFIG.clientID,
     domain: AUTH_CONFIG.domain,
     responseType: 'token id_token',
-    audience: `https://${AUTH_CONFIG.domain}userinfo`,
+    audience: `https://${AUTH_CONFIG.domain}/userinfo`,
     redirectUri: `http://${AUTH_CONFIG.host}:8100/home`,
     scope: 'openid profile'
   });
 
-  constructor(public router: Router) {
+  userProfile: any;
+
+  constructor(public router: Router, public http: HttpClient) {
     // Check if user is logged In when Initializing
     const loggedIn = this.isLoggedIn = this.isAuthenticated();
     this.isLoggedIn$.next(loggedIn);
@@ -38,6 +42,15 @@ export class AuthService {
         const loggedIn = this.isLoggedIn = true;
         this.isLoggedIn$.next(loggedIn);
         this.router.navigate(['/home']);
+        // http req here to /userinfo to grab user prof from Auth0
+        this.http.get('https://opticloset.auth0.com/userinfo', {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.access_token}`,
+          },
+        }).subscribe((userInfo) => {
+          console.log(userInfo);
+        })
       } else if (err) {
         const loggedIn = this.isLoggedIn = false;
         this.isLoggedIn$.next(loggedIn);
@@ -70,5 +83,20 @@ export class AuthService {
     // Access Token's expiry time
     const expiresAt = JSON.parse(localStorage.getItem('expires_at') || '{}');
     return new Date().getTime() < expiresAt;
+  }
+
+  public getProfile(cb): void {
+
+    if (!localStorage.getItem('access_token')) {
+      throw new Error('Access Token must exist to fetch profile');
+    }
+
+    const self = this;
+    this.auth0.client.userInfo(localStorage.getItem('access_token'), (err, profile) => {
+      if (profile) {
+        self.userProfile = profile;
+      }
+      cb(err, profile);
+    });
   }
 }
