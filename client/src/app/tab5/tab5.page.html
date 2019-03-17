@@ -21,15 +21,15 @@
     <!-- date picker -->
     <ion-item>
       <ion-label>Start Date</ion-label>
-      <ion-datetime display-format="MMM YYYY" picker-format="MMMM YYYY"></ion-datetime>
+      <ion-datetime [(ngModel)]="startDate" (ionChange)="setFilter()" display-format="MMM  D YYYY" picker-format="MMMM D YYYY" placeholder="Select Date"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>End Date</ion-label>
-      <ion-datetime display-format="MMM YYYY" picker-format="MMMM YYYY"></ion-datetime>
+      <ion-datetime [(ngModel)]="endDate" (ionChange)="setFilter()"display-format="MMM D YYYY" picker-format="MMMM D YYYY" placeholder="Select Date"></ion-datetime>
     </ion-item>
 
     <!-- clothing item rendering -->
-  <ion-item *ngFor="let clothing of closet">
+  <ion-item *ngFor="let clothing of filteredCloset">
     <!-- clothing image -->
     <ion-label>
       <ion-img [src]="clothing.imageUrl"></ion-img>
