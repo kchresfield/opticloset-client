@@ -19,7 +19,13 @@ import { Router } from '@angular/router';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, HttpModule],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    HttpClientModule,
+    HttpModule,
+  ],
   providers: [
     StatusBar,
     Camera,
