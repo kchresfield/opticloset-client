@@ -1,4 +1,20 @@
 <ion-content>
+    <ion-radio-group>
+      <ion-list-header>
+        Sort By
+      </ion-list-header>
+    
+      <ion-item>
+        <ion-label>Least to Most</ion-label>
+        <ion-radio value="Least to Most"></ion-radio>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label>Most to Least</ion-label>
+        <ion-radio value="Most to Least"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+
   <ion-item *ngFor="let clothing of closet">
 
     <ion-label>
