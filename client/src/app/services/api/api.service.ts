@@ -29,9 +29,18 @@ export class ApiService {
     });
   }
 
+  deleteClothingItem(callback) {
+    this.httpClient.post(`${this.apiURL}/closet/remove`, {
+      clothingItemId: 1,
+    }).subscribe((data) => {
+      callback(data);
+    });
+  }
+
   getCloset(callback) {
     this.httpClient.get(`${this.apiURL}/closet/1`).subscribe((data) => {
       callback(data);
     });
   }
+  
 }
