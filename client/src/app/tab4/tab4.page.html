@@ -8,13 +8,13 @@
 </ion-header>
 
 <ion-content>
-  <ul class="closetK" > 
-    <li *ngFor="let clothingItem of closetK">
+  <div class="row card-group" > 
+    <div class="col-4" *ngFor="let clothingItem of closetK">
       <div class="clothingItem">{{clothingItem.type}}</div>
-      <img [src]="clothingItem.img" height="200" width="fixed">
+      <img [src]="clothingItem.img" height="150">
 
-    </li>
-  </ul>
+    </div>
+  </div>
 </ion-content>
 
 <!-- line 11/12 : *ngIf="(closet | async)" -->

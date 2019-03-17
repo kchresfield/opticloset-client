@@ -1,6 +1,6 @@
-import { ClothingItem } from './clothing-item';
+import { ClothingItemK } from './clothing-item';
 
-export const ClothingList: ClothingItem[] = [
+export const ClothingListK: ClothingItemK[] = [
   { id: 1, type: 'top', img: 'https://res.cloudinary.com/opticloset/image/upload/v1552727035/shirt2.png' },
   { id: 2, type: 'top', img: 'https://res.cloudinary.com/opticloset/image/upload/v1552726975/shirt-1.png'},
   { id: 3, type: 'one-piece', img: 'https://res.cloudinary.com/opticloset/image/upload/v1552727112/dress-1.png' },
