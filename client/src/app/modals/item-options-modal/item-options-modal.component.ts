@@ -24,6 +24,11 @@ export class ItemOptionsModal {
     console.log(this.navParams.data.itemId);
     this.apiService.deleteClothingItem(this.navParams.data.itemId);
   }
+  close() {
+    this.modalController.dismiss();
+  }
+
+
 }
 
 
