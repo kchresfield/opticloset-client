@@ -30,7 +30,7 @@ export class Tab4Page implements OnInit {
       this.closet = data;
     });
   }
-
+  
   async presentModal(id) {
     const modal = await this.modalController.create({
       component: ItemOptionsModal,
@@ -42,5 +42,5 @@ export class Tab4Page implements OnInit {
   closeModal() {
     this.modalController.dismiss();
   }
-  
+
 }
