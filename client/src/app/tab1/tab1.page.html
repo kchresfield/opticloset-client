@@ -1,2 +1,41 @@
 <ion-content>
+    <ion-grid fixed>
+      <ion-row class="ion-align-items-center ion-justify-content-center">
+
+        <ion-col>
+          <ion-thumbnail>
+            <ion-img [src]="accessory[getRandomIndex(accessory.length)].imageUrl"></ion-img>
+          </ion-thumbnail>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-img [src]="top[getRandomIndex(top.length)].imageUrl"></ion-img>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-img [src]="outerwear[getRandomIndex(outerwear.length)].imageUrl"></ion-img>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-img [src]="bottom[getRandomIndex(bottom.length)].imageUrl"></ion-img>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-align-items-center ion-justify-content-center">
+        <ion-col>
+          <ion-button color="secondary" (click)="presentToast()">Confirm Outfit</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-img [src]="shoes[getRandomIndex(shoes.length)].imageUrl"></ion-img>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 </ion-content>
