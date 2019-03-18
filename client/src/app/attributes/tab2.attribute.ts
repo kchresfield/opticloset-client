@@ -58,7 +58,13 @@ export class Tab2Attribute {
     const selectedOccasion = allOccasions.occasion;
     const price = this.price;
 
-    const clothesData = { selectedAttributesSavedChoices: selectedAttributesSavedChoices, selectedOccasion: selectedOccasion, price:price};
+    const clothesData = { 
+      selectedAttributesSavedChoices: selectedAttributesSavedChoices,
+      selectedOccasion: selectedOccasion, 
+      price:price,
+      count_worn: 0,
+      
+    };
     
     this.httpClient.post(`${this.apiURL}/closet/1`, clothesData).subscribe((data) => {
       console.log(data);
