@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api/api.service';
-import { ClothingItem } from '../clothing-item';
+import { ClothingItemK } from '../clothing-item';
 import { NG_MODEL_WITH_FORM_CONTROL_WARNING } from '@angular/forms/src/directives';
 
 @Component({
