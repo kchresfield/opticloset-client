@@ -15,7 +15,7 @@ export class TabsPage implements OnInit {
   constructor(private apiService: ApiService) {}
   ngOnInit() {
     this.apiService.getConditions(data => {
-      this.temperature = data.temp;
+      this.temperature = Math.floor(data.temp);
       if (data.weather.includes('rain')) {
         this.conditions = 'rainy';
       }
