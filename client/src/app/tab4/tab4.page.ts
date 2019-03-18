@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClothingListK } from '../clothing-item-list';
-import { ClothingItem } from '../clothing-item';
+import { ClothingItemK } from '../clothing-item';
 import { ApiService } from '../services/api/api.service';
 import { ModalController, NavParams } from '@ionic/angular';
 import { ItemOptionsModal } from '../modals/item-options-modal/item-options-modal.component';

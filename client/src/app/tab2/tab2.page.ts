@@ -63,18 +63,18 @@ export class Tab2Page {
 
 
   // Tester
-  sendToCloud() {
-    this.http.post('https://api.cloudinary.com/v1_1/opticloset/image/upload', {
-      file: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAAAAAA6mKC9AAAAOklEQVR4AXWMhxEAMAgCf/+pmCy9hxO7gugDyhXKkHu3FgDBwiTh0027FwC+cIk97fsrMZU7+cIlHwpF66etRhJpFgAAAABJRU5ErkJggg==",
-      upload_preset: "opticloset",
-    }).subscribe((response) => {
-      console.log(response, 'cloudinary', response);
-      this.http.post('http://localhost:8080/clothingImage/:UserId', {
-        response: response,
-      }, { responseType: 'text' }).subscribe((response) => {
-        console.log(response, 'server response');
-      })
-    })
-  }
+  // sendToCloud() {
+  //   this.http.post('https://api.cloudinary.com/v1_1/opticloset/image/upload', {
+  //     file: "data:image/png;base64,",
+  //     upload_preset: "opticloset",
+  //   }).subscribe((response) => {
+  //     console.log(response, 'cloudinary', response);
+  //     this.http.post('http://localhost:8080/clothingImage/:UserId', {
+  //       response: response,
+  //     }, { responseType: 'text' }).subscribe((response) => {
+  //       console.log(response, 'server response');
+  //     })
+  //   })
+  // }
   
 }
