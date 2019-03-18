@@ -22,9 +22,7 @@ export class ItemOptionsModal {
 
   removeFromCloset() {
     console.log(this.navParams.data.itemId);
-    this.apiService.deleteClothingItem(this.navParams.data.itemId, data => {
-      console.log('test', data);
-    });
+    this.apiService.deleteClothingItem(this.navParams.data.itemId);
   }
 }
 
