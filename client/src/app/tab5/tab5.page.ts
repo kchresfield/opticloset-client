@@ -30,12 +30,12 @@ export class Tab5Page implements OnInit {
 
   sortCloset(method) {
     if (method === 'most2Least') {
-      this.closet.sort((a, b) => {
+      this.filteredCloset.sort((a, b) => {
         return b.count_worn - a.count_worn;
       })
     }
     if (method === 'least2Most') {
-      this.closet.sort((a, b) => {
+      this.filteredCloset.sort((a, b) => {
         return a.count_worn - b.count_worn;
       })
     }
