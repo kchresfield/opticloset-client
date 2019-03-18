@@ -15,7 +15,7 @@
     </li> -->
   <!-- </ul> -->
     <ul class="closet">
-      <li id="modal"(click)="presentModal(clothingItem.id_clothing_item)" *ngFor="let clothingItem of closet">
+      <li (click)="presentModal(clothingItem.id_clothing_item)" *ngFor="let clothingItem of closet">
         <div class="clothingItem">{{clothingItem.category}}</div>
         <img [src]="clothingItem.imageUrl" height="200" width="fixed">
       </li>
