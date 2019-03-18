@@ -16,23 +16,18 @@ export class Tab1Page implements OnInit {
   outerwear: any; // 4
   accessory: any; // 5
   bottom: any; // 6
-  shoes: any; // 13
+  shoe: any; // 13
 
   constructor(private apiService: ApiService, public toastController: ToastController) {
   }
   
   ngOnInit() {
     this.apiService.getCloset(clothes => {
-      this.top = [...clothes].filter((clothing) => clothing.id_category === 1 || clothing.id_category === 2);
-      this.onePiece = [...clothes].filter((clothing) => clothing.id_category === 3);
-      this.outerwear = [...clothes].filter((clothing) => clothing.id_category === 4);
-      this.accessory = [...clothes].filter((clothing) => clothing.id_category === 5);
-      this.bottom = [...clothes].filter((clothing) => clothing.id_category === 6);
-      this.shoes = [...clothes].filter((clothing) => clothing.id_category === 13);
-      // console.log(this.tops, this.onePiece, this.outerwear, this.accessory, this.bottom);
+      this.closet = clothes;
+      this.chooseOutfit();
     });
   }
-
+  
   async presentToast() {
     const toast = await this.toastController.create({
       message: 'Great Choice!',
@@ -42,10 +37,28 @@ export class Tab1Page implements OnInit {
     });
     toast.present();
   }
-
+  
   getRandomIndex = (max) => {
     const maxInt = Math.floor(max);
     return Math.floor(Math.random() * (maxInt));
+  };
+  
+  chooseOutfit = () => {
+    // copy closet and filter by category
+    const tops = [...this.closet].filter((clothing) => clothing.id_category === 1 || clothing.id_category === 2);
+    const onePieces = [...this.closet].filter((clothing) => clothing.id_category === 3);
+    const outerwears = [...this.closet].filter((clothing) => clothing.id_category === 4);
+    const accessories = [...this.closet].filter((clothing) => clothing.id_category === 5);
+    const bottoms = [...this.closet].filter((clothing) => clothing.id_category === 6);
+    const shoes = [...this.closet].filter((clothing) => clothing.id_category === 13);
+
+    this.top = tops[this.getRandomIndex(tops.length)];
+    this.onePiece = onePieces[this.getRandomIndex(onePieces.length)];
+    this.outerwear = outerwears[this.getRandomIndex(outerwears.length)];
+    this.accessory = accessories[this.getRandomIndex(accessories.length)];
+    this.bottom = bottoms[this.getRandomIndex(bottoms.length)];
+    this.shoe = shoes[this.getRandomIndex(shoes.length)];
+    // console.log(this.tops, this.onePiece, this.outerwear, this.accessory, this.bottom);
   };
 
 }

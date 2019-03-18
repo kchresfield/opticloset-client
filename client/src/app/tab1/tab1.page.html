@@ -3,13 +3,13 @@
       <ion-row class="ion-align-items-center ion-justify-content-center">
 
         <ion-col>
-          <ion-thumbnail>
-            <ion-img [src]="accessory[getRandomIndex(accessory.length)].imageUrl"></ion-img>
-          </ion-thumbnail>
+          <ion-item>
+            <ion-img [src]="accessory.imageUrl"></ion-img>
+          </ion-item>
         </ion-col>
         <ion-col>
           <ion-item>
-            <ion-img [src]="top[getRandomIndex(top.length)].imageUrl"></ion-img>
+            <ion-img [src]="top.imageUrl"></ion-img>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -17,12 +17,12 @@
       <ion-row>
         <ion-col>
           <ion-item>
-            <ion-img [src]="outerwear[getRandomIndex(outerwear.length)].imageUrl"></ion-img>
+            <ion-img [src]="outerwear.imageUrl"></ion-img>
           </ion-item>
         </ion-col>
         <ion-col>
           <ion-item>
-            <ion-img [src]="bottom[getRandomIndex(bottom.length)].imageUrl"></ion-img>
+            <ion-img [src]="bottom.imageUrl"></ion-img>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -33,7 +33,7 @@
         </ion-col>
         <ion-col>
           <ion-item>
-            <ion-img [src]="shoes[getRandomIndex(shoes.length)].imageUrl"></ion-img>
+            <ion-img [src]="shoe.imageUrl"></ion-img>
           </ion-item>
         </ion-col>
       </ion-row>
