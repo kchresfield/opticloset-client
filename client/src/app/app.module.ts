@@ -16,6 +16,8 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { ApiService } from './services/api/api.service';
 import { Router } from '@angular/router';
 
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -31,7 +33,7 @@ import { Router } from '@angular/router';
     Camera,
     SplashScreen,
     ApiService,
-    
+    LocalNotifications,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

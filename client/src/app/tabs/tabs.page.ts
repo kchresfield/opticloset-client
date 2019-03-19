@@ -16,6 +16,7 @@ export class TabsPage implements OnInit {
   ngOnInit() {
     this.apiService.getConditions(data => {
       this.temperature = Math.floor(data.temp);
+      console.log(data.weather);
       if (data.weather.includes('rain')) {
         this.conditions = 'rainy';
       }
@@ -25,8 +26,8 @@ export class TabsPage implements OnInit {
       if (data.weather.includes('storm')) {
         this.conditions = 'thunderstorm';
       }
-      if (data.weather.includes('sun')) {
-        this.conditions = 'sun';
+      if (data.weather.includes('sun') || data.weather.includes('clear')) {
+        this.conditions = 'sunny';
       }
     });
     // debugger;
