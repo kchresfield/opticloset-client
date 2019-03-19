@@ -25,12 +25,19 @@ export class ItemOptionsModal {
   }
 
   removeFromCloset() {
-    // console.log(this.navParams.data.itemId);
+    console.log(this.navParams.data.itemId);
     this.apiService.deleteClothingItem(this.navParams.data.itemId);
+    this.closeAfterDeletion();
+    this.presentToast();
+    // console.log(this.navParams);
   }
 
   close() {
     this.modalController.dismiss();
+  }
+
+  closeAfterDeletion() {
+    this.modalController.dismiss(1);
   }
 
   async presentToast() {

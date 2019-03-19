@@ -14,6 +14,7 @@ export class Tab4Page implements OnInit {
   closet: any;
   closetK = ClothingListK;
   open: any;
+  value: any;
   constructor(
     private apiService: ApiService,
     public modalController: ModalController
@@ -21,7 +22,6 @@ export class Tab4Page implements OnInit {
 
   ngOnInit() {
     this.getAllItems();
-    // this.open = this.itemOptionsModal.open;
   }
 
   getAllItems() {
@@ -30,17 +30,19 @@ export class Tab4Page implements OnInit {
       this.closet = data;
     });
   }
-  
+
   async presentModal(id) {
     const modal = await this.modalController.create({
       component: ItemOptionsModal,
       componentProps: { itemId: id }
     });
-    return await modal.present();
-  }
+    modal.onDidDismiss().then((data) => {
+      if (data.data === 1) {
+        this.getAllItems();
+      }
+    });
 
-  closeModal() {
-    this.modalController.dismiss();
+    return await modal.present();
   }
 
 }
