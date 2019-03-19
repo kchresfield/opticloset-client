@@ -20,13 +20,12 @@ npm-debug.log*
 .tmp/
 .versions/
 coverage/
-node_modules/
+client/node_modules/
 **/node_modules
-client/node_modules
 client/node_modules/@types/node/package.json
 tmp/
 temp/
-platforms/
+client/platforms/
 plugins/
 plugins/android.json
 plugins/ios.json
