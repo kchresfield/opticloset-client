@@ -21,6 +21,7 @@ npm-debug.log*
 .versions/
 coverage/
 client/node_modules/
+client/package-lock.json
 **/node_modules
 client/node_modules/@types/node/package.json
 tmp/
