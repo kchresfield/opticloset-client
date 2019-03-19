@@ -30,7 +30,7 @@ plugins/
 plugins/android.json
 plugins/ios.json
 $RECYCLE.BIN/
-wwww/
+**/www/
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
