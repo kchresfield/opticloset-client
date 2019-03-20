@@ -1,6 +1,7 @@
 import { Component, OnInit  } from '@angular/core';
 import { ApiService } from '../services/api/api.service';
 import { ToastController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -10,21 +11,30 @@ import { ToastController } from '@ionic/angular';
 })
 
 export class Tab1Page implements OnInit {
-  closet: any;
-  top: any; // 1 or 2
-  onePiece: any; // 3
-  outerwear: any; // 4
-  accessory: any; // 5
-  bottom: any; // 6
-  shoe: any; // 13
+  closet: Array<Object>;
+  top: Object; // 1 or 2
+  onePiece: Object; // 3
+  outerwear: Object; // 4
+  accessory: Object; // 5
+  bottom: Object; // 6
+  shoe: Object; // 13
+  isLoading: Boolean;
+  outfitSelected: Boolean;
 
-  constructor(private apiService: ApiService, public toastController: ToastController) {
-  }
+  constructor(
+    private apiService: ApiService, 
+    public toastController: ToastController, 
+    public loadingController: LoadingController, 
+  ) { }
   
   ngOnInit() {
+    this.isLoading = true;
+    this.outfitSelected = false;
+    this.presentLoadingWithOptions();
     this.apiService.getCloset(clothes => {
       this.closet = clothes;
       this.chooseOutfit();
+      this.isLoading = false;
     });
   }
   
@@ -36,6 +46,17 @@ export class Tab1Page implements OnInit {
       duration: 3000,
     });
     toast.present();
+  }
+
+  async presentLoadingWithOptions() {
+    const loading = await this.loadingController.create({
+      spinner: null,
+      duration: 3000,
+      message: 'One moment while we select your outfit...',
+      translucent: true,
+      cssClass: 'custom-class custom-loading'
+    });
+    return await loading.present();
   }
   
   getRandomIndex = (max) => {
@@ -58,7 +79,6 @@ export class Tab1Page implements OnInit {
     this.accessory = accessories[this.getRandomIndex(accessories.length)];
     this.bottom = bottoms[this.getRandomIndex(bottoms.length)];
     this.shoe = shoes[this.getRandomIndex(shoes.length)];
-    // console.log(this.tops, this.onePiece, this.outerwear, this.accessory, this.bottom);
   };
 
 }
