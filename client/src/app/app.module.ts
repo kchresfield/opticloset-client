@@ -17,6 +17,7 @@ import { ApiService } from './services/api/api.service';
 import { Router } from '@angular/router';
 
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,6 +34,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
     Camera,
     SplashScreen,
     ApiService,
+    Geolocation,
     LocalNotifications,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { WeatherConditions } from '../../weather-conditions';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -8,15 +9,26 @@ import { WeatherConditions } from '../../weather-conditions';
 export class ApiService {
   apiURL = 'http://localhost:8080';
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private geolocation: Geolocation) { }
 
   public currentConditions: object = {};
 
-  getConditions(callback) {
+  // weather API helpers to server
+  async getConditions(callback) {
+    const latLong = await this.getCoordinates();
+    console.log(latLong, 'latLong');
     this.httpClient.get(`${this.apiURL}/weather`).subscribe(data => {
       callback(data);
     });
-  } 
+  }
+
+  getCoordinates() {
+    return this.geolocation.getCurrentPosition().then((resp) => {
+      return { lat: resp.coords.latitude, long: resp.coords.longitude };
+    }).catch((error) => {
+      console.log('Error getting location:', error);
+    });
+  }
 
   addClothingItem(callback) {
     this.httpClient
