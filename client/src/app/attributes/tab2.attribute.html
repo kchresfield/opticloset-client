@@ -16,7 +16,7 @@
   </div>
   <div>Color</div>
   <div *ngFor="let color of topTwoColors">
-    <ion-button (click)="color(color)" class="colorGenerated">{{color}}</ion-button>
+    <ion-button [color]="buttonColor" (click)="color(color)" class="colorGenerated">{{color}}</ion-button>
   </div>
   <div>Occasion</div>
   <div>
@@ -26,9 +26,9 @@
     <ion-button [color]="buttonColor" (click)="occasionItem('cocktail')">Cocktail</ion-button>
   </div>
   <div>Category</div>
-  <ul *ngFor="let category of finished">
-    <ion-button class="category">{{category}}</ion-button>
-  </ul>
+  <div *ngFor="let category of finished">
+    <ion-button [color]="buttonColor" class="category">{{category}}</ion-button>
+  </div>
   <div>
     <ion-card-title>Price</ion-card-title>
     <ion-item id="rounded">
