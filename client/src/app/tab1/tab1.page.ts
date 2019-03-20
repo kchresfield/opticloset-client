@@ -46,6 +46,7 @@ export class Tab1Page implements OnInit {
       duration: 3000,
     });
     toast.present();
+    this.outfitSelected = true;
   }
 
   async presentLoadingWithOptions() {
