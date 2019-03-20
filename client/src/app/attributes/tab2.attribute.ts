@@ -16,11 +16,16 @@ const allAttributes = {
   light: false,
 };
 
+const arrOfColors = [];
+
+const category = { category: true };
+
 const allOccasions = {
   occasion: "",
 };
 
 const allPossibilities = [];
+const topTwoColors = [];
 
 @Component({
   selector: 'app-tab2.attribute',
@@ -33,31 +38,42 @@ export class Tab2Attribute {
   price: string;
   info: any;
   categories: any;
+  finished = allPossibilities;
+  colors: any;
+  topTwoColors = topTwoColors;
 
   constructor(private apiService: ApiService, private httpClient: HttpClient) { }
   private buttonColor: string = "light";
 
   ngOnInit() {
     this.categories = JSON.parse(localStorage.getItem('response')).categories;
-    this.categories;
-    if (this.categories.includes("shirt") || this.categories.includes("blouse") || this.categories.includes("sleeve") || this.categories.includes("polo") || this.categories.includes("vest")) {
+    this.info = this.categories.map((catagoryObj) => {
+      return catagoryObj.name;
+    })
+    if (this.info.includes("shirt") || this.info.includes("pattern") || this.info.includes("sleeve") || this.info.includes("polo") || this.info.includes("vest")) {
       allPossibilities.push('top');
     }
-    if (this.categories.includes("skirt") || this.categories.includes("denim") || this.categories.includes("pants") || this.categories.includes("jean") || this.categories.includes("shorts") || this.categories.includes("bottom")) {
+    if (this.info.includes("skirt") || this.info.includes("pattern") || this.info.includes("pants") || this.info.includes("jean") || this.info.includes("shorts") || this.info.includes("bottom")) {
       allPossibilities.push('bottom');
     }
-    if (this.categories.includes("dress") || this.categories.includes("romper") || this.categories.includes("pants") || this.categories.includes("jean") || this.categories.includes("shorts") || this.categories.includes("bottom")) {
+    if (this.info.includes("dress") || this.info.includes("romper") || this.info.includes("pants") || this.info.includes("jean") || this.info.includes("shorts") || this.info.includes("bottom")) {
       allPossibilities.push('one-piece');
     }
-    if (this.categories.includes("coat") || this.categories.includes("jacket") || this.categories.includes("outerware") || this.categories.includes("kimono") || this.categories.includes("cardigan") || this.categories.includes("hoodie") || this.categories.includes("sweatshirt")) {
+    if (this.info.includes("coat") || this.info.includes("jacket") || this.info.includes("outerware") || this.info.includes("kimono") || this.info.includes("cardigan") || this.info.includes("hoodie") || this.info.includes("sweatshirt")) {
       allPossibilities.push('outerwear');
     }
-    if (this.categories.includes("heels") || this.categories.includes("shoe") || this.categories.includes("sneaker") || this.categories.includes("flats") || this.categories.includes("boots") || this.categories.includes("footware") || this.categories.includes("foot")) {
+    if (this.info.includes("heels") || this.info.includes("shoe") || this.info.includes("sneaker") || this.info.includes("flats") || this.info.includes("boots") || this.info.includes("footware") || this.info.includes("foot")) {
       allPossibilities.push('shoes');
     }
-    if (this.categories.includes("jewelry") || this.categories.includes("hat") || this.categories.includes("sneaker") || this.categories.includes("flats") || this.categories.includes("boots") || this.categories.includes("footware") || this.categories.includes("foot")) {
-      allPossibilities.push('shoes');
+    if (this.info.includes("jewelry") || this.info.includes("hat") || this.info.includes("sneaker") || this.info.includes("flats") || this.info.includes("boots") || this.info.includes("footware") || this.info.includes("foot")) {
+      allPossibilities.push('acc');
     }
+    this.colors = JSON.parse(localStorage.getItem('response')).colorsOptions;
+    this.colors.map((color) => {
+      if (topTwoColors.length <= 1) {
+        topTwoColors.push(color.label)
+      }
+    });
   }
 
   attributeItem(input) {
@@ -73,6 +89,17 @@ export class Tab2Attribute {
     allOccasions.occasion = input;
     // console.log(input)
   };
+  category(input){
+    category.category = input;
+    console.log(input);
+  }
+
+  color(input) {
+    // if(arrOfColors.length <= 1){
+    //   arrOfColors.push(colorValue);
+    // }
+    console.log(input);
+  }
 
 
   addItem() {
