@@ -65,12 +65,12 @@ export class Tab1Page implements OnInit {
 
   chooseOutfit = () => {
     // copy closet and filter by category
-    const tops = [...this.closet].filter((clothing) => clothing.id_category === 1 || clothing.id_category === 2);
-    const onePieces = [...this.closet].filter((clothing) => clothing.id_category === 3);
-    const outerwears = [...this.closet].filter((clothing) => clothing.id_category === 4);
-    const accessories = [...this.closet].filter((clothing) => clothing.id_category === 5);
-    const bottoms = [...this.closet].filter((clothing) => clothing.id_category === 6);
-    const shoes = [...this.closet].filter((clothing) => clothing.id_category === 13);
+    const tops = [...this.closet].filter((clothing) => clothing['id_category'] === 1 || clothing['id_category'] === 2);
+    const onePieces = [...this.closet].filter((clothing) => clothing['id_category'] === 3);
+    const outerwears = [...this.closet].filter((clothing) => clothing['id_category'] === 4);
+    const accessories = [...this.closet].filter((clothing) => clothing['id_category'] === 5);
+    const bottoms = [...this.closet].filter((clothing) => clothing['id_category'] === 6);
+    const shoes = [...this.closet].filter((clothing) => clothing['id_category'] === 13);
 
     this.top = tops[this.getRandomIndex(tops.length)];
     this.onePiece = onePieces[this.getRandomIndex(onePieces.length)];
