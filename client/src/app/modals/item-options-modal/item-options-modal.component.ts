@@ -29,11 +29,12 @@ export class ItemOptionsModal {
     this.apiService.deleteClothingItem(this.navParams.data.itemId);
     this.closeAfterDeletion();
     this.presentToast();
-    // console.log(this.navParams);
+
   }
 
   close() {
     this.modalController.dismiss();
+    console.log(this.navParams);
   }
 
   closeAfterDeletion() {
@@ -49,6 +50,8 @@ export class ItemOptionsModal {
     });
     toast.present();
   }
+
+
 }
 
 
