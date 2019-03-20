@@ -71,7 +71,7 @@ export class NotificationsPage implements OnInit {
       text:
         'Your outfit of the day is waiting for you, would you like to see it?',
       actions: 'yes-no',
-      trigger: { at: new Date(new Date().getTime() + 20 * 1000) },
+      trigger: { at: new Date(new Date().getTime() + 60 * 1000) },
       foreground: true // Show the notification while app is open
     });
   }
@@ -112,8 +112,8 @@ export class NotificationsPage implements OnInit {
     this.localNotifications.cancelAll();
   }
 
-  printTime() {
-    console.log(typeof this.time, this.time, this.time.split(':'));
-  }
+  // printTime() {
+  //   console.log(this.scheduled, this.time, this.time.split(':'));
+  // }
 
 }
