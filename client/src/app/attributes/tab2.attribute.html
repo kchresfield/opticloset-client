@@ -1,37 +1,41 @@
 <ion-content>
-      <ion-card-title>Attributes</ion-card-title>
-      <div>
-        
-          <ion-button #comfortable color="light" (click)="attributeItem('comfortable')">Comfortable</ion-button>
-          <ion-button #heavy color="light" (click)="attributeItem('heavy')">Heavy</ion-button>
-          <ion-button #professional color="light" (click)="attributeItem('professional')">Professional</ion-button>
-          <ion-button #tight [color]="buttonColor" (click)="attributeItem('tight')">Tight</ion-button>
-          <ion-button #short [color]="buttonColor" (click)="attributeItem('short')">Short</ion-button>
-          <ion-button #long [color]="buttonColor" (click)="attributeItem('long')">Long</ion-button>
-          <ion-button #basic [color]="buttonColor" (click)="attributeItem('basic')">Basic</ion-button>
-          <ion-button #specialoccasion [color]="buttonColor" (click)="attributeItem('specialoccasion')">Special Occasion</ion-button>
-          <ion-button #light [color]="buttonColor" (click)="attributeItem('light')">Light</ion-button>
-      
-      </div>
-      <div>Color</div>
-      <div>Occasion</div>
-      <div>
-          <ion-button [color]="buttonColor" (click)="occasionItem('casual')">Casual</ion-button>
-          <ion-button [color]="buttonColor" (click)="occasionItem('formal')">Formal</ion-button>
-          <ion-button [color]="buttonColor" (click)="occasionItem('businesscasual')">Business Casual</ion-button>
-          <ion-button [color]="buttonColor" (click)="occasionItem('cocktail')">Cocktail</ion-button>
-      </div>
-      <div>
-      <ion-card-title>Price</ion-card-title>
-        <ion-item id="rounded">
-          <ion-label fixed>$</ion-label>
-          <ion-input type="text" [(ngModel)]="price" value=""></ion-input>
-        </ion-item>
-      </div>
+  <ion-card-title>Attributes</ion-card-title>
+  <div>
 
-      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button routerLink="/home/tabs/tab2" (click)="addItem()">
-          <ion-icon name="save"></ion-icon>
-        </ion-fab-button>
-      </ion-fab>
+    <ion-button #comfortable color="light" (click)="attributeItem('comfortable')">Comfortable</ion-button>
+    <ion-button #heavy color="light" (click)="attributeItem('heavy')">Heavy</ion-button>
+    <ion-button #professional color="light" (click)="attributeItem('professional')">Professional</ion-button>
+    <ion-button #tight [color]="buttonColor" (click)="attributeItem('tight')">Tight</ion-button>
+    <ion-button #short [color]="buttonColor" (click)="attributeItem('short')">Short</ion-button>
+    <ion-button #long [color]="buttonColor" (click)="attributeItem('long')">Long</ion-button>
+    <ion-button #basic [color]="buttonColor" (click)="attributeItem('basic')">Basic</ion-button>
+    <ion-button #specialoccasion [color]="buttonColor" (click)="attributeItem('specialoccasion')">Special Occasion
+    </ion-button>
+    <ion-button #light [color]="buttonColor" (click)="attributeItem('light')">Light</ion-button>
+
+  </div>
+  <div>Color</div>
+  <div>Occasion</div>
+  <div>
+    <ion-button [color]="buttonColor" (click)="occasionItem('casual')">Casual</ion-button>
+    <ion-button [color]="buttonColor" (click)="occasionItem('formal')">Formal</ion-button>
+    <ion-button [color]="buttonColor" (click)="occasionItem('businesscasual')">Business Casual</ion-button>
+    <ion-button [color]="buttonColor" (click)="occasionItem('cocktail')">Cocktail</ion-button>
+  </div>
+  <ul *ngFor="let category of info">
+    <li class="category">{{category.name}}</li>
+  </ul>
+  <div>
+    <ion-card-title>Price</ion-card-title>
+    <ion-item id="rounded">
+      <ion-label fixed>$</ion-label>
+      <ion-input type="text" [(ngModel)]="price" value=""></ion-input>
+    </ion-item>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/home/tabs/tab2" (click)="addItem()">
+      <ion-icon name="save"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
