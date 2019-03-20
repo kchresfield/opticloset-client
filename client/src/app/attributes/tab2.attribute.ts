@@ -50,10 +50,10 @@ export class Tab2Attribute {
     this.info = this.categories.map((catagoryObj) => {
       return catagoryObj.name;
     })
-    if (this.info.includes("shirt") || this.info.includes("pattern") || this.info.includes("sleeve") || this.info.includes("polo") || this.info.includes("vest")) {
+    if (this.info.includes("shirt") || this.info.includes("blouse") || this.info.includes("sleeve") || this.info.includes("polo") || this.info.includes("vest")) {
       allPossibilities.push('top');
     }
-    if (this.info.includes("skirt") || this.info.includes("pattern") || this.info.includes("pants") || this.info.includes("jean") || this.info.includes("shorts") || this.info.includes("bottom")) {
+    if (this.info.includes("skirt") || this.info.includes("denim") || this.info.includes("pants") || this.info.includes("jean") || this.info.includes("shorts") || this.info.includes("bottom")) {
       allPossibilities.push('bottom');
     }
     if (this.info.includes("dress") || this.info.includes("romper") || this.info.includes("pants") || this.info.includes("jean") || this.info.includes("shorts") || this.info.includes("bottom")) {

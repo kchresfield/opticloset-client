@@ -1,2 +1,33 @@
 
-<ion-content></ion-content>
+<ion-content>
+  <h1>Sell to eBay</h1>
+  <ion-button>Sell All</ion-button>
+  <ion-button>Sell Selected</ion-button>
+  <ion-button>Reset</ion-button>
+  <ion-grid>
+    <ion-row class="ion-align-items-start" *ngFor="let clothing of filteredCloset">
+      <ion-col>
+        <!-- clothing image -->
+        <ion-label>
+          <ion-img class="displayed" [src]="clothing.imageUrl"></ion-img>
+        </ion-label>
+      </ion-col>
+      <!-- clothing stats -->
+      <ion-col>
+        <ion-list>
+          <ion-radio-group>
+            <ion-item>
+              <ion-label>Keep</ion-label>
+              <ion-radio slot="start" checked></ion-radio>
+            </ion-item>
+        
+            <ion-item>
+              <ion-label>Sell</ion-label>
+              <ion-radio slot="start" value="clothing.id_clothing_item"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
