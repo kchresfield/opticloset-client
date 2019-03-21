@@ -1,9 +1,9 @@
 
 <ion-content>
   <h1>Sell to eBay</h1>
-  <ion-button>Sell All</ion-button>
+  <ion-button (click)="sellAll()">Sell All</ion-button>
   <ion-button routerLink="/sell-on-ebay" (click)="sell()">Sell Selected</ion-button>
-  <ion-button>Reset</ion-button>
+  <ion-button (click)="reset()">Reset</ion-button>
   <ion-grid>
     <ion-row class="ion-align-items-start" *ngFor="let clothing of filteredCloset">
       <ion-col>

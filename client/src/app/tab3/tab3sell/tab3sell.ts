@@ -2,11 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api/api.service';
 import { HttpClient } from '@angular/common/http';
 import { ToastController } from '@ionic/angular';
-
-
-// const parsedLocalStorage = 
-// const firstItemInObjectKey = Object.keys(parsedLocalStorage)[0];
-// const firstItemInObjectValue = parsedLocalStorage[firstItemInObjectKey];
+import { AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -26,6 +22,7 @@ export class Tab3Sell {
     private apiService: ApiService,
     private http: HttpClient,
     public toastController: ToastController,
+    public alertController: AlertController,
     ) { }
 
   ngOnInit() {
@@ -36,9 +33,6 @@ export class Tab3Sell {
     this.pricePaid = this.firstItemInObjectValue.price;
   }
 
-  nextPageAndToast(){
-    
-  }
   nextItem(){
     delete this.parsedLocalStorage[this.firstItemInObjectKey];
     if(this.parsedLocalStorage.length === 0){
@@ -79,7 +73,7 @@ export class Tab3Sell {
 
   async presentToast() {
     const toast = await this.toastController.create({
-      message: 'Published!',
+      message: 'Published on eBay!',
       position: 'middle',
       animated: true,
       duration: 2000
@@ -87,4 +81,28 @@ export class Tab3Sell {
     toast.present();
   }
 
+  async presentAlert() {
+  const alert = await this.alertController.create({
+    header: 'Are you sure?',
+    // subHeader: 'Once sold you will have to manually re-add your item if you change your mind',
+    message: 'Once sold your item will be deleted from your closet.',
+    buttons: ["No, keep it", "I'm sure"],
+  });
+  return await alert.present();
 }
+
+}
+// buttons: [
+//   {
+//     text: 'New note',
+//     handler: () => {
+//       this.navCtrl.push(NewNotesPage);
+//     }
+//   },
+//   {
+//     text: 'See notes',
+//     handler: () => {
+//       this.navCtrl.push(SeeNotesPage);
+//     }
+//   }
+// ]
