@@ -71,7 +71,10 @@ export class Tab1Page implements OnInit {
     return await loading.present();
   }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 68da197afac9d327fd7d26f1d97bb7c3a5e539c7
   getRandomIndex = max => {
     const maxInt = Math.floor(max);
     return Math.floor(Math.random() * maxInt);

@@ -17,7 +17,13 @@ export class ApiService {
   async getConditions(callback) {
     const latLong = await this.getCoordinates();
     console.log(latLong, 'latLong');
-    this.httpClient.get(`${this.apiURL}/weather`).subscribe(data => {
+    this.httpClient.get(`${this.apiURL}/weather`, {
+      params: {
+        latitude: latLong['lat'],
+        longitude : latLong['long'],
+      }
+    })
+    .subscribe(data => {
       callback(data);
     });
   }
