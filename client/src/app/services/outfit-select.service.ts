@@ -26,5 +26,42 @@ export class OutfitSelectService {
     return this.outfit;
   }
 
+  // helper functions for colormatching algo
 
+  getRandomIndex(max) {
+    const maxInt = Math.floor(max);
+    return Math.floor(Math.random() * maxInt);
+  };
+
+  colorMatch(arrayOfClothingObjs) {
+    return 'colormatch'
+  }
+
+  monochromatic(arrayOfClothingObjs) {
+    return 'mono'
+  }
+
+  allNeutral(arrayOfClothingObjs) {
+    return 'neutrals'
+  }
+
+  checkWeather() {
+    //remember to import weather apiservice for weather
+  }
+
+  checkOccasion() {
+
+  }
+
+  chooseMatchMethod() {
+    const methods = ['colorMatch', 'monochromatic', 'allNeutral'];
+    const randomMethod = methods[this.getRandomIndex(methods.length)];
+    return randomMethod;
+  }
+
+  // colormatching algo
+  chooseMatchingOutfit(method) {
+    //choose color method
+
+  }
 }
