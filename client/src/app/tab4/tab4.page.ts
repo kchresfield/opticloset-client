@@ -11,7 +11,8 @@ import { ItemOptionsModal } from '../modals/item-options-modal/item-options-moda
 export class Tab4Page implements OnInit {
   closet: any;
   open: any;
-
+  item: number;
+  itemCategory: any;
   constructor(
     private apiService: ApiService,
     public modalController: ModalController
@@ -29,12 +30,18 @@ export class Tab4Page implements OnInit {
     });
   }
 
-  async presentModal(id) {
+  async presentModal(item) {
     const modal = await this.modalController.create({
       component: ItemOptionsModal,
-      componentProps: { itemId: id }
+      componentProps: { item: item }
     });
+    // this.itemCategory = category;
+    // console.log(this.itemCategory);
     return await modal.present();
+  }
+
+  print(item) {
+    console.log(item);
   }
 
   closeModal() {
