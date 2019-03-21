@@ -1,0 +1,28 @@
+<ion-content>
+  <img [src]="filteredCloset" height="300" class="center">
+  <div>
+    Title:
+    <ion-input placeholder="Title"></ion-input>
+  </div>
+  <div>
+    Description:
+    <ion-input placeholder="Description"></ion-input>
+  </div>
+  <div>
+    Price Paid:
+    {{pricePaid}}
+  </div>
+  <div>
+    Condition:
+    <ion-input placeholder="Condition"></ion-input>
+  </div>
+  <div>
+    Listing Price:
+    <ion-input placeholder="Listing Price"></ion-input>
+  </div>
+
+  <div>
+    <ion-button>Cancel</ion-button>
+    <ion-button (click)="nextItem()" routerLink='/home/tabs/tab3' >Next</ion-button>
+  </div>
+</ion-content>
