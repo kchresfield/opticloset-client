@@ -1,41 +1,75 @@
 <ion-content>
-    <ion-grid fixed>
-      <ion-row class="ion-align-items-center ion-justify-content-center">
+  <ion-grid fixed>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
 
-        <ion-col>
-          <ion-item>
-            <ion-img [src]="accessory.imageUrl"></ion-img>
-          </ion-item>
-        </ion-col>
-        <ion-col>
-          <ion-item>
-            <ion-img [src]="top.imageUrl"></ion-img>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-img [src]="outerwear.imageUrl"></ion-img>
-          </ion-item>
-        </ion-col>
-        <ion-col>
-          <ion-item>
-            <ion-img [src]="bottom.imageUrl"></ion-img>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+      <ion-col>
+        <ion-item>
+          <div *ngIf="!isLoading; else elseBlock">
+            <div *ngIf="!outfit['accessory']">
+              You currently have no Accessory in your closet. Go add some!
+            </div>
+            <div *ngIf="outfit['accessory']">
+              <ion-img [src]="outfit['accessory'].imageUrl"></ion-img>
+            </div>
+          </div>
+          <ng-template #elseBlock>Loading</ng-template>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <div *ngIf="!isLoading; else elseBlock">
+            <div *ngIf="!outfit['top']">
+              You currently have no Top in your closet. Go add some!
+            </div>
+            <div *ngIf="outfit['top']">
+              <ion-img [src]="outfit['top'].imageUrl"></ion-img>
+            </div>
+          </div>
+        </ion-item>
+      </ion-col>
+    </ion-row>
 
-      <ion-row class="ion-align-items-center ion-justify-content-center">
-        <ion-col>
-          <ion-button color="secondary" (click)="presentToast()">Confirm Outfit</ion-button>
-        </ion-col>
-        <ion-col>
-          <ion-item>
-            <ion-img [src]="shoe.imageUrl"></ion-img>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <div *ngIf="!isLoading; else elseBlock">
+            <div *ngIf="!outfit['outerwear']">
+              You currently have no Outerwear in your closet. Go add some!
+            </div>
+            <div *ngIf="outfit['outerwear']">
+              <ion-img [src]="outfit['outerwear'].imageUrl"></ion-img>
+            </div>
+          </div>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <div *ngIf="!isLoading; else elseBlock">
+            <div *ngIf="!outfit['bottom']">
+              You currently have no Bottom in your closet. Go add some!
+            </div>
+            <div *ngIf="outfit['bottom']">
+              <ion-img [src]="outfit['bottom'].imageUrl"></ion-img>
+            </div>
+          </div>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col>
+        <ion-button color="secondary" (click)="presentToast()">{{outfitSelected ? 'Current Outfit' : 'Confirm Outfit'}}
+        </ion-button>
+        <!-- <ion-button color="secondary" (click)="retrieveOutfit()">
+        </ion-button> -->
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <div *ngIf="!isLoading && outfit['shoes']; else elseBlock">
+            <ion-img [src]="outfit['shoes'].imageUrl"></ion-img>
+          </div>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

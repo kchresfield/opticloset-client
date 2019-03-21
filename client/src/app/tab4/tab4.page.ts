@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ClothingListK } from '../clothing-item-list';
-import { ClothingItemK } from '../clothing-item';
 import { ApiService } from '../services/api/api.service';
 import { ModalController, NavParams } from '@ionic/angular';
 import { ItemOptionsModal } from '../modals/item-options-modal/item-options-modal.component';
@@ -12,9 +10,9 @@ import { ItemOptionsModal } from '../modals/item-options-modal/item-options-moda
 })
 export class Tab4Page implements OnInit {
   closet: any;
-  closetK = ClothingListK;
   open: any;
-  value: any;
+  item: number;
+  itemCategory: any;
   constructor(
     private apiService: ApiService,
     public modalController: ModalController
@@ -22,6 +20,7 @@ export class Tab4Page implements OnInit {
 
   ngOnInit() {
     this.getAllItems();
+    // this.open = this.itemOptionsModal.open;
   }
 
   getAllItems() {
@@ -31,18 +30,22 @@ export class Tab4Page implements OnInit {
     });
   }
 
-  async presentModal(id) {
+  async presentModal(item) {
     const modal = await this.modalController.create({
       component: ItemOptionsModal,
-      componentProps: { itemId: id }
+      componentProps: { item: item }
     });
-    modal.onDidDismiss().then((data) => {
-      if (data.data === 1) {
-        this.getAllItems();
-      }
-    });
-
+    // this.itemCategory = category;
+    // console.log(this.itemCategory);
     return await modal.present();
+  }
+
+  print(item) {
+    console.log(item);
+  }
+
+  closeModal() {
+    this.modalController.dismiss();
   }
 
 }

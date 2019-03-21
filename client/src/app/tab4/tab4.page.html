@@ -1,28 +1,19 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="light">
     <ion-title>
       Closet
     </ion-title>
-    <!-- <ion-item ngFor="posts"></ion-item> -->
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <!-- <ul class="closetK" > 
-    <li id="modal"(click)="presentModal(clothingItem.id_clothing_item)" *ngFor="let clothingItem of closetK">
-      <div class="clothingItem">{{clothingItem.type}}</div>
-      <img [src]="clothingItem.img" height="200" width="fixed">
-    </li> -->
-  <!-- </ul> -->
-    <ul class="closet">
-      <li (click)="presentModal(clothingItem.id_clothing_item)" *ngFor="let clothingItem of closet">
+  <ion-grid class="closet">
+    <ion-row>
+      <ion-col id="test" size="6" (click)="presentModal(clothingItem); print(clothingItem)"
+        *ngFor="let clothingItem of closet">
         <div class="clothingItem">{{clothingItem.category}}</div>
-        <img [src]="clothingItem.imageUrl" height="200" width="fixed">
-      </li>
-    </ul>
+        <img class="displayed" [src]="clothingItem.imageUrl">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
-
-<!-- line 11/12 : *ngIf="(closet | async)" -->
-<!-- <li *ngFor="let clothing-item of (closet | async)"></li> -->
-<!-- *ngIf="clothingItem.img" -->
-<!-- *ngIf="clothingItem.type" -->
