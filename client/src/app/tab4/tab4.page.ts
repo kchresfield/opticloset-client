@@ -30,10 +30,10 @@ export class Tab4Page implements OnInit {
     });
   }
 
-  async presentModal(id, category) {
+  async presentModal(id, category, item) {
     const modal = await this.modalController.create({
       component: ItemOptionsModal,
-      componentProps: { itemId: id, itemCategory: category }
+      componentProps: { itemId: id, itemCategory: category, item: item }
     });
     // this.itemCategory = category;
     // console.log(this.itemCategory);

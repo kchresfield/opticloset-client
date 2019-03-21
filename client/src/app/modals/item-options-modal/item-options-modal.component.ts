@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, HostBinding } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { ApiService } from '../../services/api/api.service';
+import { OutfitSelectService } from '../../services/outfit-select.service';
 import { ToastController } from '@ionic/angular';
+import { Router, Routes } from '@angular/router';
+
 
 
 @Component({
@@ -20,16 +23,24 @@ export class ItemOptionsModal {
     private navParams: NavParams,
     private apiService: ApiService,
     public toastController: ToastController,
+    private outfitSelectService: OutfitSelectService,
+    private router: Router,
   ) {
     // componentProps can also be accessed at construction time using NavParams
   }
+
+  // @HostBinding('style.border') border: string;
+
+  // @HostListener('click')
+  // click() {
+  //   this.outfitSelectService.set();
+  // }
 
   removeFromCloset() {
     console.log(this.navParams.data.itemId);
     this.apiService.deleteClothingItem(this.navParams.data.itemId);
     this.closeAfterDeletion();
     this.presentToast();
-
   }
 
   close() {
@@ -51,7 +62,18 @@ export class ItemOptionsModal {
     toast.present();
   }
 
+  changeSelectedItem() {
+    this.outfitSelectService.set(
+      this.navParams.data.itemCategory,
+      this.navParams.data.item
+    );
+  }
 
+  redirectTo(uri) {
+    this.router
+      .navigateByUrl(uri, { skipLocationChange: true })
+      .then(() => this.router.navigate([uri]));
+  }
 }
 
 
