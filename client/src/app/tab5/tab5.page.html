@@ -32,13 +32,15 @@
 
   <!-- clothing item rendering -->
   <ion-grid>
-    <ion-row class="ion-align-items-start">
-      <ion-col *ngFor="let clothing of filteredCloset">
+    <ion-row class="ion-align-items-start" *ngFor="let clothing of filteredCloset">
+      <ion-col >
         <!-- clothing image -->
         <ion-label>
           <ion-img class="displayed" [src]="clothing.imageUrl"></ion-img>
         </ion-label>
+      </ion-col> 
         <!-- clothing stats -->
+      <ion-col>
         <ion-list>
           <ion-item>
             <ion-label>Last Worn: {{clothing.lastUpdated}}</ion-label>
