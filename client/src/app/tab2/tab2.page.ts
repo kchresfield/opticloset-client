@@ -52,7 +52,7 @@ export class Tab2Page {
         this.http.post('http://localhost:8080/clothingImage/1', {
           cloudinaryUrl: url,
         }, { responseType: 'text' }).subscribe((response) => {
-          localStorage.setItem('response', 'response');
+          localStorage.setItem('response', response);
           console.log(response);
         })
       })
@@ -90,21 +90,22 @@ export class Tab2Page {
           cloudinaryUrl: url,
         }, { responseType: 'text' }).subscribe((response) => {
           console.log(response);
+          localStorage.setItem('response', response);
         })
       })
   }
 
 
   // Tester
-  sendToCloud() {
-      this.http.post('http://localhost:8080/clothingImage/1', {
-        "response": {
-          "url": "https://res.cloudinary.com/opticloset/image/upload/v1552924048/longSkirt.png"
-        }
-      }, { responseType: 'text' }).subscribe((response) => {
-        console.log(JSON.parse(response), 'server response');
-        localStorage.setItem('response', response);
-      })
-    }
+  // sendToCloud() {
+  //     this.http.post('http://localhost:8080/clothingImage/1', {
+  //       "response": {
+  //         "url": "https://res.cloudinary.com/opticloset/image/upload/v1552924048/longSkirt.png"
+  //       }
+  //     }, { responseType: 'text' }).subscribe((response) => {
+  //       console.log(JSON.parse(response), 'server response');
+  //       localStorage.setItem('response', response);
+  //     })
+  //   }
   
 }
