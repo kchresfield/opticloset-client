@@ -7,7 +7,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
   providedIn: 'root'
 })
 export class ApiService {
-  apiURL = 'http://localhost:8080';
+  apiURL = 'http://172.24.0.55:8080';
 
   constructor(private httpClient: HttpClient, private geolocation: Geolocation) { }
 
