@@ -91,7 +91,7 @@ export class Tab1Page implements OnInit {
       outerwear: outerwears[this.getRandomIndex(outerwears.length)],
       accessory: accessories[this.getRandomIndex(accessories.length)],
       bottom: bottoms[this.getRandomIndex(bottoms.length)],
-      shoe: shoes[this.getRandomIndex(shoes.length)],
+      shoes: shoes[this.getRandomIndex(shoes.length)],
     };
     console.log(this.outfit);
 

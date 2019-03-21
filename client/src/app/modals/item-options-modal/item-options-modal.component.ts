@@ -37,8 +37,8 @@ export class ItemOptionsModal {
   // }
 
   removeFromCloset() {
-    console.log(this.navParams.data.itemId);
-    this.apiService.deleteClothingItem(this.navParams.data.itemId);
+    console.log(this.navParams.data);
+    this.apiService.deleteClothingItem(this.navParams.data.item.id_clothing_item);
     this.closeAfterDeletion();
     this.presentToast();
   }
@@ -64,7 +64,7 @@ export class ItemOptionsModal {
 
   changeSelectedItem() {
     this.outfitSelectService.set(
-      this.navParams.data.itemCategory,
+      this.navParams.data.item.category,
       this.navParams.data.item
     );
   }
