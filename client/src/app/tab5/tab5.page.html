@@ -23,7 +23,12 @@
   </ion-radio-group>
   <!-- date picker title -->
   <ion-list-header>
-    Filter
+    <ion-label>
+      Filter
+    </ion-label>
+    <ion-label (click)="resetFilter()">
+      Reset Filters
+    </ion-label>
   </ion-list-header>
   <!-- date picker -->
   <ion-item>

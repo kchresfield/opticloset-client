@@ -11,13 +11,6 @@ export class OutfitSelectService {
   closet: any;
   constructor(public apiService: ApiService) {}
 
-  // getClosetFromDB() {
-  //   this.apiService.getCloset(data => {
-  //     console.log('getting closet with Api Service', data);
-  //     this.closet = data;
-  //   });
-  // }
-
   // retrieve closet from DB using apiService
   getClosetFromDB(cb) {
     this.apiService.getCloset(cb);
@@ -27,8 +20,6 @@ export class OutfitSelectService {
   saveOutfit(outfit) {
     this.outfit = outfit;
   }
-
-  // @Output() change: EventEmitter<boolean> = new EventEmitter();
 
   // update the outfit of the day with an item from modal
   set(category, item) {
@@ -40,24 +31,25 @@ export class OutfitSelectService {
     return this.outfit;
   }
 
-  // saveItem(item) {
-  //   this.selectedItem = item;
-  // }
+
+  // save initial value of a collection on the service
   save(prop, value) {
-    this[prop] = value; // bad because reassignment not changing the value
+    this[prop] = value;
   }
 
+  // returns the value of a collection on the service
   get(prop) {
     return this[prop];
   }
 
-  change(prop, value) {
-    this[prop].unshift(value);
+  // replace a collection by a single item
+  change(prop, item) {
+    this[prop].unshift(item);
     this[prop].splice(1, this[prop].length);
   }
 
+  // function to update either closet or sortetCloset on outfitSelect service from components
   restore(prop, array) {
-    // console.log(this[prop]);
     this[prop].splice(0, this[prop].length);
     array.forEach(item => {
       this[prop].push(item);

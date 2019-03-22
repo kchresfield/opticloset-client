@@ -22,28 +22,21 @@ export class Tab5Page implements OnInit {
     this.setCloset();
   }
 
+  // checks if current 'diplayed' closet is smaller than the initial closet on the service
+  // and restore the current closet to match the initial closet if needed
   checkAndRestoreCloset() {
     if (this.closet.length < this.outfitSelectService.get('closet').length) {
       const closet = this.outfitSelectService.get('closet');
-      // console.log('single item closet', closet);
-
       const newSortedCloset = [...closet];
       newSortedCloset.sort((a, b) => {
         return a.count_worn - b.count_worn; // sort the closet from least worn to most worn
       });
-      console.log('test', newSortedCloset);
-      // sortedCloset.forEach(clothing => { // for each item in the sorted closet
-      //   clothing.lastUpdated = new Date(clothing.updatedAt).toString().slice(3, 15); // add a property lastUpdated
-      // });
       this.outfitSelectService.restore('sortedCloset', newSortedCloset);
-      this.setCloset();
-      // save the sorted closet on the service
     }
-    }
+  }
 
+  // sort the currently displayed closet based on the method provided
   sortCloset(method) {
-    // console.log(this.filteredCloset);
-    // this.checkCloset();
     if (method === 'most2Least') {
       this.closet.sort((a, b) => {
         return b.count_worn - a.count_worn;
@@ -57,20 +50,33 @@ export class Tab5Page implements OnInit {
   }
 
   setFilter() {
-    console.log('theTest', this.closet);
+    // creates a copy of the initial closet from the service, sort it & filters it
+    const tempCloset = [...this.outfitSelectService.get('closet')];
+    tempCloset.sort((a, b) => {
+      return b.count_worn - a.count_worn;
+    });
 
-
-    // const copyCloset = [...this.closet];
-
-    this.closet = [...this.outfitSelectService.get('sortedCloset')].filter((clothing) => {
+    const filteredCloset = tempCloset.filter(clothing => {
       // checks if startDate and endDate have been selected
       if (this.startDate && this.endDate) {
         // checks if clothing worn date is in between startDate and endDate
-        return new Date(this.startDate.valueOf()) < new Date(clothing.updatedAt.valueOf()) &&
-          new Date(this.endDate.valueOf()) > new Date(clothing.updatedAt.valueOf());
+        // console.log('test2', this.startDate, this.endDate);
+        return (
+          new Date(this.startDate.valueOf()) <= new Date(clothing.updatedAt.valueOf()) &&
+          new Date(this.endDate.valueOf()) >= new Date(clothing.updatedAt.valueOf())
+        );
       }
       return true;
     });
+    // then replaces the sortedCloset on the service with the newly created sorted and filtered closet
+    this.outfitSelectService.restore('sortedCloset', filteredCloset);
+  }
+
+  // reset the start & end dates and replace the sortedCloset on the service by an initial closet
+  resetFilter() {
+    this.startDate = undefined;
+    this.endDate = undefined;
+    this.checkAndRestoreCloset();
   }
 
   setCloset() {
