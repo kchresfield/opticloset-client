@@ -11,7 +11,6 @@ export class OutfitSelectService {
   closet: any;
   constructor(public apiService: ApiService) {}
 
-  // retrieve closet from DB using apiService
   // getClosetFromDB() {
   //   this.apiService.getCloset(data => {
   //     console.log('getting closet with Api Service', data);
@@ -19,7 +18,8 @@ export class OutfitSelectService {
   //   });
   // }
 
-  getClosetFromDBandSort(cb) {
+  // retrieve closet from DB using apiService
+  getClosetFromDB(cb) {
     this.apiService.getCloset(cb);
   }
 
@@ -53,13 +53,13 @@ export class OutfitSelectService {
 
   change(prop, value) {
     this[prop].unshift(value);
-    this[prop].splice(1, this[prop].length)
+    this[prop].splice(1, this[prop].length);
   }
 
   restore(prop, array) {
     // console.log(this[prop]);
     this[prop].splice(0, this[prop].length);
-    array.forEach((item) => {
+    array.forEach(item => {
       this[prop].push(item);
     });
   }

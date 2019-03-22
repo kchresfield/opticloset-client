@@ -41,7 +41,7 @@ export class TabsPage implements OnInit {
   }
 
   getCloset() {
-    this.outfitSelectService.getClosetFromDBandSort(data => { // invoke the getClosetFromDBandSort method from outfitSelectService to
+    this.outfitSelectService.getClosetFromDB(data => { // invoke the getClosetFromDBandSort method from outfitSelectService to
       console.log('getting closet with Api Service', data);
       this.outfitSelectService.save('closet', data); // save a regular closet on the service
       const sortedCloset = [...data];
