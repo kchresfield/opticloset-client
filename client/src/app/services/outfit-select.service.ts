@@ -53,11 +53,12 @@ export class OutfitSelectService {
 
   change(prop, value) {
     this[prop].unshift(value);
-    this[prop].splice(1, this[prop].length - 1)
+    this[prop].splice(1, this[prop].length)
   }
 
   restore(prop, array) {
-    this[prop].pop();
+    // console.log(this[prop]);
+    this[prop].splice(0, this[prop].length);
     array.forEach((item) => {
       this[prop].push(item);
     });
