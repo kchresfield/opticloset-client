@@ -18,6 +18,7 @@ import { Router } from '@angular/router';
 
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { OutfitSelectService } from './services/outfit-select.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,6 +35,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     Camera,
     SplashScreen,
     ApiService,
+    OutfitSelectService,
     Geolocation,
     LocalNotifications,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
