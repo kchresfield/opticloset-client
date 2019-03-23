@@ -18,6 +18,7 @@ import { Router } from '@angular/router';
 
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +29,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     AppRoutingModule,
     HttpClientModule,
     HttpModule,
+    FormsModule,
   ],
   providers: [
     StatusBar,

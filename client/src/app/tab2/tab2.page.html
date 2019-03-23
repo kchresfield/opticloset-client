@@ -5,18 +5,18 @@
 
   <img src="assets/camera-tab2.png">
 
-  <img [src]="uploadedImage" *ngIf="uploadedImage">
+  <!-- <img [src]="uploadedImage" *ngIf="uploadedImage"> -->
   <div></div>
   <div></div>
   <ion-fab vertical="bottom">
     <ion-row>
       <ion-col>
-        <ion-fab-button routerLink="/home/tabs/tab2" (click)="takePicture()">
+        <ion-fab-button (click)="takePicture()">
           <ion-icon name="camera"></ion-icon>
         </ion-fab-button>
       </ion-col>
       <ion-col>
-        <ion-fab-button routerLink="/home/tabs/tab2" (click)="upload()">
+        <ion-fab-button (click)="upload()">
           <ion-icon name="cloud"></ion-icon>
         </ion-fab-button>
       </ion-col>
