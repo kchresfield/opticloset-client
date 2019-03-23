@@ -44,9 +44,9 @@ export class Tab1Page implements OnInit {
       this.isLoading = false;
     });
     // testing for matching feature
-    this.outfitSelectService.setMock();
-    this.outfitSelectService.chooseMatchingOutfit(null, null);
-    this.outfit = this.outfitSelectService.getOutfit();
+    // this.outfitSelectService.setMock();
+    // this.outfitSelectService.chooseMatchingOutfit(null, null);
+    // this.outfit = this.outfitSelectService.getOutfit();
     // this.outfitSelectService.set.subscribe(isOpen => {
     //   this.isOpen = isOpen;
     // });
