@@ -66,7 +66,7 @@ export class OutfitSelectService {
 
   setMock() {
     this.closet = mockCloset;
-    this.tops = this.closet.filter((clothing) => clothing['id_category'] === 1 || clothing['id_category'] === 2);
+    this.tops = this.closet.filter((clothing) => clothing['id_category'] === 1);
     this.onePieces = this.closet.filter((clothing) => clothing['id_category'] === 3);
     this.outerwears = this.closet.filter((clothing) => clothing['id_category'] === 4);
     this.accessories = this.closet.filter((clothing) => clothing['id_category'] === 5);
@@ -137,7 +137,7 @@ export class OutfitSelectService {
     colorOutfit['top'] = currPiece;
     
     // loop through bottoms to select matching bottom by color
-    for (let i = 0; i < this.bottoms.length; i++) {
+    for (let i = this.getRandomIndex(this.bottoms.length); i < this.bottoms.length; i++) {
       // check if matching colors have been selected
       if (matchingColors) {
         // if matching colors have been selected, then check if current bottom's color is considered matching
@@ -163,11 +163,11 @@ export class OutfitSelectService {
     } 
     
     // loop through outerwears to select matching bottom by color
-    for (let i = 0; i < this.outerwears.length; i++) {
+    for (let j = this.getRandomIndex(this.outerwears.length); j < this.outerwears.length; j++) {
       // check if current bottom matches top by color
       if (matchingColors) {
-        if (matchingColors.includes(this.outerwears[i].color)) {
-          colorOutfit['outerwear'] = this.outerwears[i];
+        if (matchingColors.includes(this.outerwears[j].color)) {
+          colorOutfit['outerwear'] = this.outerwears[j];
           currPiece = colorOutfit['outerwear'];
           currColor = currPiece.color.split(', ')[0];
         }
@@ -184,11 +184,11 @@ export class OutfitSelectService {
       matchingColors = this.chooseMatchingColors(currColor);
     } 
     
-    for (let i = 0; i < this.shoes.length; i++) {
+    for (let k = this.getRandomIndex(this.shoes.length); k < this.shoes.length; k++) {
       // check if current shoes matches top by color
       if (matchingColors) {
-        if (matchingColors.includes(this.shoes[i].color)) {
-          colorOutfit['shoes'] = this.shoes[i];
+        if (matchingColors.includes(this.shoes[k].color)) {
+          colorOutfit['shoes'] = this.shoes[k];
           currPiece = colorOutfit['shoes'];
           currColor = currPiece.color.split(', ')[0];
         }
@@ -205,11 +205,11 @@ export class OutfitSelectService {
       matchingColors = this.chooseMatchingColors(currColor);
     } 
     
-    for (let i = 0; i < this.accessories.length; i++) {
+    for (let l = this.getRandomIndex(this.accessories.length); l < this.accessories.length; l++) {
       // check if current accessory matches top by color
       if (matchingColors) {
-        if (matchingColors.includes(this.accessories[i].color)) {
-          colorOutfit['accessory'] = this.accessories[i];
+        if (matchingColors.includes(this.accessories[l].color)) {
+          colorOutfit['accessory'] = this.accessories[l];
           currPiece = colorOutfit['accessory'];
           currColor = currPiece.color.split(', ')[0];
         }
