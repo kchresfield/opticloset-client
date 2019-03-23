@@ -39,8 +39,13 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../tab4/tab4.module#Tab4PageModule'
+            loadChildren: '../tab4/tab4.module#Tab4PageModule',
+            pathMatch: 'full'
           },
+          {
+            path: '/update-item',
+            loadChildren: '../tab4/update-item/update-item.module#UpdateItemPageModule'
+          }
         ]
       },
       {
@@ -54,7 +59,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tab1',
+        redirectTo: '/tab1'
         // pathMatch: 'full'
       }
     ]
