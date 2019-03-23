@@ -15,6 +15,7 @@ export class Tab4Page implements OnInit {
   open: any;
   item: number;
   itemCategory: any;
+  category: any;
   constructor(
     private apiService: ApiService,
     public modalController: ModalController,
@@ -54,5 +55,26 @@ export class Tab4Page implements OnInit {
 
   closeModal() {
     this.modalController.dismiss();
+  }
+
+  setFilter() {
+
+    const tempCloset = [...this.outfitSelectService.get('closet')];
+    const filteredCloset = tempCloset.filter(clothing => {
+      // checks if startDate and endDate have been selected
+      if (this.category !== 'all') {
+        // checks if clothing worn date is in between startDate and endDate
+        return (
+          clothing.category === this.category
+        );
+      }
+      return true;
+    });
+    this.closet = filteredCloset;
+  }
+
+  onChange() {
+    this.setFilter();
+    console.log(this);
   }
 }
