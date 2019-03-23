@@ -16,4 +16,4 @@ import { Tab3Sell } from './tab3sell';
   ],
   declarations: [Tab3Sell]
 })
-export class Tab3SellModule { }
+export class Tab3SellModule {}

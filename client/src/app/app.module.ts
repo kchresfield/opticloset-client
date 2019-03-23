@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
 
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { FormsModule } from '@angular/forms';
+import { OutfitSelectService } from './services/outfit-select.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,13 +29,13 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     HttpClientModule,
     HttpModule,
-    FormsModule,
   ],
   providers: [
     StatusBar,
     Camera,
     SplashScreen,
     ApiService,
+    OutfitSelectService,
     Geolocation,
     LocalNotifications,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

@@ -69,10 +69,14 @@ export class ItemOptionsModal {
     );
   }
 
-  redirectTo(uri) {
-    this.router
-      .navigateByUrl(uri, { skipLocationChange: true })
-      .then(() => this.router.navigate([uri]));
+  // redirectTo(uri) {
+  //   this.router
+  //     .navigateByUrl(uri, { skipLocationChange: true })
+  //     .then(() => this.router.navigate([uri]));
+  // }
+
+  chooseItem() {
+    this.outfitSelectService.change('sortedCloset', (this.navParams.data.item));
   }
 }
 
