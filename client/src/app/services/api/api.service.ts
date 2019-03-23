@@ -7,8 +7,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
   providedIn: 'root'
 })
 export class ApiService {
-  apiURL = 'http://localhost:8080';
-  // apiURL: 'http://172.24.9.131:8080';
+  apiURL = 'http://ec2-3-17-178-179.us-east-2.compute.amazonaws.com:8080';
 
   constructor(
     private httpClient: HttpClient,
@@ -21,16 +20,23 @@ export class ApiService {
   async getConditions(callback) {
     const latLong = await this.getCoordinates();
     console.log(latLong, 'latLong');
-    this.httpClient
-      .get(`${this.apiURL}/weather`, {
+    if (!latLong) {
+      this.httpClient.get(`${this.apiURL}/weather`)
+      .subscribe(data => {
+        callback(data);
+      });
+    } 
+    if (latLong) {
+      this.httpClient.get(`${this.apiURL}/weather`, {
         params: {
           latitude: latLong['lat'],
-          longitude: latLong['long']
+          longitude : latLong['long'],
         }
       })
       .subscribe(data => {
         callback(data);
       });
+    };
   }
 
   getCoordinates() {
