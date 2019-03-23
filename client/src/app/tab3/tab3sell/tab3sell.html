@@ -1,15 +1,15 @@
 <ion-content>
-  <img [src]="filteredCloset" height="300" class="center">
+  <img [src]="filteredCloset" height="400" class="center">
   <div>
     Title:
     <ion-input placeholder="Title"></ion-input>
   </div>
   <div>
-    Description:
-    <ion-input placeholder="Description"></ion-input>
+    <ion-label>Description:</ion-label>
+    <ion-textarea placeholder="Description..."></ion-textarea>
   </div>
   <div>
-    Price Paid:
+    <ion-label>Price Paid:</ion-label>
     {{pricePaid}}
   </div>
   <div>
@@ -22,7 +22,9 @@
   </div>
 
   <div>
-    <ion-button>Cancel</ion-button>
-    <ion-button (click)="nextItem()" routerLink='/home/tabs/tab3' >Next</ion-button>
+    <ion-button routerLink='/home/tabs/tab3'>Cancel</ion-button>
+    <ion-button (click)="nextItem(); presentAlert(); " routerLink='/home/tabs/tab3'>Sell</ion-button>
   </div>
 </ion-content>
+<!-- /home/tabs/tab3 -->
+<!-- presentToast() -->

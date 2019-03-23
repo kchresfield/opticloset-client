@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../services/api/api.service';
-import { IonMenuToggle } from '@ionic/angular';
+import { IonMenuToggle, NavController } from '@ionic/angular';
+import { LogService } from 'app/services/log/log.service';
 
 // This is my cheat for adding the data to the db lol
 const allAttributes = {
@@ -16,8 +17,6 @@ const allAttributes = {
   light: false,
 };
 
-const arrOfColors = [];
-
 const category = { category: true };
 
 const allOccasions = {
@@ -26,6 +25,8 @@ const allOccasions = {
 
 const allPossibilities = [];
 const topTwoColors = [];
+const arrOfSelectedColors = {color: "userInputColor"};
+
 
 @Component({
   selector: 'app-tab2.attribute',
@@ -35,17 +36,27 @@ const topTwoColors = [];
 })
 export class Tab2Attribute {
   apiURL = 'http://localhost:8080';
-  price: string;
+  price: string = JSON.parse(localStorage.getItem('response')).price;
   info: any;
   categories: any;
   finished = allPossibilities;
   colors: any;
   topTwoColors = topTwoColors;
+  colorClicked:any;
+  dropDownColors: any;
+  url = JSON.parse(localStorage.getItem('response')).cleanUrl;
+  imgId = JSON.parse(localStorage.getItem('response')).idOfTheImg;
 
-  constructor(private apiService: ApiService, private httpClient: HttpClient) { }
+  constructor(
+    private apiService: ApiService,
+    private httpClient: HttpClient,
+    private logService: LogService,
+    ) {
+  }
   private buttonColor: string = "light";
 
   ngOnInit() {
+    this.logService.log(JSON.parse(localStorage.getItem('response')));
     this.categories = JSON.parse(localStorage.getItem('response')).categories;
     this.info = this.categories.map((catagoryObj) => {
       return catagoryObj.name;
@@ -82,45 +93,51 @@ export class Tab2Attribute {
     } else {
       allAttributes[input] = true;
     }
-    // console.log(input);
-    // console.log(allAttributes);
+    console.log(input);
+    console.log(allAttributes);
   };
   occasionItem(input) {
     allOccasions.occasion = input;
-    // console.log(input)
+    console.log(input)
   };
-  category(input){
-    category.category = input;
-    console.log(input);
+  categorySelected(input){
+    category.category = input.toLowerCase();
+    console.log(input.toLowerCase());
   }
 
-  color(input) {
+  colorUserClicked(input) {
     // if(arrOfColors.length <= 1){
     //   arrOfColors.push(colorValue);
     // }
-    console.log(input);
+    const colorNameInLowercase = input.toLowerCase();
+      arrOfSelectedColors.color = colorNameInLowercase;
+    
+    console.log(arrOfSelectedColors);
   }
 
 
   addItem() {
-    const selectedAttributesSavedChoices = [];
-    const selectedAttributesNotFinalChoices = Object.keys(allAttributes).map((attribute) => {
-      if (allAttributes[attribute] === true) {
-        selectedAttributesSavedChoices.push(attribute);
+    const arrOfAttrId = Object.keys(allAttributes).filter((attributeId) => {
+      if(allAttributes[attributeId] ){
+        return attributeId;
       }
-    });
+    })
+    console.log(arrOfAttrId);
     const selectedOccasion = allOccasions.occasion;
     const price = this.price;
 
     const clothesData = {
-      selectedAttributesSavedChoices: selectedAttributesSavedChoices,
-      selectedOccasion: selectedOccasion,
+      id_user: 1,
+      id_category: category.category,
       price: price,
+      id_img: this.imgId,
       count_worn: 0,
-
+      id_occasion: selectedOccasion,
+      attribute: arrOfAttrId,
+      color: arrOfSelectedColors.color,
     };
-
-    this.httpClient.post(`${this.apiURL}/closet/1`, clothesData).subscribe((data) => {
+    console.log(clothesData);
+    this.httpClient.post(`localhost:8080/closet/1`, clothesData).subscribe((data) => {
       console.log(data);
     });
   }
