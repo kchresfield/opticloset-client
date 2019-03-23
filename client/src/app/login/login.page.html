@@ -1,21 +1,17 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>OPTICLOSET</ion-title>
+    <ion-title text-center>OPTICLOSET</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
-  <div text-center>
+  <ion-row justify-content-center align-items-center style='height: 100%'>
+    <div text-center>
       <ion-button color="secondary" shape="round" fill="outline" (click)="authService.login()">
         Get Started
       </ion-button>
-  </div>
-<!-- 
-    <span text-center>
-      <ion-button color="secondary" shape="round" fill="outline" (click)="authService.login()">
-        Get Started
-      </ion-button>
-    </span> -->
-
+    </div>
+  </ion-row>
+  
 </ion-content>
