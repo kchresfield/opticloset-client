@@ -31,12 +31,12 @@ export class OutfitSelectService {
 
   setMock() {
     this.closet = mockCloset;
-    this.tops = [...this.closet].filter((clothing) => clothing['id_category'] === 1 || clothing['id_category'] === 2);
-    this.onePieces = [...this.closet].filter((clothing) => clothing['id_category'] === 3);
-    this.outerwears = [...this.closet].filter((clothing) => clothing['id_category'] === 4);
-    this.accessories = [...this.closet].filter((clothing) => clothing['id_category'] === 5);
-    this.bottoms = [...this.closet].filter((clothing) => clothing['id_category'] === 6);
-    this.shoes = [...this.closet].filter((clothing) => clothing['id_category'] === 13);
+    this.tops = this.closet.filter((clothing) => clothing['id_category'] === 1 || clothing['id_category'] === 2);
+    this.onePieces = this.closet.filter((clothing) => clothing['id_category'] === 3);
+    this.outerwears = this.closet.filter((clothing) => clothing['id_category'] === 4);
+    this.accessories = this.closet.filter((clothing) => clothing['id_category'] === 5);
+    this.bottoms = this.closet.filter((clothing) => clothing['id_category'] === 6);
+    this.shoes = this.closet.filter((clothing) => clothing['id_category'] === 13);
   }
 
   // return the current outfit of the day
@@ -46,15 +46,29 @@ export class OutfitSelectService {
 
   // helper functions for colormatching algo
 
+  // returns random whole number from 0 to max
   getRandomIndex(max) {
     const maxInt = Math.floor(max);
     return Math.floor(Math.random() * maxInt);
   };
 
+  // selects random match method
+  chooseMatchMethod() {
+    const methods = ['colorMatch', 'monochromatic', 'allNeutral'];
+    const randomMethod = methods[this.getRandomIndex(methods.length)];
+    return randomMethod;
+  }
+
+  chooseOccasion() {
+    const occasions = ['casual', 'formal', ]
+  }
+
+  // returns outfit object with up to two matching colors in palette
   colorMatch(arrayOfClothingObjs) {
     return 'colormatch'
   }
 
+  // returns outfit object with one color for every clothing item
   monochromatic() {
     // object to hold current outfit being built
     const monoOutfit = {};
@@ -87,9 +101,36 @@ export class OutfitSelectService {
     return monoOutfit;
   }
 
+  // returns outfit object with any number of colors included in the 'neutrals' array
   allNeutral() {
+    const neutralOutfit = {};
     const neutrals = ['black', 'grey', 'white', 'tan', 'navy']
-    return 'neutrals'
+
+    // get and assign neutral top
+    for (let i = 0; i < this.tops.length; i++) {
+      if (neutrals.includes(this.tops[i].color)) {
+        neutralOutfit['top'] = this.tops[i];
+      }
+    }
+
+    // get and assign neutral bottom
+    for (let i = 0; i < this.bottoms.length; i++) {
+      if (neutrals.includes(this.bottoms[i].color)) {
+        neutralOutfit['bottom'] = this.bottoms[i];
+      }
+    }
+
+    // get and assign neutral outerwear
+    for (let i = 0; i < this.outerwears.length; i++) {
+      if (neutrals.includes(this.outerwears[i].color)) {
+        neutralOutfit['outerwear'] = this.outerwears[i];
+      }
+    }
+
+    neutralOutfit['shoes'] = this.shoes[this.getRandomIndex(this.shoes.length)]
+    neutralOutfit['accessory'] = this.accessories[this.getRandomIndex(this.accessories.length)]
+    
+    return neutralOutfit;
   }
 
   checkWeather() {
@@ -106,13 +147,6 @@ export class OutfitSelectService {
     //   }
     // }
     return true;
-  }
-
-  // selects random match method
-  chooseMatchMethod() {
-    const methods = ['colorMatch', 'monochromatic', 'allNeutral'];
-    const randomMethod = methods[this.getRandomIndex(methods.length)];
-    return randomMethod;
   }
 
   // select matching outfit
