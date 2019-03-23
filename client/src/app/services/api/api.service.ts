@@ -29,8 +29,8 @@ export class ApiService {
     if (latLong) {
       this.httpClient.get(`${this.apiURL}/weather`, {
         params: {
-          latitude: latLong['lat'],
-          longitude : latLong['long'],
+          latitude: latLong['lat'].toString(),
+          longitude : latLong['long'].toString(),
         }
       })
       .subscribe(data => {
