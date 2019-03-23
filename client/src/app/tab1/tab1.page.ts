@@ -29,13 +29,12 @@ export class Tab1Page implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    public loadingController: LoadingController, 
+    public loadingController: LoadingController,
     public toastController: ToastController,
     public outfitSelectService: OutfitSelectService
   ) {}
 
   ngOnInit() {
-    console.log('test');
     this.isLoading = true;
     this.outfitSelected = false;
     this.presentLoadingWithOptions();
@@ -78,7 +77,6 @@ export class Tab1Page implements OnInit {
 
   chooseOutfit = () => {
     // copy closet and filter by category
-    console.log(this.closet, 'here')
     const tops = [...this.closet].filter((clothing) => clothing['id_category'] === 1 || clothing['id_category'] === 2);
     const onePieces = [...this.closet].filter((clothing) => clothing['id_category'] === 3);
     const outerwears = [...this.closet].filter((clothing) => clothing['id_category'] === 4);
@@ -94,16 +92,9 @@ export class Tab1Page implements OnInit {
       bottom: bottoms[this.getRandomIndex(bottoms.length)],
       shoes: shoes[this.getRandomIndex(shoes.length)],
     };
-    console.log(this.outfit);
 
     this.outfitSelectService.saveOutfit(this.outfit);
 
-    // this.top = tops[this.getRandomIndex(tops.length)];
-    // this.onePiece = onePieces[this.getRandomIndex(onePieces.length)];
-    // this.outerwear = outerwears[this.getRandomIndex(outerwears.length)];
-    // this.accessory = accessories[this.getRandomIndex(accessories.length)];
-    // this.bottom = bottoms[this.getRandomIndex(bottoms.length)];
-    // this.shoe = shoes[this.getRandomIndex(shoes.length)];
   }
 
   retrieveOutfit() {

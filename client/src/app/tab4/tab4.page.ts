@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api/api.service';
 import { ModalController, NavParams } from '@ionic/angular';
 import { ItemOptionsModal } from '../modals/item-options-modal/item-options-modal.component';
+import { OutfitSelectService } from '../services/outfit-select.service';
+
 
 @Component({
   selector: 'app-tab4',
@@ -15,12 +17,14 @@ export class Tab4Page implements OnInit {
   itemCategory: any;
   constructor(
     private apiService: ApiService,
-    public modalController: ModalController
+    public modalController: ModalController,
+    public outfitSelectService: OutfitSelectService,
   ) {}
 
   ngOnInit() {
-    this.getAllItems();
+    // this.getAllItems();
     // this.open = this.itemOptionsModal.open;
+    this.setCloset();
   }
 
   getAllItems() {
@@ -28,6 +32,10 @@ export class Tab4Page implements OnInit {
       console.log(data);
       this.closet = data;
     });
+  }
+
+  setCloset() {
+    this.closet = this.outfitSelectService.get('closet');
   }
 
   async presentModal(item) {
@@ -47,5 +55,4 @@ export class Tab4Page implements OnInit {
   closeModal() {
     this.modalController.dismiss();
   }
-
 }

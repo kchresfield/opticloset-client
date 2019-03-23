@@ -8,8 +8,12 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 })
 export class ApiService {
   apiURL = 'http://localhost:8080';
+  // apiURL: 'http://172.24.9.131:8080';
 
-  constructor(private httpClient: HttpClient, private geolocation: Geolocation) { }
+  constructor(
+    private httpClient: HttpClient,
+    private geolocation: Geolocation
+  ) {}
 
   public currentConditions: object = {};
 
@@ -17,23 +21,27 @@ export class ApiService {
   async getConditions(callback) {
     const latLong = await this.getCoordinates();
     console.log(latLong, 'latLong');
-    this.httpClient.get(`${this.apiURL}/weather`, {
-      params: {
-        latitude: latLong['lat'],
-        longitude : latLong['long'],
-      }
-    })
-    .subscribe(data => {
-      callback(data);
-    });
+    this.httpClient
+      .get(`${this.apiURL}/weather`, {
+        params: {
+          latitude: latLong['lat'],
+          longitude: latLong['long']
+        }
+      })
+      .subscribe(data => {
+        callback(data);
+      });
   }
 
   getCoordinates() {
-    return this.geolocation.getCurrentPosition().then((resp) => {
-      return { lat: resp.coords.latitude, long: resp.coords.longitude };
-    }).catch((error) => {
-      console.log('Error getting location:', error);
-    });
+    return this.geolocation
+      .getCurrentPosition()
+      .then(resp => {
+        return { lat: resp.coords.latitude, long: resp.coords.longitude };
+      })
+      .catch(error => {
+        console.log('Error getting location:', error);
+      });
   }
 
   addClothingItem(callback) {
