@@ -34,4 +34,12 @@ export class Tab3Page {
   sell(){
     localStorage.setItem('itemsToSell', JSON.stringify(selectedItemsToSellObj));
   }
+
+  sellAll(){
+
+  }
+
+  reset(){
+    delete localStorage.itemsToSell;
+  }
 }
