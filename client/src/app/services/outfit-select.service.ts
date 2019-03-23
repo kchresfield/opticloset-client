@@ -89,13 +89,82 @@ export class OutfitSelectService {
     return randomMethod;
   }
 
+  // selects random occasion
   chooseOccasion() {
-    const occasions = ['casual', 'formal', ]
+    const occasions = ['casual', 'formal', 'business', 'goingOut', 'athletic'];
+    const randomOccasion = occasions[this.getRandomIndex(occasions.length)];
+    return randomOccasion;
+  }
+
+  // define matching colors
+  // takes in color and returns array of 'matching' colors
+  chooseMatchingColors(color) {
+    const red = ['green', 'yellow', 'blue'];
+    const orange = ['green', 'blue', 'purple'];
+    const yellow = ['red', 'blue', 'purple'];
+    const green = ['orange', 'blue', 'purple'];
+    const blue = ['yellow', 'green', 'orange'];
+    const purple = ['yellow', 'green', 'orange'];
+    if (color === 'red' || color === 'pink') { return red };
+    if (color === 'orange') { return orange };
+    if (color === 'yellow') { return yellow };
+    if (color === 'green') { return green };
+    if (color === 'blue') { return blue };
+    if (color === 'purple') { return purple };
+  }
+
+  // checks if color is neutral
+  //takes in a color and returns a boolean on if color is neutral or not
+  isNeutral(color) {
+    return ['black', 'grey', 'white', 'tan'].includes(color);
   }
 
   // returns outfit object with up to two matching colors in palette
-  colorMatch(arrayOfClothingObjs) {
-    return 'colormatch'
+  colorMatch() {
+    const colorOutfit = {};
+    let currPiece = this.tops[this.getRandomIndex(this.tops.length)];
+    let matchingColors;
+    let currColor = currPiece.color.split(', ')[0];
+    console.log(currColor);
+    if (!this.isNeutral(currColor) && !matchingColors){
+      matchingColors = this.chooseMatchingColors(currColor);
+    } 
+
+    colorOutfit['top'] = currPiece;
+
+    // loop through bottoms to select matching bottom by color
+    for (let i = 0; i < this.bottoms.length; i++) {
+      // check if current bottom matches top by color
+      if (matchingColors) {
+        if (matchingColors.includes(this.bottoms[i].color)) {
+          colorOutfit['bottom'] = this.bottoms[i];
+        }
+      } else {
+        colorOutfit['bottom'] = this.bottoms[this.getRandomIndex(this.bottoms.length)]
+      }
+    }
+
+    if (!this.isNeutral(currColor) && !matchingColors) {
+      matchingColors = this.chooseMatchingColors(currColor);
+    } 
+    
+    // loop through outerwears to select matching bottom by color
+    for (let i = 0; i < this.outerwears.length; i++) {
+      // check if current bottom matches top by color
+      if (matchingColors) {
+        if (matchingColors.includes(this.outerwears[i].color)) {
+          colorOutfit['outerwear'] = this.outerwears[i];
+        }
+      } else {
+        colorOutfit['outerwear'] = this.outerwears[this.getRandomIndex(this.outerwears.length)];
+      }
+    }
+
+    if (!this.isNeutral(currColor) && !matchingColors) {
+      matchingColors = this.chooseMatchingColors(currColor);
+    } 
+
+    return colorOutfit;
   }
 
   // returns outfit object with one color for every clothing item
@@ -134,25 +203,24 @@ export class OutfitSelectService {
   // returns outfit object with any number of colors included in the 'neutrals' array
   allNeutral() {
     const neutralOutfit = {};
-    const neutrals = ['black', 'grey', 'white', 'tan', 'navy']
 
     // get and assign neutral top
     for (let i = 0; i < this.tops.length; i++) {
-      if (neutrals.includes(this.tops[i].color)) {
+      if (this.isNeutral(this.tops[i].color)) {
         neutralOutfit['top'] = this.tops[i];
       }
     }
 
     // get and assign neutral bottom
     for (let i = 0; i < this.bottoms.length; i++) {
-      if (neutrals.includes(this.bottoms[i].color)) {
+      if (this.isNeutral(this.bottoms[i].color)) {
         neutralOutfit['bottom'] = this.bottoms[i];
       }
     }
 
     // get and assign neutral outerwear
     for (let i = 0; i < this.outerwears.length; i++) {
-      if (neutrals.includes(this.outerwears[i].color)) {
+      if (this.isNeutral(this.outerwears[i].color)) {
         neutralOutfit['outerwear'] = this.outerwears[i];
       }
     }
@@ -182,14 +250,20 @@ export class OutfitSelectService {
   // select matching outfit
   // takes in match method and reassigns OOTD to outfit with that method
   // order of selection: occasion => weather => matching
-  chooseMatchingOutfit(method) {
+  chooseMatchingOutfit(method, occasion) {
     // if no method is selected, select random matching method
     if (!method) {
       method = this.chooseMatchMethod();
     }
+    // if no occasion is selected, select random occasion
+    if (!occasion) {
+      occasion = this.chooseOccasion();
+    }
+
+    
 
     // current outfit selected by method
-    const currOutfitSelection = this[method](this.closet);
+    const currOutfitSelection = this[method]();
     
     // check if clothing selections are all the same occasion
     // NOTE FOR LAURA - MAYBE PUT THIS CONDITIONAL IN WHEN THE OUTFIT IS ACTUALLY BUILDING AND NOT WHEN IT'S FINISHED
