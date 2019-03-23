@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api/api.service';
+import { getLView } from '@angular/core/src/render3/state';
+import { OutfitSelectService } from '../services/outfit-select.service';
 
 
 @Component({
@@ -12,8 +14,14 @@ export class TabsPage implements OnInit {
   temperature: any;
   conditions: any;
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private outfitSelectService: OutfitSelectService) {}
   ngOnInit() {
+    this.getWeather();
+    this.getCloset();
+    // debugger;
+  }
+
+  getWeather() {
     this.apiService.getConditions(data => {
       this.temperature = Math.floor(data.temp);
       console.log(data.weather);
@@ -30,6 +38,27 @@ export class TabsPage implements OnInit {
         this.conditions = 'sunny';
       }
     });
-    // debugger;
+  }
+
+  getCloset() {
+    this.outfitSelectService.getClosetFromDB(data => { // invoke the getClosetFromDBandSort method from outfitSelectService to
+      console.log('getting closet with Api Service', data);
+      this.outfitSelectService.save('closet', data); // save a regular closet on the service
+      const sortedCloset = [...data];
+      sortedCloset.sort((a, b) => {
+        return a.count_worn - b.count_worn; // sort the closet from least worn to most worn
+      });
+      console.log('test', sortedCloset);
+      sortedCloset.forEach(clothing => { // for each item in the sorted closet
+        clothing.lastUpdated = new Date(clothing.updatedAt).toString().slice(3, 15); // add a property lastUpdated
+      });
+      this.outfitSelectService.save('sortedCloset', sortedCloset); // save the sorted closet on the service
+      console.log(
+        this.outfitSelectService.get('closet'),
+        this.outfitSelectService.get('sortedCloset'),
+        this
+      );
+    });
+    console.log(this);
   }
 }

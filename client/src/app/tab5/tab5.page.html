@@ -2,8 +2,15 @@
   <ion-radio-group>
     <!-- Sort title -->
     <ion-list-header>
+      <ion-label (click)="retrieveItem()">
       Sort By
+      </ion-label>
+      <ion-label (click)="checkAndRestoreCloset()">
+        See All
+      </ion-label>
     </ion-list-header>
+
+
     <!-- Sort methods -->
     <ion-item>
       <ion-label>Least to Most Worn</ion-label>
@@ -16,7 +23,12 @@
   </ion-radio-group>
   <!-- date picker title -->
   <ion-list-header>
-    Filter
+    <ion-label>
+      Filter
+    </ion-label>
+    <ion-label (click)="resetFilter()">
+      Reset Filters
+    </ion-label>
   </ion-list-header>
   <!-- date picker -->
   <ion-item>
@@ -32,7 +44,7 @@
 
   <!-- clothing item rendering -->
   <ion-grid>
-    <ion-row class="ion-align-items-start" *ngFor="let clothing of filteredCloset">
+    <ion-row class="ion-align-items-start" *ngFor="let clothing of closet">
       <ion-col >
         <!-- clothing image -->
         <ion-label>

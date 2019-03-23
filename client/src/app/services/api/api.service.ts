@@ -9,14 +9,16 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 export class ApiService {
   apiURL = 'http://ec2-3-17-178-179.us-east-2.compute.amazonaws.com:8080';
 
-  constructor(private httpClient: HttpClient, private geolocation: Geolocation) { }
+  constructor(
+    private httpClient: HttpClient,
+    private geolocation: Geolocation
+  ) {}
 
   public currentConditions: object = {};
 
   // weather API helpers to server
   async getConditions(callback) {
-    // const latLong = await this.getCoordinates();
-    const latLong = undefined;
+    const latLong = await this.getCoordinates();
     console.log(latLong, 'latLong');
     if (!latLong) {
       this.httpClient.get(`${this.apiURL}/weather`)
@@ -38,11 +40,14 @@ export class ApiService {
   }
 
   getCoordinates() {
-    return this.geolocation.getCurrentPosition().then((resp) => {
-      return { lat: resp.coords.latitude, long: resp.coords.longitude };
-    }).catch((error) => {
-      console.log('Error getting location:', error);
-    });
+    return this.geolocation
+      .getCurrentPosition()
+      .then(resp => {
+        return { lat: resp.coords.latitude, long: resp.coords.longitude };
+      })
+      .catch(error => {
+        console.log('Error getting location:', error);
+      });
   }
 
   addClothingItem(callback) {
