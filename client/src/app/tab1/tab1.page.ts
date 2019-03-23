@@ -39,10 +39,16 @@ export class Tab1Page implements OnInit {
     this.outfitSelected = false;
     this.presentLoadingWithOptions();
     this.apiService.getCloset(clothes => {
-    this.closet = clothes;
-    this.chooseOutfit();
-    this.isLoading = false;
+      this.closet = clothes;
+      this.chooseOutfit();
+      this.isLoading = false;
     });
+    // testing for matching feature
+    // console.log(this.outfit, 'before');
+    // this.outfitSelectService.setMock();
+    // this.outfitSelectService.chooseMatchingOutfit('allNeutral');
+    // this.outfit = this.outfitSelectService.getOutfit();
+    // console.log(this.outfit, 'after');
     // this.outfitSelectService.set.subscribe(isOpen => {
     //   this.isOpen = isOpen;
     // });

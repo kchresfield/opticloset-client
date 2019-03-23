@@ -19,18 +19,27 @@ export class ApiService {
 
   // weather API helpers to server
   async getConditions(callback) {
+
+
     const latLong = await this.getCoordinates();
     console.log(latLong, 'latLong');
-    this.httpClient
-      .get(`${this.apiURL}/weather`, {
+    if (!latLong) {
+      this.httpClient.get(`${this.apiURL}/weather`)
+      .subscribe(data => {
+        callback(data);
+      });
+    }
+    if (latLong) {
+      this.httpClient.get(`${this.apiURL}/weather`, {
         params: {
-          latitude: latLong['lat'],
-          longitude: latLong['long']
+          latitude: latLong['lat'].toString(),
+          longitude : latLong['long'].toString(),
         }
       })
       .subscribe(data => {
         callback(data);
       });
+    };
   }
 
   getCoordinates() {
