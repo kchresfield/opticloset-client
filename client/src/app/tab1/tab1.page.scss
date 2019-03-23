@@ -2,3 +2,12 @@
   max-height: 35vh;
   overflow: hidden;
 }
+
+ion-grid {
+  height: 100%;
+
+  ion-row {
+    height: 33.33%;
+  }
+
+}
