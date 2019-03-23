@@ -1,8 +1,26 @@
 <ion-header>
   <ion-toolbar color="light">
-    <ion-title>
+    <!-- <ion-title>
       Closet
-    </ion-title>
+    </ion-title> -->
+
+  <!-- <ion-item-divider>
+    <div style="width: 100%; text-align: center;">PLEASE CENTER ME!!</div>
+  </ion-item-divider> -->
+  
+
+    <ion-item class="ion-justify-content-center">
+      <ion-select #S [(ngModel)]="category" (ionChange)="setFilter()">
+        <ion-select-option value="all"selected>All</ion-select-option>
+        <ion-select-option value="top">Tops</ion-select-option>
+        <ion-select-option value="bottom">Bottoms</ion-select-option>
+        <ion-select-option value="outerware">Outerwares</ion-select-option>
+        <ion-select-option value="one-piece">One-Pieces</ion-select-option>
+        <ion-select-option value="shoes">Shoes</ion-select-option>
+        <ion-select-option value="accessory">Accessories</ion-select-option>
+      </ion-select>
+    </ion-item>
+
   </ion-toolbar>
 </ion-header>
 
@@ -11,7 +29,7 @@
     <ion-row>
       <ion-col id="test" size="6" (click)="presentModal(clothingItem); print(clothingItem)"
         *ngFor="let clothingItem of closet">
-        <div class="clothingItem">{{clothingItem.category}}</div>
+        <!-- <div class="clothingItem">{{clothingItem.category}}</div> -->
         <img class="displayed" [src]="clothingItem.imageUrl">
       </ion-col>
     </ion-row>
