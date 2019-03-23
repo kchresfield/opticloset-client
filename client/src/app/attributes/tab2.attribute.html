@@ -1,8 +1,8 @@
 <ion-content>
   <ion-card-title>Attributes</ion-card-title>
   <div>
-    <ion-button #comfortable color="light" (click)="attributeItem('2')">Comfortable</ion-button>
-    <ion-button #heavy color="light" (click)="attributeItem('4')">Heavy</ion-button>
+    <ion-button #comfortable color="buttonColor" (click)="attributeItem('2')">Comfortable</ion-button>
+    <ion-button #heavy color="buttonColor" (click)="attributeItem('4')">Heavy</ion-button>
     <ion-button #tight [color]="buttonColor" (click)="attributeItem('3')">Tight</ion-button>
     <ion-button #short [color]="buttonColor" (click)="attributeItem('5')">Short</ion-button>
     <ion-button #long [color]="buttonColor" (click)="attributeItem('6')">Long</ion-button>
@@ -43,7 +43,7 @@
   </div>
   <h2>Category</h2>
   <div *ngFor="let category of finished" (click)="categorySelected(category)">
-    <ion-button [color]="buttonColor" class="category">{{category}}</ion-button>
+    <ion-button [color]="ionicNamedColor" class="category">{{category}}</ion-button>
   </div>
   <div>- or -</div>
   <ion-item>
