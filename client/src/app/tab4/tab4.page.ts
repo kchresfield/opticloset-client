@@ -15,7 +15,7 @@ export class Tab4Page implements OnInit {
   open: any;
   item: number;
   itemCategory: any;
-  category: any;
+  category = 'all';
   constructor(
     private apiService: ApiService,
     public modalController: ModalController,
@@ -26,6 +26,7 @@ export class Tab4Page implements OnInit {
     // this.getAllItems();
     // this.open = this.itemOptionsModal.open;
     this.setCloset();
+    this.setFilter();
   }
 
   getAllItems() {
