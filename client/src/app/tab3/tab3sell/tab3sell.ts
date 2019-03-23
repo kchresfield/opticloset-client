@@ -51,8 +51,8 @@ export class Tab3Sell {
     //       "title": "GoPro Hero4 Helmet Cam",
     //       "description": "New GoPro Hero4 Helmet Cam. Unopened box.",
     //       "aspects": {
-    //         "Brand": ["GoPro"],
-    //         "Type": ["Helmet/Action"],
+    //         "Brand": [],
+    //         "Type": ["Clothing"],
     //         "Storage Type": ["Removable"],
     //         "Recording Definition": ["High Definition"],
     //         "Media Format": ["Flash Drive (SSD)"],

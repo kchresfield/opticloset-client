@@ -8,7 +8,8 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 })
 export class ApiService {
   // apiURL = 'http://ec2-3-17-178-179.us-east-2.compute.amazonaws.com:8080';
-  apiURL = 'http://localhost:8080';
+  // apiURL = 'http://localhost:8080';
+  apiURL = 'http://172.24.0.217:8080';
 
 
   constructor(private httpClient: HttpClient, private geolocation: Geolocation) { }
