@@ -122,29 +122,43 @@ export class OutfitSelectService {
   // returns outfit object with up to two matching colors in palette
   colorMatch() {
     const colorOutfit = {};
+    // select random top
     let currPiece = this.tops[this.getRandomIndex(this.tops.length)];
+    // declare matchingColors variable
     let matchingColors;
+    // current color
     let currColor = currPiece.color.split(', ')[0];
-    console.log(currColor);
+    // check if current color is neutral and if matching colors have been selected
     if (!this.isNeutral(currColor) && !matchingColors){
+      // if current color isn't neutral, then matching colors are assigned
       matchingColors = this.chooseMatchingColors(currColor);
     } 
-
+    // assign top
     colorOutfit['top'] = currPiece;
-
+    
     // loop through bottoms to select matching bottom by color
     for (let i = 0; i < this.bottoms.length; i++) {
-      // check if current bottom matches top by color
+      // check if matching colors have been selected
       if (matchingColors) {
+        // if matching colors have been selected, then check if current bottom's color is considered matching
         if (matchingColors.includes(this.bottoms[i].color)) {
+          // if so, assign bottom to outfit
           colorOutfit['bottom'] = this.bottoms[i];
+          currPiece = colorOutfit['bottom'];
+          currColor = currPiece.color.split(', ')[0];
         }
-      } else {
-        colorOutfit['bottom'] = this.bottoms[this.getRandomIndex(this.bottoms.length)]
+        //if not, do nothing and move to next bottom
       }
     }
-
-    if (!this.isNeutral(currColor) && !matchingColors) {
+    // if loop completes and no matching top has been selected, choose random bottom
+    if (!colorOutfit['bottom']) {
+      colorOutfit['bottom'] = this.bottoms[this.getRandomIndex(this.bottoms.length)];
+      currPiece = colorOutfit['bottom'];
+      currColor = currPiece.color.split(', ')[0];
+    }
+    // after bottom is assigned, check if matching colors are assigned and check if current color is not neutral
+    if (!matchingColors && !this.isNeutral(currColor)) {
+      // if colros are not assigned and current color not neutral, assign matching colors
       matchingColors = this.chooseMatchingColors(currColor);
     } 
     
@@ -154,16 +168,60 @@ export class OutfitSelectService {
       if (matchingColors) {
         if (matchingColors.includes(this.outerwears[i].color)) {
           colorOutfit['outerwear'] = this.outerwears[i];
+          currPiece = colorOutfit['outerwear'];
+          currColor = currPiece.color.split(', ')[0];
         }
-      } else {
-        colorOutfit['outerwear'] = this.outerwears[this.getRandomIndex(this.outerwears.length)];
       }
     }
-
+    
+    if (!colorOutfit['outerwear']) {
+      colorOutfit['outerwear'] = this.outerwears[this.getRandomIndex(this.outerwears.length)];
+      currPiece = colorOutfit['outerwear'];
+      currColor = currPiece.color.split(', ')[0];
+    }
+    
     if (!this.isNeutral(currColor) && !matchingColors) {
       matchingColors = this.chooseMatchingColors(currColor);
     } 
-
+    
+    for (let i = 0; i < this.shoes.length; i++) {
+      // check if current shoes matches top by color
+      if (matchingColors) {
+        if (matchingColors.includes(this.shoes[i].color)) {
+          colorOutfit['shoes'] = this.shoes[i];
+          currPiece = colorOutfit['shoes'];
+          currColor = currPiece.color.split(', ')[0];
+        }
+      }
+    }
+    
+    if (!colorOutfit['shoes']) {
+      colorOutfit['shoes'] = this.shoes[this.getRandomIndex(this.shoes.length)];
+      currPiece = colorOutfit['shoes'];
+      currColor = currPiece.color.split(', ')[0];
+    }
+    
+    if (!this.isNeutral(currColor) && !matchingColors) {
+      matchingColors = this.chooseMatchingColors(currColor);
+    } 
+    
+    for (let i = 0; i < this.accessories.length; i++) {
+      // check if current accessory matches top by color
+      if (matchingColors) {
+        if (matchingColors.includes(this.accessories[i].color)) {
+          colorOutfit['accessory'] = this.accessories[i];
+          currPiece = colorOutfit['accessory'];
+          currColor = currPiece.color.split(', ')[0];
+        }
+      }
+    }
+    if(!colorOutfit['accessory']) {
+      colorOutfit['accessory'] = this.accessories[this.getRandomIndex(this.accessories.length)];
+      currPiece = colorOutfit['accessory'];
+      currColor = currPiece.color.split(', ')[0];
+    }
+    
+    console.log('matching colors', matchingColors)
     return colorOutfit;
   }
 
@@ -235,16 +293,9 @@ export class OutfitSelectService {
     //remember to import weather apiservice for weather
   }
 
-  //checks to see if each clothing item in outfit is the same occasion
-  //returns a boolean
-  checkOccasion(outfitObj) {
-    // const occasion = outfitObj['top']['occasion'];
-    // for (let key in outfitObj) {
-    //   if (outfitObj[key]['occasion'] !== occasion) {
-    //     return false;
-    //   }
-    // }
-    return true;
+  // filters closet by occasion, returns new array of clothingItem objects
+  filterByOccasion(closet, occasion) {
+
   }
 
   // select matching outfit
@@ -260,21 +311,11 @@ export class OutfitSelectService {
       occasion = this.chooseOccasion();
     }
 
-    
-
     // current outfit selected by method
     const currOutfitSelection = this[method]();
-    
-    // check if clothing selections are all the same occasion
-    // NOTE FOR LAURA - MAYBE PUT THIS CONDITIONAL IN WHEN THE OUTFIT IS ACTUALLY BUILDING AND NOT WHEN IT'S FINISHED
-    if (this.checkOccasion(currOutfitSelection)) {
-      // reassign outfit to be outfit chosen by method
-      this.outfit = currOutfitSelection;
-      console.log(this.outfit, 'outfit selected');
-      return;
-    } else {
-      console.log('recurse');
-      // this.chooseMatchingOutfit(method, count + 1, totalCombos);
-    }
+
+    // reassign outfit to be outfit chosen by method
+    this.outfit = currOutfitSelection;
+    console.log(this.outfit, 'outfit selected');
   }
 }
