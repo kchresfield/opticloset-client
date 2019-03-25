@@ -44,9 +44,9 @@ export class Tab1Page implements OnInit {
       this.isLoading = false;
     });
     // testing for matching feature
-    this.outfitSelectService.setMock();
-    this.outfitSelectService.chooseMatchingOutfit(null, null);
-    this.outfit = this.outfitSelectService.getOutfit();
+    // this.outfitSelectService.setMock();
+    // this.outfitSelectService.chooseMatchingOutfit(null, null);
+    // this.outfit = this.outfitSelectService.getOutfit();
 
     // this.outfitSelectService.set.subscribe(isOpen => {
     //   this.isOpen = isOpen;
@@ -82,12 +82,12 @@ export class Tab1Page implements OnInit {
 
   chooseOutfit = () => {
     // copy closet and filter by category
-    const tops = [...this.closet].filter((clothing) => clothing['id_category'] === 1 || clothing['id_category'] === 2);
-    const onePieces = [...this.closet].filter((clothing) => clothing['id_category'] === 3);
+    const tops = [...this.closet].filter((clothing) => clothing['id_category'] === 2);
+    const onePieces = [...this.closet].filter((clothing) => clothing['id_category'] === 1);
     const outerwears = [...this.closet].filter((clothing) => clothing['id_category'] === 4);
     const accessories = [...this.closet].filter((clothing) => clothing['id_category'] === 5);
-    const bottoms = [...this.closet].filter((clothing) => clothing['id_category'] === 6);
-    const shoes = [...this.closet].filter((clothing) => clothing['id_category'] === 13);
+    const bottoms = [...this.closet].filter((clothing) => clothing['id_category'] === 3);
+    const shoes = [...this.closet].filter((clothing) => clothing['id_category'] === 6);
 
     this.outfit = {
       top: tops[this.getRandomIndex(tops.length)],
