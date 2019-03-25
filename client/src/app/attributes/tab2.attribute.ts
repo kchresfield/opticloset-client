@@ -141,5 +141,4 @@ export class Tab2Attribute {
       console.log(data);
     });
   }
-
 }
