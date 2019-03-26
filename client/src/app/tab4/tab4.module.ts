@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab4Page } from './tab4.page';
 import { HttpClient } from '@angular/common/http';
-import { UpdateItemPage } from './update-item/update-item.page';
+// import { UpdateItemPage } from './update-item/update-item.page';
 import { ItemOptionsModalModule } from '../modals/item-options-modal/item-options-modal.module';
 import { UpdateItemPageModule } from './update-item/update-item.module';
 
@@ -19,7 +19,7 @@ import { UpdateItemPageModule } from './update-item/update-item.module';
     UpdateItemPageModule,
     RouterModule.forChild([
       { path: '', component: Tab4Page },
-      { path: '/update-item', component: UpdateItemPage }
+      { path: 'update-item', component: UpdateItemPageModule }
     ])
   ],
   declarations: [Tab4Page],

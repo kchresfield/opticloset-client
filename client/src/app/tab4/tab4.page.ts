@@ -54,6 +54,10 @@ export class Tab4Page implements OnInit {
     console.log(item);
   }
 
+  select(item) {
+    this.outfitSelectService.save('selectedItem', item);
+  }
+
   closeModal() {
     this.modalController.dismiss();
   }

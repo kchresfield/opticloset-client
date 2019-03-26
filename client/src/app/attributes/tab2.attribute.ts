@@ -42,7 +42,7 @@ export class Tab2Attribute {
   finished = allPossibilities;
   colors: any;
   topTwoColors = topTwoColors;
-  colorClicked:any;
+  colorClicked: any;
   dropDownColors: any;
   url = JSON.parse(localStorage.getItem('response')).cleanUrl;
   imgId = JSON.parse(localStorage.getItem('response')).idOfTheImg;
