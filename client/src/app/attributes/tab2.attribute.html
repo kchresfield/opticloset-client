@@ -22,6 +22,7 @@
     <ion-label>Select Primary Color</ion-label>
     <ion-select cancelText="Cancel" okText="Done" [(ngModel)]="chosenColor" [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit" (ionChange)="colorUserClicked(chosenColor)">
       <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Blue</ion-select-option>
+      <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Blue</ion-select-option>
       <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Red</ion-select-option>
       <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">White</ion-select-option>
       <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Black</ion-select-option>

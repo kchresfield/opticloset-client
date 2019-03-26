@@ -7,19 +7,13 @@ import { IonicModule } from '@ionic/angular';
 
 import { UpdateItemPage } from './update-item.page';
 
-const routes: Routes = [
-  // {
-  //   path: '/home/tabs/tab4/update-item/item',
-  //   component: UpdateItemPage
-  // }
-];
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild([{ path: 'update-item', component: UpdateItemPage }])
   ],
   declarations: [UpdateItemPage]
 })

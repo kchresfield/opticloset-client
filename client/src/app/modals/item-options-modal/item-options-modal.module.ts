@@ -6,7 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'tab1',
+    path: 'home',
     children: [
       {
         path: '',
