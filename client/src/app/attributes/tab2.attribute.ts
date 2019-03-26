@@ -17,7 +17,7 @@ const allAttributes = {
   light: false,
 };
 
-const category = { category: true };
+const category = { category: "" };
 
 const allOccasions = {
   occasion: "",
@@ -156,16 +156,6 @@ export class Tab2Attribute {
     // console.log(arrOfAttrId);
     const selectedOccasion = allOccasions.occasion;
     const price = this.price;
-    this.logService.log({
-      id_user: 1,
-      price: this.price,
-      selectedOccasion : allOccasions.occasion,
-      id_image: this.imgId,
-      count_worn: 0,
-      id_occasion: selectedOccasion,
-      attribute: JSON.stringify(arrOfAttrId),
-      color: arrOfSelectedColors.color,
-    });
     const clothesData = {
       id_user: 1,
       id_category: category.category,
@@ -176,10 +166,21 @@ export class Tab2Attribute {
       attribute: arrOfAttrId,
       color: arrOfSelectedColors.color,
     };
+    this.logService.log((clothesData));
     console.log(clothesData);
-    this.httpClient.post(`localhost:8080/closet/1`, clothesData).subscribe((data) => {
-      console.log(data);
-      this.logService.log(data);
+    this.httpClient.post('http://172.24.0.217:8080/closet/1', {
+      id_user: 1,
+      id_category: parseInt(category.category),
+      price: parseInt(price),
+      id_image: this.imgId,
+      count_worn: 0,
+      id_occasion: parseInt(selectedOccasion),
+      attribute: JSON.stringify(arrOfAttrId),
+      color: arrOfSelectedColors.color.toString(),
+    }).toPromise()
+    .then( (result) => {
+      console.log(result);
+      this.logService.log(result);
     });
   }
 }

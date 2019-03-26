@@ -60,7 +60,7 @@ export class Tab2Page {
       .then((cloudResponse: CloudinaryResposne) => {
         const { url } = cloudResponse;
         // this.logService.log(cloudResponse);
-        return this.http.post('http://172.24.0.217:8080/clothingImage/1', {
+        return this.http.post('http://172.24.0.217:8080/clothingImage/1', { 
           "response": {
             "url": url,
           }

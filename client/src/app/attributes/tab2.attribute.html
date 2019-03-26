@@ -1,16 +1,17 @@
 <ion-content>
   <ion-card-title>Attributes</ion-card-title>
   <div>
-    <ion-button #comfortable [color]="buttonColor" (click)="attributeItem('2')">Comfortable</ion-button>
-    <ion-button #heavy [color]="buttonColor" (click)="attributeItem('4')">Heavy</ion-button>
-    <ion-button #tight [color]="buttonColor" (click)="attributeItem('3')">Tight</ion-button>
-    <ion-button #short [color]="buttonColor" (click)="attributeItem('5')">Short</ion-button>
-    <ion-button #long [color]="buttonColor" (click)="attributeItem('6')">Long</ion-button>
-    <ion-button #basic [color]="buttonColor" (click)="attributeItem('1')">Basic</ion-button>
-    <ion-button #loose [color]="buttonColor" (click)="attributeItem('8')">Loose</ion-button>
-    <ion-button #light [color]="buttonColor" (click)="attributeItem('9')">Light</ion-button>
-    <ion-button #solid [color]="buttonColor" (click)="attributeItem('10')">Solid</ion-button>
-    <ion-button #patterned [color]="buttonColor" (click)="attributeItem('11')">Patterned</ion-button>
+    <ion-button #comfortable [color]="buttonColor" (click)="attributeItem('long')">Long</ion-button>
+    <ion-button #heavy [color]="buttonColor" (click)="attributeItem('short')">Short</ion-button>
+    <ion-button #tight [color]="buttonColor" (click)="attributeItem('light')">Light</ion-button>
+    <ion-button #short [color]="buttonColor" (click)="attributeItem('heavy')">Heavy</ion-button>
+    <ion-button #long [color]="buttonColor" (click)="attributeItem('tight')">Tight</ion-button>
+    <ion-button #basic [color]="buttonColor" (click)="attributeItem('loose')">Loose</ion-button>
+    <ion-button #loose [color]="buttonColor" (click)="attributeItem('comfortable')">Comfortable</ion-button>
+    <ion-button #light [color]="buttonColor" (click)="attributeItem('basic')">Basic</ion-button>
+    <ion-button #solid [color]="buttonColor" (click)="attributeItem('shiny')">Shiny</ion-button>
+    <ion-button #patterned [color]="buttonColor" (click)="attributeItem('solid')">Solid</ion-button>
+    <ion-button #comfortable [color]="buttonColor" (click)="attributeItem('patterned')">Patterned</ion-button>
 
 
   </div>
@@ -24,7 +25,7 @@
       <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Red</ion-select-option>
       <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">White</ion-select-option>
       <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Black</ion-select-option>
-      <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Grey</ion-select-option>
+      <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Gray</ion-select-option>
       <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Yellow</ion-select-option>
       <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Green</ion-select-option>
       <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Tan</ion-select-option>
@@ -49,12 +50,12 @@
   <ion-item>
     <ion-label>Select One</ion-label>
     <ion-select multiple="false" cancelText="Cancel" okText="Done" [(ngModel)]="chosenCategory" (ionChange)="categorySelected(chosenCategory)">
-      <ion-select-option value="top">Top</ion-select-option>
-      <ion-select-option value="bottom">Bottom</ion-select-option>
-      <ion-select-option value="one-piece">One Piece</ion-select-option>
-      <ion-select-option value="outerware">Outerware</ion-select-option>
-      <ion-select-option value="shoes">Shoes</ion-select-option>
-      <ion-select-option value="accessories">Accessories</ion-select-option>
+      <ion-select-option value="2">Top</ion-select-option>
+      <ion-select-option value="3">Bottom</ion-select-option>
+      <ion-select-option value="1">One Piece</ion-select-option>
+      <ion-select-option value="4">Outerware</ion-select-option>
+      <ion-select-option value="6">Shoes</ion-select-option>
+      <ion-select-option value="5">Accessories</ion-select-option>
     </ion-select>
   </ion-item>
   <div>
