@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../services/api/api.service';
 import { IonMenuToggle, NavController } from '@ionic/angular';
 import { LogService } from 'app/services/log/log.service';
+import { Router } from '@angular/router';
+
 
 // This is my cheat for adding the data to the db lol
 const allAttributes = {
@@ -17,6 +19,22 @@ const allAttributes = {
   light: false,
 };
 
+const allColors = {
+  Red: false,
+  Pink: false,
+  Orange: false,
+  Yellow: false,
+  Green: false,
+  Blue: false,
+  Purple: false,
+  White: false,
+  Black: false,
+  Brown: false,
+  Gray: false,
+};
+
+
+
 const category = { category: "" };
 
 const allOccasions = {
@@ -25,7 +43,7 @@ const allOccasions = {
 
 const allPossibilities = [];
 const topTwoColors = [];
-const arrOfSelectedColors = {color: 1};
+const arrOfSelectedColors = [];
 
 
 @Component({
@@ -51,6 +69,7 @@ export class Tab2Attribute {
     private apiService: ApiService,
     private httpClient: HttpClient,
     private logService: LogService,
+    private router: Router,
     ) {
   }
   private buttonColor: string = "light";
@@ -106,44 +125,10 @@ export class Tab2Attribute {
   }
 
   colorUserClicked(input) {
-    // if(arrOfColors.length <= 1){
-    //   arrOfColors.push(colorValue);
-    // }
-    if(input === "red"){
-      arrOfSelectedColors.color = 2;
-    } 
-    if (input === "purple") {
-      arrOfSelectedColors.color = 2;
+    if(!allColors[input]){
+      allColors[input] = true;
     }
-    if (input === "orange") {
-      arrOfSelectedColors.color = 3;
-    }
-    if (input === "yellow") {
-      arrOfSelectedColors.color = 4;
-    }
-    if (input === "green") {
-      arrOfSelectedColors.color = 5;
-    }
-    if (input === "blue") {
-      arrOfSelectedColors.color = 6;
-    }
-    if (input === "pink") {
-      arrOfSelectedColors.color = 7;
-    }
-    if (input === "white") {
-      arrOfSelectedColors.color = 8;
-    }
-    if (input === "black") {
-      arrOfSelectedColors.color = 9;
-    }
-    if (input === "brown") {
-      arrOfSelectedColors.color = 10;
-    }
-    if (input === "gray") {
-      arrOfSelectedColors.color = 11;
-    }
-    
-    console.log(arrOfSelectedColors);
+    else allColors[input] = false;
   }
 
 
@@ -151,6 +136,12 @@ export class Tab2Attribute {
     const arrOfAttrId = Object.keys(allAttributes).filter((attributeId) => {
       if(allAttributes[attributeId] ){
         return attributeId;
+      }
+    })
+
+    const arrOfColors = Object.keys(allColors).filter((color) => {
+      if(allColors[color]){
+        return color;
       }
     })
     // console.log(arrOfAttrId);
@@ -164,7 +155,7 @@ export class Tab2Attribute {
       count_worn: 0,
       id_occasion: selectedOccasion,
       attribute: arrOfAttrId,
-      color: arrOfSelectedColors.color,
+      color: arrOfColors,
     };
     this.logService.log((clothesData));
     console.log(clothesData);
@@ -176,11 +167,13 @@ export class Tab2Attribute {
       count_worn: 0,
       id_occasion: parseInt(selectedOccasion),
       attribute: JSON.stringify(arrOfAttrId),
-      color: arrOfSelectedColors.color.toString(),
+      color: JSON.stringify(arrOfColors),
     }).toPromise()
-    .then( (result) => {
-      console.log(result);
-      this.logService.log(result);
-    });
+    .then(() => {
+      this.router.navigate(['/home/tabs/tab2'])
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }
 }
