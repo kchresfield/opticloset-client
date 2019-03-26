@@ -216,12 +216,9 @@ export class UpdateItemPage implements OnInit {
   }
 
   selectCategory(input) {
-    console.log(input);
-    // debugger;
     this.selectedCategory.splice(0, 2, `${category[input][0].toUpperCase()}${category[input].slice(1)}`);
     this.selectedCategoryID = input;
   }
-
 
   colorUserClicked(input) {
     console.log(input);
