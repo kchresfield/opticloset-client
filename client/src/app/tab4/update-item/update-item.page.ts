@@ -23,12 +23,12 @@ const allAttributes = {
 
 const category = { category: true };
 
-const allOccasions = {
-  casual: false,
-  formal: false,
-  business: false,
-  goingOut: false,
-  athletic: false
+const occasions = {
+  '1': 'casual',
+  '2': 'formal',
+  '3': 'business',
+  '4': 'goingOut',
+  '5': 'athletic'
 };
 
 
@@ -115,10 +115,10 @@ export class UpdateItemPage implements OnInit {
   updateItem() {
     Object.keys(this.buttonColors).forEach(button => {
       if (this.buttonColors[button] === 'primary') {
-        if (allAttributes.hasOwnProperty(button)) {
+        if (this.allAttributes.hasOwnProperty(button)) {
           this.selectedAttributes.push(button);
         }
-        if (allOccasions.hasOwnProperty(button)) {
+        if (this.allOccasions.hasOwnProperty(button)) {
           this.selectedOccasions.push(button);
         }
       }
@@ -143,9 +143,17 @@ export class UpdateItemPage implements OnInit {
   }
   setItem() {
     this.selectedItem = this.outfitSelectService.get('selectedItem');
-    this.selectedItem.color.split(',').forEach(color => {
+    this.selectedItem.color.split(', ').forEach(color => {
       this.selectedColors.push(color);
     });
+    this.selectedItem.attribute.split(', ').forEach((attribute) => {
+      if (Object.keys(this.buttonColors).indexOf(attribute) !== 1) {
+        this.buttonColors[attribute] = 'primary';
+      }
+    });
+    this.buttonColors[occasions[this.selectedItem.id_occasion]] = 'primary';
+
+
   }
 
   attributeItem(input) {
@@ -154,8 +162,6 @@ export class UpdateItemPage implements OnInit {
     } else {
       this.allAttributes[input] = true;
     }
-    // console.log(input);
-    // console.log(allAttributes);
   }
 
   occasionItem(input) {
