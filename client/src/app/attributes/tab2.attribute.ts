@@ -56,7 +56,7 @@ export class Tab2Attribute {
   private buttonColor: string = "light";
 
   ngOnInit() {
-    this.logService.log(JSON.parse(localStorage.getItem('response')));
+    // this.logService.log(JSON.parse(localStorage.getItem('response')));
     this.categories = JSON.parse(localStorage.getItem('response')).categories;
     this.info = this.categories.map((catagoryObj) => {
       return catagoryObj.name;
