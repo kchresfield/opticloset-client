@@ -24,7 +24,7 @@ const allOccasions = {
 };
 
 const allPossibilities = [];
-const topTwoColors = [];
+// const topTwoColors = [];
 const arrOfSelectedColors = {color: "userInputColor"};
 
 
@@ -41,7 +41,7 @@ export class Tab2Attribute {
   categories: any;
   finished = allPossibilities;
   colors: any;
-  topTwoColors = topTwoColors;
+  topTwoColors = this.topTwoColors;
   colorClicked:any;
   dropDownColors: any;
   url = JSON.parse(localStorage.getItem('response')).cleanUrl;
@@ -81,8 +81,8 @@ export class Tab2Attribute {
     }
     this.colors = JSON.parse(localStorage.getItem('response')).colorsOptions;
     this.colors.map((color) => {
-      if (topTwoColors.length <= 1) {
-        topTwoColors.push(color.label)
+      if (this.topTwoColors.length <= 1) {
+        this.topTwoColors.push(color.label)
       }
     });
   }
@@ -122,7 +122,7 @@ export class Tab2Attribute {
         return attributeId;
       }
     })
-    console.log(arrOfAttrId);
+    // console.log(arrOfAttrId);
     const selectedOccasion = allOccasions.occasion;
     const price = this.price;
 
@@ -130,15 +130,15 @@ export class Tab2Attribute {
       id_user: 1,
       id_category: category.category,
       price: price,
-      id_img: this.imgId,
+      id_img: 48, //this.imgId
       count_worn: 0,
       id_occasion: selectedOccasion,
       attribute: arrOfAttrId,
       color: arrOfSelectedColors.color,
     };
     console.log(clothesData);
-    this.httpClient.post(`localhost:8080/closet/1`, clothesData).subscribe((data) => {
-      console.log(data);
-    });
+    // this.httpClient.post(`localhost:8080/closet/1`, clothesData).subscribe((data) => {
+    //   console.log(data);
+    // });
   }
 }
