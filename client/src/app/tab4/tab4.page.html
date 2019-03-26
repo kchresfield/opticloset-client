@@ -28,7 +28,7 @@
 <ion-content>
   <ion-grid class="closet">
     <ion-row>
-      <ion-col id="test" size="6" (click)="presentModal(clothingItem); print(clothingItem)"
+      <ion-col id="test" size="6" (click)="presentModal(clothingItem); select(clothingItem); print(clothingItem)"
         *ngFor="let clothingItem of closet">
         <!-- <div class="clothingItem">{{clothingItem.category}}</div> -->
         <img class="displayed" [src]="clothingItem.imageUrl">

@@ -29,12 +29,6 @@ export class ItemOptionsModal {
     // componentProps can also be accessed at construction time using NavParams
   }
 
-  // @HostBinding('style.border') border: string;
-
-  // @HostListener('click')
-  // click() {
-  //   this.outfitSelectService.set();
-  // }
 
   removeFromCloset() {
     console.log(this.navParams.data);

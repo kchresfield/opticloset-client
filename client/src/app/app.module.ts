@@ -20,6 +20,9 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { OutfitSelectService } from './services/outfit-select.service';
 
+// import { NavParams } from '@ionic/angular';
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -38,6 +41,7 @@ import { OutfitSelectService } from './services/outfit-select.service';
     OutfitSelectService,
     Geolocation,
     LocalNotifications,
+    // NavParams,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

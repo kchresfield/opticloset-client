@@ -1,41 +1,182 @@
 import { Component, OnInit } from '@angular/core';
-
+import { NavParams } from '@ionic/angular';
+import { OutfitSelectService } from '../../services/outfit-select.service';
+import { ToastController } from '@ionic/angular';
+import { ItemOptionsModalModule } from 'app/modals/item-options-modal/item-options-modal.module';
+import { ApiService } from '../../services/api/api.service';
 
 
 const allAttributes = {
-  comfortable: false,
-  heavy: false,
-  professional: false,
-  tight: false,
-  short: false,
   long: false,
-  basic: false,
-  specialoccasion: false,
+  short: false,
   light: false,
+  heavy: false,
+  tight: false,
+  loose: false,
+  comfortable: false,
+  basic: false,
+  shiny: false,
+  solid: false,
+  patterned: false
 };
+
 
 const category = { category: true };
 
 const allOccasions = {
-  occasion: "",
+  casual: false,
+  formal: false,
+  business: false,
+  goingOut: false,
+  athletic: false
 };
 
-const allPossibilities = [];
-const topTwoColors = [];
-const arrOfSelectedColors = { color: "userInputColor" };
 
 @Component({
   selector: 'app-update-item',
   templateUrl: './update-item.page.html',
   styleUrls: ['./update-item.page.scss'],
+  providers: [ToastController]
 })
 export class UpdateItemPage implements OnInit {
+  buttonColors = {
+    long: 'light',
+    short: 'light',
+    light: 'light',
+    heavy: 'light',
+    tight: 'light',
+    loose: 'light',
+    comfortable: 'light',
+    basic: 'light',
+    shiny: 'light',
+    solid: 'light',
+    patterned: 'light',
+    casual: 'light',
+    formal: 'light',
+    business: 'light',
+    goingOut: 'light',
+    athletic: 'light'
+  };
 
-  
+  allAttributes = {
+    long: false,
+    short: false,
+    light: false,
+    heavy: false,
+    tight: false,
+    loose: false,
+    comfortable: false,
+    basic: false,
+    shiny: false,
+    solid: false,
+    patterned: false
+  };
 
-  constructor() { }
+  allOccasions = {
+    casual: false,
+    formal: false,
+    business: false,
+    goingOut: false,
+    athletic: false
+  };
 
-  ngOnInit() {
+  chosenColor: any;
+  chosenCategory: any;
+  selectedItem: any;
+  selectedAttributes = [];
+  selectedOccasions = [];
+  selectedOccasionID: any;
+  selectedColors = [];
+  selectedCategory = [];
+  selectedCategoryID: any;
+  allPossibilities = [];
+  updatedItem = {};
+  finished = this.allPossibilities;
+  arrOfSelectedColors = { color: 'userInputColor' };
+  price: any;
+  constructor(
+    public toastController: ToastController,
+    private outfitSelectService: OutfitSelectService,
+    private apiService: ApiService,
+  ) {}
+
+  public toggleNamedColor(item): void {
+    if (this.buttonColors[item] === 'light') {
+      this.buttonColors[item] = 'primary';
+    } else {
+      this.buttonColors[item] = 'light';
+    }
   }
 
+  ngOnInit() {
+    this.setItem();
+  }
+
+  updateItem() {
+    Object.keys(this.buttonColors).forEach(button => {
+      if (this.buttonColors[button] === 'primary') {
+        if (allAttributes.hasOwnProperty(button)) {
+          this.selectedAttributes.push(button);
+        }
+        if (allOccasions.hasOwnProperty(button)) {
+          this.selectedOccasions.push(button);
+        }
+      }
+    });
+
+    // create the updated item to be input in the DB
+    this.updatedItem = {
+      id_clothing_item: this.selectedItem.id_clothing_item,
+      id_category: this.selectedCategoryID,
+      price: this.price,
+      id_image: this.selectedItem.id_image,
+      count_worn: this.selectedItem.count_worn,
+      id_occasion: this.selectedOccasionID,
+      attribute: this.selectedAttributes.join(', '),
+      color: this.selectedColors.join(', ')
+    };
+    this.apiService.updateClothingItem(this.updatedItem);
+  }
+
+  print() {
+    console.log(this);
+  }
+  setItem() {
+    this.selectedItem = this.outfitSelectService.get('selectedItem');
+    this.selectedItem.color.split(',').forEach(color => {
+      this.selectedColors.push(color);
+    });
+  }
+
+  attributeItem(input) {
+    if (this.allAttributes[input] === true) {
+      this.allAttributes[input] = false;
+    } else {
+      this.allAttributes[input] = true;
+    }
+    // console.log(input);
+    // console.log(allAttributes);
+  }
+
+  occasionItem(input) {
+    this.selectedOccasionID = input;
+    // if (allOccasions[input] === true) {
+    //   this.allOccasions[input] = false;
+    // } else {
+    //   this.allOccasions[input] = true;
+    // }
+  }
+
+  selectCategory(input) {
+    console.log(input);
+    this.selectedCategory.splice(0, 2, input);
+    this.selectedCategoryID = input;
+  }
+
+  colorUserClicked(input) {
+    console.log(input);
+    if (this.selectedColors.length > 0) {
+      this.selectedColors.splice(0, 2, input.toLowerCase());
+    }
+  }
 }
