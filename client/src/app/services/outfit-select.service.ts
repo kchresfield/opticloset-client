@@ -67,17 +67,17 @@ export class OutfitSelectService {
   setMock() {
     this.closet = mockCloset;
     this.shuffle(this.closet);
-    this.tops = this.closet.filter((clothing) => clothing['id_category'] === 1);
+    this.tops = this.closet.filter((clothing) => clothing['id_category'] === 2);
     console.log(`Tops length is ${this.tops.length}`)
-    this.onePieces = this.closet.filter((clothing) => clothing['id_category'] === 3);
+    this.onePieces = this.closet.filter((clothing) => clothing['id_category'] === 1);
     console.log(`onePieces length is ${this.onePieces.length}`)
     this.outerwears = this.closet.filter((clothing) => clothing['id_category'] === 4);
     console.log(`outerwears length is ${this.outerwears.length}`)
     this.accessories = this.closet.filter((clothing) => clothing['id_category'] === 5);
     console.log(`accessories length is ${this.accessories.length}`)
-    this.bottoms = this.closet.filter((clothing) => clothing['id_category'] === 6);
+    this.bottoms = this.closet.filter((clothing) => clothing['id_category'] === 3);
     console.log(`bottoms length is ${this.bottoms.length}`)
-    this.shoes = this.closet.filter((clothing) => clothing['id_category'] === 13);
+    this.shoes = this.closet.filter((clothing) => clothing['id_category'] === 6);
     console.log(`shoes length is ${this.shoes.length}`)
   }
 
