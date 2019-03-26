@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title (click)="print(); updateItem()">Update Item</ion-title>
+    <ion-title (click)="print()">Update Item</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -57,7 +57,7 @@
       <ion-button [color]="this.buttonColors['athletic']" (click)="occasionItem('5'); toggleNamedColor('athletic')">Athletic</ion-button>
     </div>
     <h2>Category</h2>
-    <div *ngFor="let category of selectedCategory" (click)="categorySelected(category)">
+    <div *ngFor="let category of selectedCategory" (click)="selectCategory(category)">
       <ion-button [color]="buttonColor" class="category">{{category}}</ion-button>
     </div>
     <div>- or -</div>
