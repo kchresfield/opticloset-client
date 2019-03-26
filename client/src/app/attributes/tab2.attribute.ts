@@ -24,8 +24,8 @@ const allOccasions = {
 };
 
 const allPossibilities = [];
-// const topTwoColors = [];
-const arrOfSelectedColors = {color: "userInputColor"};
+const topTwoColors = [];
+const arrOfSelectedColors = {color: 1};
 
 
 @Component({
@@ -41,7 +41,7 @@ export class Tab2Attribute {
   categories: any;
   finished = allPossibilities;
   colors: any;
-  topTwoColors = this.topTwoColors;
+  topTwoColors = topTwoColors;
   colorClicked:any;
   dropDownColors: any;
   url = JSON.parse(localStorage.getItem('response')).cleanUrl;
@@ -81,8 +81,8 @@ export class Tab2Attribute {
     }
     this.colors = JSON.parse(localStorage.getItem('response')).colorsOptions;
     this.colors.map((color) => {
-      if (this.topTwoColors.length <= 1) {
-        this.topTwoColors.push(color.label)
+      if (topTwoColors.length <= 1) {
+        topTwoColors.push(color.label)
       }
     });
   }
@@ -109,8 +109,39 @@ export class Tab2Attribute {
     // if(arrOfColors.length <= 1){
     //   arrOfColors.push(colorValue);
     // }
-    const colorNameInLowercase = input.toLowerCase();
-      arrOfSelectedColors.color = colorNameInLowercase;
+    if(input === "red"){
+      arrOfSelectedColors.color = 2;
+    } 
+    if (input === "purple") {
+      arrOfSelectedColors.color = 2;
+    }
+    if (input === "orange") {
+      arrOfSelectedColors.color = 3;
+    }
+    if (input === "yellow") {
+      arrOfSelectedColors.color = 4;
+    }
+    if (input === "green") {
+      arrOfSelectedColors.color = 5;
+    }
+    if (input === "blue") {
+      arrOfSelectedColors.color = 6;
+    }
+    if (input === "pink") {
+      arrOfSelectedColors.color = 7;
+    }
+    if (input === "white") {
+      arrOfSelectedColors.color = 8;
+    }
+    if (input === "black") {
+      arrOfSelectedColors.color = 9;
+    }
+    if (input === "brown") {
+      arrOfSelectedColors.color = 10;
+    }
+    if (input === "gray") {
+      arrOfSelectedColors.color = 11;
+    }
     
     console.log(arrOfSelectedColors);
   }
@@ -125,20 +156,30 @@ export class Tab2Attribute {
     // console.log(arrOfAttrId);
     const selectedOccasion = allOccasions.occasion;
     const price = this.price;
-
+    this.logService.log({
+      id_user: 1,
+      price: this.price,
+      selectedOccasion : allOccasions.occasion,
+      id_image: this.imgId,
+      count_worn: 0,
+      id_occasion: selectedOccasion,
+      attribute: JSON.stringify(arrOfAttrId),
+      color: arrOfSelectedColors.color,
+    });
     const clothesData = {
       id_user: 1,
       id_category: category.category,
       price: price,
-      id_img: 48, //this.imgId
+      id_image: this.imgId,
       count_worn: 0,
       id_occasion: selectedOccasion,
       attribute: arrOfAttrId,
       color: arrOfSelectedColors.color,
     };
     console.log(clothesData);
-    // this.httpClient.post(`localhost:8080/closet/1`, clothesData).subscribe((data) => {
-    //   console.log(data);
-    // });
+    this.httpClient.post(`localhost:8080/closet/1`, clothesData).subscribe((data) => {
+      console.log(data);
+      this.logService.log(data);
+    });
   }
 }
