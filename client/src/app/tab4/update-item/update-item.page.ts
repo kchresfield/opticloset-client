@@ -21,7 +21,14 @@ const allAttributes = {
 };
 
 
-const category = { category: true };
+const category = {
+  '1': 'one-piece',
+  '2': 'top',
+  '3': 'bottom',
+  '4': 'outerwear',
+  '5': 'accessory',
+  '6': 'shoes'
+};
 
 const occasions = {
   '1': 'casual',
@@ -93,7 +100,9 @@ export class UpdateItemPage implements OnInit {
   updatedItem = {};
   finished = this.allPossibilities;
   arrOfSelectedColors = { color: 'userInputColor' };
+  initialprice: any;
   price: any;
+
   constructor(
     public toastController: ToastController,
     private outfitSelectService: OutfitSelectService,
@@ -135,7 +144,14 @@ export class UpdateItemPage implements OnInit {
       attribute: this.selectedAttributes.join(', '),
       color: this.selectedColors.join(', ')
     };
-    this.apiService.updateClothingItem(this.updatedItem);
+    this.apiService.updateClothingItem(this.updatedItem).subscribe((result) => {
+      console.log(result);
+      if (result === 'Accepted') {
+        this.presentToast('Item updated!');
+      } else {
+        this.presentToast('Oops, something went wrong. Try again!');
+      }
+    });
   }
 
   print() {
@@ -144,7 +160,7 @@ export class UpdateItemPage implements OnInit {
   setItem() {
     this.selectedItem = this.outfitSelectService.get('selectedItem');
     this.selectedItem.color.split(', ').forEach(color => {
-      this.selectedColors.push(color);
+      this.selectedColors.push(`${color[0].toUpperCase()}${color.slice(1)}`);
     });
     this.selectedItem.attribute.split(', ').forEach((attribute) => {
       if (Object.keys(this.buttonColors).indexOf(attribute) !== 1) {
@@ -152,7 +168,10 @@ export class UpdateItemPage implements OnInit {
       }
     });
     this.buttonColors[occasions[this.selectedItem.id_occasion]] = 'primary';
-
+    this.selectedCategory.push(
+      `${this.selectedItem.category[0].toUpperCase()}${this.selectedItem.category.slice(1)}`
+    );
+    this.initialprice = this.selectedItem.price;
 
   }
 
@@ -175,14 +194,26 @@ export class UpdateItemPage implements OnInit {
 
   selectCategory(input) {
     console.log(input);
-    this.selectedCategory.splice(0, 2, input);
+    this.selectedCategory.splice(0, 2, `${category[input][0].toUpperCase()}${category[input].slice(1)}`);
     this.selectedCategoryID = input;
   }
 
   colorUserClicked(input) {
     console.log(input);
     if (this.selectedColors.length > 0) {
-      this.selectedColors.splice(0, 2, input.toLowerCase());
+      this.selectedColors.splice(0, 2, input);
     }
   }
+
+  async presentToast(message) {
+    const toast = await this.toastController.create({
+      message: message,
+      position: 'middle',
+      animated: true,
+      duration: 3000
+    });
+    toast.present();
+    // this.outfitSelected = true;
+  }
+
 }

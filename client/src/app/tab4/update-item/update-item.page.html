@@ -57,7 +57,7 @@
       <ion-button [color]="this.buttonColors['athletic']" (click)="occasionItem('5'); toggleNamedColor('athletic')">Athletic</ion-button>
     </div>
     <h2>Category</h2>
-    <div *ngFor="let category of finished" (click)="categorySelected(category)">
+    <div *ngFor="let category of selectedCategory" (click)="categorySelected(category)">
       <ion-button [color]="buttonColor" class="category">{{category}}</ion-button>
     </div>
     <div>- or -</div>
@@ -68,8 +68,8 @@
         <ion-select-option value="1">One Piece</ion-select-option>
         <ion-select-option value="2">Top</ion-select-option>
         <ion-select-option value="3">Bottom</ion-select-option>
-        <ion-select-option value="4">Outerware</ion-select-option>
-        <ion-select-option value="5">Accessories</ion-select-option>
+        <ion-select-option value="4">Outerwear</ion-select-option>
+        <ion-select-option value="5">Accessory</ion-select-option>
         <ion-select-option value="6">Shoes</ion-select-option>
 
       </ion-select>
@@ -78,7 +78,7 @@
       <ion-card-title>Price</ion-card-title>
       <ion-item id="rounded">
         <ion-label fixed>$</ion-label>
-        <ion-input type="text" [(ngModel)]="price" value=""></ion-input>
+        <ion-input type="text" [(ngModel)]="price" value="" placeholder="{{initialprice}}" inputmode="numeric"></ion-input>
       </ion-item>
     </div>
   

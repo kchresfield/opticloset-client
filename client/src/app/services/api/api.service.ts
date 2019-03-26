@@ -82,14 +82,14 @@ export class ApiService {
   updateClothingItem(item) {
     console.log(item);
 
-    this.httpClient
+    return this.httpClient
       .request('put', `${this.apiURL}/closet/1`, {
         body: item,
         responseType: 'text'
-      })
-      .subscribe(result => {
-        console.log(result);
       });
+      // .subscribe(result => {
+      //   console.log(result);
+      // });
   }
 
   getCloset(callback) {
