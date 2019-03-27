@@ -3,13 +3,14 @@ import { ApiService } from '../services/api/api.service';
 import { ToastController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { OutfitSelectService } from '../services/outfit-select.service';
+import { AuthService } from '../services/auth/auth.service';
 
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
-  providers: [ApiService, ToastController]
+  providers: [ApiService, ToastController, AuthService]
 })
 export class Tab1Page implements OnInit {
   closet: Array<Object>;
@@ -31,16 +32,23 @@ export class Tab1Page implements OnInit {
     private apiService: ApiService,
     public loadingController: LoadingController,
     public toastController: ToastController,
-    public outfitSelectService: OutfitSelectService
+    public outfitSelectService: OutfitSelectService,
+    private authService: AuthService,
   ) {}
 
   ngOnInit() {
+    this.authService.handleAuthentication();
+    console.log('local storage', localStorage);
     this.isLoading = true;
     this.outfitSelected = false;
     this.presentLoadingWithOptions();
     this.apiService.getCloset(clothes => {
       this.closet = clothes;
-      this.chooseOutfit();
+      this.outfitSelectService.save('closet', this.closet);
+      // this.chooseOutfit();
+      this.outfitSelectService.setMock();
+      this.outfitSelectService.chooseMatchingOutfit(null, null);
+      this.outfit = this.outfitSelectService.getOutfit();
       this.isLoading = false;
     });
     // testing for matching feature

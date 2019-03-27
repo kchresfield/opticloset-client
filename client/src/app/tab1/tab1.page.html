@@ -2,6 +2,13 @@
   <ion-grid fixed>
     <ion-row>
       <ion-col>
+        <ion-button color="tertiary" shape="round" fill="solid" (click)="authService.logout()">
+          logout
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
         <ion-item #S class="ion-justify-content-center">
           <ion-select>
             <ion-select-option value="random" selected>Random</ion-select-option>

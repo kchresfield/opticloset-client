@@ -35,32 +35,34 @@ export class AuthService {
   }
 
   public handleAuthentication(): void {
-    this.auth0.parseHash((err, authResult) => {
+    debugger;
+    this.auth0.parseHash({ 
+      hash: window.location.hash,
+    }, (err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
         this.setSession(authResult);
         const loggedIn = this.isLoggedIn = true;
         this.isLoggedIn$.next(loggedIn);
-        this.router.navigate(['/home']);
-        // http req here to /userinfo to grab user prof from Auth0
-        this.http.get('https://opticloset.auth0.com/userinfo', {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.access_token}`,
-          },
-        }).subscribe((userInfo) => {
-          console.log(userInfo);
-        })
+        this.router.navigate(['/']);
+        // this.http.get('https://opticloset.auth0.com/userinfo', {
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //     'Authorization': `Bearer ${localStorage.access_token}`,
+        //   },
+        // }).subscribe((userInfo) => {
+        //   console.log(userInfo);
+        // })
       } else if (err) {
         const loggedIn = this.isLoggedIn = false;
         this.isLoggedIn$.next(loggedIn);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
       }
-      console.log(this.isLoggedIn);
     });
   }
 
   private setSession(authResult): void {
+    debugger;
     // Set the time that the Access Token will expire at
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
     localStorage.setItem('access_token', authResult.accessToken);
@@ -70,6 +72,7 @@ export class AuthService {
 
   public logout(): void {
     // Remove tokens and expiry time from localStorage
+    console.log('logging out')
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
@@ -81,6 +84,7 @@ export class AuthService {
   public isAuthenticated(): boolean {
     // Check whether the current time is past the
     // Access Token's expiry time
+    // debugger;
     const expiresAt = JSON.parse(localStorage.getItem('expires_at') || '{}');
     return new Date().getTime() < expiresAt;
   }

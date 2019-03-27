@@ -65,7 +65,7 @@ export class OutfitSelectService {
   }
 
   setMock() {
-    this.closet = mockCloset;
+    // this.closet = mockCloset;
     this.shuffle(this.closet);
     this.tops = this.closet.filter((clothing) => clothing['id_category'] === 2);
     console.log(`Tops length is ${this.tops.length}`)
@@ -280,6 +280,9 @@ export class OutfitSelectService {
         break;
       }
     }
+    if (!monoOutfit['bottom']) {
+      monoOutfit['bottom'] = this.bottoms[this.getRandomIndex(this.bottoms.length)];
+    }
     
     // loop through outwears to select matching outerwears by color
     for (let i = this.getRandomIndex(this.outerwears.length); i < this.outerwears.length; i++) {
@@ -289,6 +292,9 @@ export class OutfitSelectService {
         monoOutfit['outerwear'] = this.outerwears[i];
         break;
       }
+    }
+    if (!monoOutfit['outerwear']) {
+      monoOutfit['outerwear'] = this.outerwears[this.getRandomIndex(this.outerwears.length)];
     }
     
     monoOutfit['shoes'] = this.shoes[this.getRandomIndex(this.shoes.length)]
@@ -309,6 +315,9 @@ export class OutfitSelectService {
         break;
       }
     }
+    if (!neutralOutfit['top']) {
+      neutralOutfit['top'] = this.tops[this.getRandomIndex(this.tops.length)];
+    }
     
     // get and assign neutral bottom
     for (let i = this.getRandomIndex(this.bottoms.length); i < this.bottoms.length; i++) {
@@ -318,6 +327,10 @@ export class OutfitSelectService {
         break;
       }
     }
+
+    if (!neutralOutfit['bottom']) {
+      neutralOutfit['bottom'] = this.bottoms[this.getRandomIndex(this.bottoms.length)];
+    }
     
     // get and assign neutral outerwear
     for (let i = this.getRandomIndex(this.outerwears.length); i < this.outerwears.length; i++) {
@@ -326,6 +339,10 @@ export class OutfitSelectService {
         neutralOutfit['outerwear'] = this.outerwears[i];
         break;
       }
+    }
+
+    if (!neutralOutfit['outerwear']) {
+      neutralOutfit['outerwear'] = this.outerwears[this.getRandomIndex(this.outerwears.length)];
     }
 
     neutralOutfit['shoes'] = this.shoes[this.getRandomIndex(this.shoes.length)]
