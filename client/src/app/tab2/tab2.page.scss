@@ -1,4 +1,18 @@
-.center {
+.camera {
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.5;
+}
+
+.button1 {
+  margin-left: 30vw;
+  margin-right: auto;
+}
+
+.text {
   margin-left: auto;
   margin-right: auto;
 }

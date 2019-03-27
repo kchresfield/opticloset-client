@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api/api.service';
 import { OutfitSelectService } from '../services/outfit-select.service';
+import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 
-const selectedItemsToSellObj = {};
+
+let selectedItemsToSellObj = {};
 
 @Component({
   selector: 'app-tab3',
@@ -13,9 +16,12 @@ const selectedItemsToSellObj = {};
 export class Tab3Page implements OnInit {
   list: any;
   listArr = [];
+
   constructor(
     private apiService: ApiService,
     private outfitSelectService: OutfitSelectService,
+    public toastController: ToastController,
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -33,17 +39,31 @@ export class Tab3Page implements OnInit {
     console.log(selectedItemsToSellObj);
   }
 
-  sell() {
+  sell(){
+    if (!Object.keys(selectedItemsToSellObj).length) {
+      return this.presentToast();
+    }
     localStorage.setItem('itemsToSell', JSON.stringify(selectedItemsToSellObj));
+    this.router.navigate(['/sell-on-ebay']);
   }
 
   sellAll() {}
 
+  print() {
+    console.log(this.listArr, this.outfitSelectService.get('sellArr'));
+  }
   reset() {
+    selectedItemsToSellObj = {};
     delete localStorage.itemsToSell;
   }
 
-  print() {
-    console.log(this.listArr, this.outfitSelectService.get('sellArr'));
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Please select at least 1 item',
+      position: 'top',
+      animated: true,
+      duration: 2000
+    });
+    toast.present();
   }
 }
