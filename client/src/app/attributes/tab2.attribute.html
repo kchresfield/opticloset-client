@@ -36,11 +36,11 @@
   </ion-item>
   <h2>Occasion</h2>
   <div>
-    <ion-button [color]="buttonColors['casual']" (click)="occasionItem('1')">Casual</ion-button>
-    <ion-button [color]="buttonColors['formal']" (click)="occasionItem('5')">Formal</ion-button>
-    <ion-button [color]="buttonColors['business']" (click)="occasionItem('2')">Business</ion-button>
-    <ion-button [color]="buttonColors['goingOut']" (click)="occasionItem('4')">Going Out</ion-button>
-    <ion-button [color]="buttonColors['athletic']" (click)="occasionItem('3')">Athletic</ion-button>
+    <ion-button [color]="buttonOccasion['casual']" (click)="occasionItem('1', 'casual')">Casual</ion-button>
+    <ion-button [color]="buttonOccasion['formal']" (click)="occasionItem('5', 'formal')">Formal</ion-button>
+    <ion-button [color]="buttonOccasion['business']" (click)="occasionItem('2', 'business')">Business</ion-button>
+    <ion-button [color]="buttonOccasion['goingOut']" (click)="occasionItem('4', 'goingOut')">Going Out</ion-button>
+    <ion-button [color]="buttonOccasion['athletic']" (click)="occasionItem('3', 'athletic')">Athletic</ion-button>
   </div>
   <h2>Category</h2>
   <div *ngFor="let category of finished" (click)="categorySelected(category)">

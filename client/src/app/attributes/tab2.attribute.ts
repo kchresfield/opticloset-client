@@ -79,11 +79,6 @@ export class Tab2Attribute {
     shiny: 'light',
     solid: 'light',
     patterned: 'light',
-    casual: 'light',
-    formal: 'light',
-    business: 'light',
-    goingOut: 'light',
-    athletic: 'light',
     Red: 'light',
     Pink: 'light',
     Orange: 'light',
@@ -96,6 +91,14 @@ export class Tab2Attribute {
     Brown: 'light',
     Gray: 'light',
   };
+
+  buttonOccasion = {
+    casual: 'light',
+    formal: 'light',
+    business: 'light',
+    goingOut: 'light',
+    athletic: 'light',
+  }
 
   ngOnInit() {
     this.categories = JSON.parse(localStorage.getItem('response')).categories;
@@ -142,12 +145,15 @@ export class Tab2Attribute {
     }
   };
 
-  occasionItem(input) {
+  occasionItem(input, occasion) {
     allOccasions.occasion = input;
-    if (this.buttonColors[input] === 'light') {
-      this.buttonColors[input] = 'primary';
+    if (this.buttonOccasion[occasion] === 'light') {
+      for (let key in this.buttonOccasion) {
+        this.buttonOccasion[key] = "light"
+      }
+      this.buttonOccasion[occasion] = 'primary';
     } else {
-      this.buttonColors[input] = 'light';
+      this.buttonOccasion[occasion] = 'light';
     }
     console.log(input)
   };
