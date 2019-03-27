@@ -13,11 +13,15 @@ export class TabsPage implements OnInit {
   data: any;
   temperature: any;
   conditions: any;
+  sellList: any;
+  sellArr = [];
 
   constructor(private apiService: ApiService, private outfitSelectService: OutfitSelectService) {}
+
   ngOnInit() {
     this.getWeather();
     this.getCloset();
+    this.getSellList();
   }
 
   getWeather() {
@@ -51,5 +55,15 @@ export class TabsPage implements OnInit {
       });
       this.outfitSelectService.save('sortedCloset', sortedCloset); // save the sorted closet on the service
     });
+  }
+
+  // gets sellList from local storage and saves it on service to be shared between components
+  getSellList() {
+    this.sellList = localStorage.getItem('itemsToSell');
+    this.sellList = this.sellList ? JSON.parse(this.sellList) : {};
+    Object.keys(this.sellList).forEach(id => {
+      this.sellArr.push(this.sellList[id]);
+    });
+    this.outfitSelectService.save('sellArr', this.sellArr);
   }
 }

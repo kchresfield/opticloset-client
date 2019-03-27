@@ -18,21 +18,23 @@ export class ItemOptionsModal {
   // @Input() value: number;
   myParameter: boolean;
   myOtherParameter: Date;
+  existing: any;
   constructor(
     private modalController: ModalController,
     private navParams: NavParams,
     private apiService: ApiService,
     public toastController: ToastController,
     private outfitSelectService: OutfitSelectService,
-    private router: Router,
+    private router: Router
   ) {
     // componentProps can also be accessed at construction time using NavParams
   }
 
-
   removeFromCloset() {
     console.log(this.navParams.data);
-    this.apiService.deleteClothingItem(this.navParams.data.item.id_clothing_item);
+    this.apiService.deleteClothingItem(
+      this.navParams.data.item.id_clothing_item
+    );
     this.closeAfterDeletion();
     this.presentToast();
   }
@@ -63,14 +65,27 @@ export class ItemOptionsModal {
     );
   }
 
-  // redirectTo(uri) {
-  //   this.router
-  //     .navigateByUrl(uri, { skipLocationChange: true })
-  //     .then(() => this.router.navigate([uri]));
-  // }
+  add() {
+
+    // Get the existing data
+    this.existing = localStorage.getItem('itemsToSell');
+
+    // If no existing data, create an array
+    // Otherwise, convert the localStorage string to an array
+    this.existing = this.existing ? JSON.parse(this.existing) : {};
+
+    // Add new data to localStorage Array
+    this.existing[this.outfitSelectService.selectedItem.id_clothing_item] = this.outfitSelectService.selectedItem;
+
+    // Save back to localStorage
+    localStorage.setItem('itemsToSell', JSON.stringify(this.existing));
+
+    // Add item to sellArr on service so tab3 gets 'refreshed' as it refers to the same array
+    this.outfitSelectService.add('sellArr', this.outfitSelectService.selectedItem);
+  }
 
   chooseItem() {
-    this.outfitSelectService.change('sortedCloset', (this.navParams.data.item));
+    this.outfitSelectService.change('sortedCloset', this.navParams.data.item);
   }
 }
 

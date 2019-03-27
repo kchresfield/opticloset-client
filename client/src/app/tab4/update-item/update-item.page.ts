@@ -196,8 +196,6 @@ export class UpdateItemPage implements OnInit {
     console.log(this);
   }
 
-
-
   attributeItem(input) {
     if (this.allAttributes[input] === true) {
       this.allAttributes[input] = false;
