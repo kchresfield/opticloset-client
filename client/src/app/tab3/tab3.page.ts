@@ -12,24 +12,15 @@ const selectedItemsToSellObj = {};
 })
 export class Tab3Page implements OnInit {
   list: any;
-
+  listArr = [];
   constructor(
     private apiService: ApiService,
     private outfitSelectService: OutfitSelectService,
   ) {}
 
   ngOnInit() {
-    this.apiService.getCloset(clothes => {
-      console.log(clothes);
-      this.list = [...clothes];
-    });
-
-    // this.list = this.outfitSelectService.get('sellList');
-    // localStorage.setItem(
-    //   'itemsToSell',
-    //   JSON.stringify(selectedItemsToSellObj)
-    // );
-    // console.log(this.list);
+    // setting relationship between tab3 listArr and sellArr on service for dynamic refreshing
+    this.listArr = this.outfitSelectService.get('sellArr');
   }
 
   radioValueSellOrKeep(clothingId, keepOrSell, clothingInfo) {
@@ -50,5 +41,9 @@ export class Tab3Page implements OnInit {
 
   reset() {
     delete localStorage.itemsToSell;
+  }
+
+  print() {
+    console.log(this.listArr, this.outfitSelectService.get('sellArr'));
   }
 }

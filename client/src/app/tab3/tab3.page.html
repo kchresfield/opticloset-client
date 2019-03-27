@@ -1,12 +1,12 @@
 
 <ion-content>
-  <h1>Sell List for eBay</h1>
+  <h1 (click)="print()">Sell List for eBay</h1>
   <ion-button (click)="sellAll()">Sell All</ion-button>
   <ion-button (click)="reset()">Keep All</ion-button>
   <ion-button routerLink="/sell-on-ebay" (click)="sell()">Sell Selected</ion-button>
 
   <ion-grid>
-    <ion-row class="ion-align-items-start" *ngFor="let clothing of list">
+    <ion-row class="ion-align-items-start" *ngFor="let clothing of listArr">
       <ion-col>
         <!-- clothing image -->
         <ion-label>

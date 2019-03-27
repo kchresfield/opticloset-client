@@ -17,7 +17,7 @@ export class OutfitSelectService {
   onePieces: any;
   accessories: any;
   shoes: any;
-  sellList = [];
+  sellArr = [];
   constructor(public apiService: ApiService) {}
 
   // retrieve closet from DB using apiService
@@ -59,8 +59,9 @@ export class OutfitSelectService {
     });
   }
 
-  addToList(item) {
-      this.sellList.push(item);
+  // add item to array on service
+  add(prop, item) {
+    this[prop].push(item);
   }
   // return the current outfit of the day
   getOutfit() {
