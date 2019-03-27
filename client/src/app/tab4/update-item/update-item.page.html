@@ -32,7 +32,7 @@
     </div>
     <div>- or -</div>
     <ion-item>
-      <ion-label>Select Color</ion-label>
+      <ion-label>Update Color</ion-label>
       <ion-select cancelText="Cancel" okText="Done" [(ngModel)]="chosenColor"
         [disabled]="chosenColor==false" (ionChange)="colorUserClicked(chosenColor)">
         <ion-select-option [disabled]="chosenColor==false">Blue</ion-select-option>
@@ -99,6 +99,4 @@
   
   </ion-content>
   
-  <!-- 67 routerLink="/home/tabs/tab2" -->
-
 </ion-content>

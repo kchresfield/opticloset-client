@@ -10,10 +10,10 @@ import { AlertController } from '@ionic/angular';
   templateUrl: 'tab3sell.html',
   styleUrls: ['tab3sell.scss']
 })
-export class Tab3Sell {
-  parsedLocalStorage:any;
-  firstItemInObjectKey:any;
-  firstItemInObjectValue:any;
+export class Tab3Sell implements OnInit {
+  parsedLocalStorage: any;
+  firstItemInObjectKey: any;
+  firstItemInObjectValue: any;
   filteredCloset: any;
   pricePaid: any;
   redirect: any;
@@ -22,20 +22,23 @@ export class Tab3Sell {
     private apiService: ApiService,
     private http: HttpClient,
     public toastController: ToastController,
-    public alertController: AlertController,
-    ) { }
+    public alertController: AlertController
+  ) {}
 
   ngOnInit() {
     this.parsedLocalStorage = JSON.parse(localStorage.getItem('itemsToSell'));
+    console.log(this.parsedLocalStorage);
     this.firstItemInObjectKey = Object.keys(this.parsedLocalStorage)[0];
-    this.firstItemInObjectValue = this.parsedLocalStorage[this.firstItemInObjectKey];
+    this.firstItemInObjectValue = this.parsedLocalStorage[
+      this.firstItemInObjectKey
+    ];
     this.filteredCloset = this.firstItemInObjectValue.imageUrl;
     this.pricePaid = this.firstItemInObjectValue.price;
   }
 
-  nextItem(){
+  nextItem() {
     delete this.parsedLocalStorage[this.firstItemInObjectKey];
-    if(this.parsedLocalStorage.length === 0){
+    if (this.parsedLocalStorage.length === 0) {
       this.redirect = '../tabs/tab3';
     }
     this.redirect = '/sell-on-ebay';
@@ -67,8 +70,6 @@ export class Tab3Sell {
     // }).subscribe((response) => {
     //   console.log(response);
     // });
-
-    
   }
 
   async presentToast() {
@@ -82,15 +83,14 @@ export class Tab3Sell {
   }
 
   async presentAlert() {
-  const alert = await this.alertController.create({
-    header: 'Are you sure?',
-    // subHeader: 'Once sold you will have to manually re-add your item if you change your mind',
-    message: 'Once sold your item will be deleted from your closet.',
-    buttons: ["No, keep it", "I'm sure"],
-  });
-  return await alert.present();
-}
-
+    const alert = await this.alertController.create({
+      header: 'Are you sure?',
+      // subHeader: 'Once sold you will have to manually re-add your item if you change your mind',
+      message: 'Once sold your item will be deleted from your closet.',
+      buttons: ['No, keep it', "I'm sure"]
+    });
+    return await alert.present();
+  }
 }
 // buttons: [
 //   {

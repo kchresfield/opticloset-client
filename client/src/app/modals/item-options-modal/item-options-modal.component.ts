@@ -24,15 +24,16 @@ export class ItemOptionsModal {
     private apiService: ApiService,
     public toastController: ToastController,
     private outfitSelectService: OutfitSelectService,
-    private router: Router,
+    private router: Router
   ) {
     // componentProps can also be accessed at construction time using NavParams
   }
 
-
   removeFromCloset() {
     console.log(this.navParams.data);
-    this.apiService.deleteClothingItem(this.navParams.data.item.id_clothing_item);
+    this.apiService.deleteClothingItem(
+      this.navParams.data.item.id_clothing_item
+    );
     this.closeAfterDeletion();
     this.presentToast();
   }
@@ -69,8 +70,12 @@ export class ItemOptionsModal {
   //     .then(() => this.router.navigate([uri]));
   // }
 
+  add() {
+    this.outfitSelectService.addToList(this.outfitSelectService.selectedItem);
+  }
+
   chooseItem() {
-    this.outfitSelectService.change('sortedCloset', (this.navParams.data.item));
+    this.outfitSelectService.change('sortedCloset', this.navParams.data.item);
   }
 }
 
