@@ -1,51 +1,50 @@
 <ion-content>
   <ion-card-title>Attributes</ion-card-title>
   <div>
-    <ion-button #comfortable [color]="buttonColor" (click)="attributeItem('long')">Long</ion-button>
-    <ion-button #heavy [color]="buttonColor" (click)="attributeItem('short')">Short</ion-button>
-    <ion-button #tight [color]="buttonColor" (click)="attributeItem('light')">Light</ion-button>
-    <ion-button #short [color]="buttonColor" (click)="attributeItem('heavy')">Heavy</ion-button>
-    <ion-button #long [color]="buttonColor" (click)="attributeItem('tight')">Tight</ion-button>
-    <ion-button #basic [color]="buttonColor" (click)="attributeItem('loose')">Loose</ion-button>
-    <ion-button #loose [color]="buttonColor" (click)="attributeItem('comfortable')">Comfortable</ion-button>
-    <ion-button #light [color]="buttonColor" (click)="attributeItem('basic')">Basic</ion-button>
-    <ion-button #solid [color]="buttonColor" (click)="attributeItem('shiny')">Shiny</ion-button>
-    <ion-button #patterned [color]="buttonColor" (click)="attributeItem('solid')">Solid</ion-button>
-    <ion-button #comfortable [color]="buttonColor" (click)="attributeItem('patterned')">Patterned</ion-button>
+    <ion-button #comfortable [color]="buttonColors.long" (click)="attributeItem('long')">Long</ion-button>
+    <ion-button #heavy [color]="buttonColors['short']" (click)="attributeItem('short')">Short</ion-button>
+    <ion-button #tight [color]="buttonColors['light']" (click)="attributeItem('light')">Light</ion-button>
+    <ion-button #short [color]="buttonColors['heavy']" (click)="attributeItem('heavy')">Heavy</ion-button>
+    <ion-button #long [color]="buttonColors['tight']" (click)="attributeItem('tight')">Tight</ion-button>
+    <ion-button #basic [color]="buttonColors['loose']" (click)="attributeItem('loose')">Loose</ion-button>
+    <ion-button #loose [color]="buttonColors['comfortable']" (click)="attributeItem('comfortable')">Comfortable</ion-button>
+    <ion-button #light [color]="buttonColors['basic']" (click)="attributeItem('basic')">Basic</ion-button>
+    <ion-button #solid [color]="buttonColors['shiny']" (click)="attributeItem('shiny')">Shiny</ion-button>
+    <ion-button #patterned [color]="buttonColors['solid']" (click)="attributeItem('solid')">Solid</ion-button>
+    <ion-button #comfortable [color]="buttonColors['patterned']" (click)="attributeItem('patterned')">Patterned</ion-button>
 
 
   </div>
   <h2>Color</h2>
-  <div *ngFor="let color of topTwoColors" (click)="colorUserClicked(color)"><ion-button [color]="buttonColor" class="colorGenerated">{{color}}</ion-button></div>
+  <div *ngFor="let color of topTwoColors" (click)="colorUserClicked(color)"><ion-button [color]="buttonColors[color]" class="colorGenerated">{{color}}</ion-button></div>
   <div>- or -</div>
   <ion-item>
     <ion-label>Select Primary Color</ion-label>
-    <ion-select cancelText="Cancel" okText="Done" [(ngModel)]="chosenColor" [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit" (ionChange)="colorUserClicked(chosenColor)">
-      <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Blue</ion-select-option>
-      <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Blue</ion-select-option>
-      <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Red</ion-select-option>
-      <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">White</ion-select-option>
-      <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Black</ion-select-option>
-      <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Gray</ion-select-option>
-      <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Yellow</ion-select-option>
-      <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Green</ion-select-option>
-      <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Tan</ion-select-option>
-      <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Purple</ion-select-option>
-      <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Pink</ion-select-option>
-      <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Orange</ion-select-option>
+    <ion-select cancelText="Cancel" okText="Done" [(ngModel)]="chosenColor" (ionChange)="colorUserClicked(chosenColor)">
+      <ion-select-option>Red</ion-select-option>
+      <ion-select-option>Pink</ion-select-option>
+      <ion-select-option>Orange</ion-select-option>
+      <ion-select-option>Yellow</ion-select-option>
+      <ion-select-option>Green</ion-select-option>
+      <ion-select-option>Blue</ion-select-option>
+      <ion-select-option>Purple</ion-select-option>
+      <ion-select-option>White</ion-select-option>
+      <ion-select-option>Black</ion-select-option>
+      <ion-select-option>Brown</ion-select-option>
+      <ion-select-option>Gray</ion-select-option>
     </ion-select>
   </ion-item>
   <h2>Occasion</h2>
   <div>
-    <ion-button [color]="buttonColor" (click)="occasionItem('1')">Casual</ion-button>
-    <ion-button [color]="buttonColor" (click)="occasionItem('5')">Formal</ion-button>
-    <ion-button [color]="buttonColor" (click)="occasionItem('2')">Business</ion-button>
-    <ion-button [color]="buttonColor" (click)="occasionItem('4')">Going Out</ion-button>
-    <ion-button [color]="buttonColor" (click)="occasionItem('3')">Athletic</ion-button>
+    <ion-button [color]="buttonColors['casual']" (click)="occasionItem('1')">Casual</ion-button>
+    <ion-button [color]="buttonColors['formal']" (click)="occasionItem('5')">Formal</ion-button>
+    <ion-button [color]="buttonColors['business']" (click)="occasionItem('2')">Business</ion-button>
+    <ion-button [color]="buttonColors['goingOut']" (click)="occasionItem('4')">Going Out</ion-button>
+    <ion-button [color]="buttonColors['athletic']" (click)="occasionItem('3')">Athletic</ion-button>
   </div>
   <h2>Category</h2>
   <div *ngFor="let category of finished" (click)="categorySelected(category)">
-    <ion-button [color]="ionicNamedColor" class="category">{{category}}</ion-button>
+    <ion-button [color]="buttonColor[category]" class="category">{{category}}</ion-button>
   </div>
   <div>- or -</div>
   <ion-item>
