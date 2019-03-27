@@ -37,7 +37,6 @@ export class Tab1Page implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.authService.handleAuthentication();
     console.log('local storage', localStorage);
     this.isLoading = true;
     this.outfitSelected = false;

@@ -35,34 +35,32 @@ export class AuthService {
   }
 
   public handleAuthentication(): void {
-    debugger;
-    this.auth0.parseHash({ 
-      hash: window.location.hash,
-    }, (err, authResult) => {
+    // debugger;
+    this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
         this.setSession(authResult);
         const loggedIn = this.isLoggedIn = true;
         this.isLoggedIn$.next(loggedIn);
-        this.router.navigate(['/']);
-        // this.http.get('https://opticloset.auth0.com/userinfo', {
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //     'Authorization': `Bearer ${localStorage.access_token}`,
-        //   },
-        // }).subscribe((userInfo) => {
-        //   console.log(userInfo);
-        // })
+        this.router.navigate(['/home']);
+        this.http.get('https://opticloset.auth0.com/userinfo', {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.access_token}`,
+          },
+        }).subscribe((userInfo) => {
+          console.log(userInfo);
+        })
       } else if (err) {
         const loggedIn = this.isLoggedIn = false;
         this.isLoggedIn$.next(loggedIn);
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
       }
     });
   }
 
   private setSession(authResult): void {
-    debugger;
+    // debugger;
     // Set the time that the Access Token will expire at
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
     localStorage.setItem('access_token', authResult.accessToken);
