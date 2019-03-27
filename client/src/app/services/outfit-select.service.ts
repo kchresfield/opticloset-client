@@ -61,7 +61,16 @@ export class OutfitSelectService {
 
   // add item to array on service
   add(prop, item) {
-    this[prop].push(item);
+    let exist = false;
+    this[prop].forEach((sellItem) => {
+      if (sellItem.id_clothing_item === item.id_clothing_item) {
+        exist = true;
+      }
+    });
+
+    if (exist === false) {
+      this[prop].push(item);
+    }
   }
   // return the current outfit of the day
   getOutfit() {
