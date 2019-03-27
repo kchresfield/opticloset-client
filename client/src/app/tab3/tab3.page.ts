@@ -55,6 +55,7 @@ export class Tab3Page implements OnInit {
   reset() {
     selectedItemsToSellObj = {};
     delete localStorage.itemsToSell;
+    this.outfitSelectService.empty('sellArr');
   }
 
   async presentToast() {

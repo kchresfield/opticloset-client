@@ -72,6 +72,10 @@ export class OutfitSelectService {
       this[prop].push(item);
     }
   }
+
+  empty(prop) {
+    this[prop].splice(0, this[prop].length);
+  }
   // return the current outfit of the day
   getOutfit() {
     return this.outfit;
