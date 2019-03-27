@@ -1,9 +1,9 @@
 <ion-content>
   <!-- <img [src]="currentImage" *ngIf="currentImage"> -->
 
-  <div>Upload Your Closet!</div>
+  <h1 style="text-align:center">Upload Your Closet!</h1>
 
-  <img src="assets/camera-tab2.png">
+  <img class='camera' src="assets/camera-tab2.png">
 
   <!-- <img [src]="uploadedImage" *ngIf="uploadedImage"> -->
   <div></div>
@@ -11,12 +11,12 @@
   <ion-fab vertical="bottom">
     <ion-row>
       <ion-col>
-        <ion-fab-button (click)="takePicture()">
+        <ion-fab-button color="medium" class='button1' (click)="takePicture()">
           <ion-icon name="camera"></ion-icon>
         </ion-fab-button>
       </ion-col>
       <ion-col>
-        <ion-fab-button (click)="upload()">
+        <ion-fab-button color="medium" class='button2' (click)="upload()">
           <ion-icon name="cloud"></ion-icon>
         </ion-fab-button>
       </ion-col>

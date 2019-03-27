@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api/api.service';
+import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 
-const selectedItemsToSellObj = {};
+
+let selectedItemsToSellObj = {};
 
 @Component({
   selector: 'app-tab3',
@@ -12,7 +15,11 @@ const selectedItemsToSellObj = {};
 export class Tab3Page {
   filteredCloset: any;
 
-  constructor(private apiService: ApiService) { }
+  constructor(
+    private apiService: ApiService,
+    public toastController: ToastController,
+    private router: Router,
+    ) { }
 
   ngOnInit() {
     this.apiService.getCloset(clothes => {
@@ -32,7 +39,11 @@ export class Tab3Page {
   }
 
   sell(){
+    if(!Object.keys(selectedItemsToSellObj).length){
+      return this.presentToast();
+    }
     localStorage.setItem('itemsToSell', JSON.stringify(selectedItemsToSellObj));
+    this.router.navigate(['/sell-on-ebay']);
   }
 
   sellAll(){
@@ -40,6 +51,17 @@ export class Tab3Page {
   }
 
   reset(){
+    selectedItemsToSellObj = {};
     delete localStorage.itemsToSell;
+  }
+
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Please select at least 1 item',
+      position: 'top',
+      animated: true,
+      duration: 2000
+    });
+    toast.present();
   }
 }

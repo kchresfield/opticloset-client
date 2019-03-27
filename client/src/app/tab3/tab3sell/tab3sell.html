@@ -1,30 +1,36 @@
 <ion-content>
-  <img [src]="filteredCloset" height="400" class="center">
+  <img [src]="filteredCloset" height="300" class="center">
   <div>
-    Title:
-    <ion-input placeholder="Title"></ion-input>
+    <h3>Title:</h3><ion-input class="input" [(ngModel)]="title" placeholder="Title"></ion-input>
   </div>
   <div>
-    <ion-label>Description:</ion-label>
-    <ion-textarea placeholder="Description..."></ion-textarea>
+    <h3>Description:</h3><ion-textarea class="input" [(ngModel)]="description" placeholder="Description..."></ion-textarea>
   </div>
   <div>
-    <ion-label>Price Paid:</ion-label>
-    {{pricePaid}}
+    <h3>Price Paid:</h3>$ {{pricePaid}}
   </div>
   <div>
-    Condition:
-    <ion-input placeholder="Condition"></ion-input>
+    <h3>Condition:</h3>
+    <ion-item>
+      <ion-label>Condition</ion-label>
+      <ion-select multiple="false" cancelText="Cancel" okText="Done" [(ngModel)]="chosenCondition" (ionChange)="conditionSelected(chosenCondition)">
+        <ion-select-option value="New with tags">New With Tags</ion-select-option>
+        <ion-select-option value="New without tags">New Without Tags</ion-select-option>
+        <ion-select-option value="New with defects">New with defects</ion-select-option>
+        <ion-select-option value="Pre-owned">Pre-owned</ion-select-option>
+      </ion-select>
+    </ion-item>
   </div>
   <div>
-    Listing Price:
-    <ion-input placeholder="Listing Price"></ion-input>
+    <h3>Listing Price:</h3><ion-input class="input" [(ngModel)]="listingPrice" placeholder="$ Listing Price"></ion-input>
   </div>
 
   <div>
     <ion-button routerLink='/home/tabs/tab3'>Cancel</ion-button>
-    <ion-button (click)="nextItem(); presentAlert(); " routerLink='/home/tabs/tab3'>Sell</ion-button>
+    <ion-button (click)="presentAlert()">Sell</ion-button>
   </div>
+
+  <!-- <ion-button (click)="test()">Test</ion-button> -->
 </ion-content>
 <!-- /home/tabs/tab3 -->
 <!-- presentToast() -->
