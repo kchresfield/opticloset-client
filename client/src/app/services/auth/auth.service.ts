@@ -17,7 +17,7 @@ export class AuthService {
     domain: AUTH_CONFIG.domain,
     responseType: 'token id_token',
     audience: `https://${AUTH_CONFIG.domain}/userinfo`,
-    redirectUri: `http://${AUTH_CONFIG.host}:8100/home`,
+    redirectUri: `http://${AUTH_CONFIG.host}:8100/callback`,
     scope: 'openid profile'
   });
 
@@ -42,7 +42,6 @@ export class AuthService {
         this.setSession(authResult);
         const loggedIn = this.isLoggedIn = true;
         this.isLoggedIn$.next(loggedIn);
-        this.router.navigate(['/home']);
         this.http.get('https://opticloset.auth0.com/userinfo', {
           headers: {
             'Content-Type': 'application/json',
@@ -50,11 +49,12 @@ export class AuthService {
           },
         }).subscribe((userInfo) => {
           console.log(userInfo);
+          this.router.navigate(['/home/tabs/tab1']);
         })
       } else if (err) {
         const loggedIn = this.isLoggedIn = false;
         this.isLoggedIn$.next(loggedIn);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
       }
     });
   }
@@ -82,8 +82,8 @@ export class AuthService {
   public isAuthenticated(): boolean {
     // Check whether the current time is past the
     // Access Token's expiry time
-    // debugger;
     const expiresAt = JSON.parse(localStorage.getItem('expires_at') || '{}');
+    // debugger;
     return new Date().getTime() < expiresAt;
   }
 
