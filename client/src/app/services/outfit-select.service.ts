@@ -1,6 +1,7 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { mockCloset } from './mockClosetData.js';
 import { ApiService } from '../services/api/api.service';
+import { UserService } from '../services/user/user.service';
 
 
 @Injectable({
@@ -17,12 +18,15 @@ export class OutfitSelectService {
   onePieces: any;
   accessories: any;
   shoes: any;
-  sellArr = [];
-  constructor(public apiService: ApiService) {}
+  
+  constructor(
+    public apiService: ApiService,
+    public userService: UserService,
+  ) {}
 
   // retrieve closet from DB using apiService
-  getClosetFromDB(cb) {
-    this.apiService.getCloset(cb);
+  getClosetFromDB(username, cb) {
+    this.apiService.getCloset(username, cb);
   }
 
   // to save outfit from tab1
@@ -82,7 +86,7 @@ export class OutfitSelectService {
   }
 
   setMock() {
-    this.closet = mockCloset;
+    // this.closet = mockCloset;
     this.shuffle(this.closet);
     this.tops = this.closet.filter(clothing => clothing['id_category'] === 2);
     console.log(`Tops length is ${this.tops.length}`);
@@ -341,7 +345,10 @@ export class OutfitSelectService {
         break;
       }
     }
-
+    if (!monoOutfit['bottom']) {
+      monoOutfit['bottom'] = this.bottoms[this.getRandomIndex(this.bottoms.length)];
+    }
+    
     // loop through outwears to select matching outerwears by color
     for (
       let i = this.getRandomIndex(this.outerwears.length);
@@ -355,12 +362,13 @@ export class OutfitSelectService {
         break;
       }
     }
-
-    monoOutfit['shoes'] = this.shoes[this.getRandomIndex(this.shoes.length)];
-    monoOutfit['accessory'] = this.accessories[
-      this.getRandomIndex(this.accessories.length)
-    ];
-
+    if (!monoOutfit['outerwear']) {
+      monoOutfit['outerwear'] = this.outerwears[this.getRandomIndex(this.outerwears.length)];
+    }
+    
+    monoOutfit['shoes'] = this.shoes[this.getRandomIndex(this.shoes.length)]
+    monoOutfit['accessory'] = this.accessories[this.getRandomIndex(this.accessories.length)]
+    
     return monoOutfit;
   }
 
@@ -380,7 +388,10 @@ export class OutfitSelectService {
         break;
       }
     }
-
+    if (!neutralOutfit['top']) {
+      neutralOutfit['top'] = this.tops[this.getRandomIndex(this.tops.length)];
+    }
+    
     // get and assign neutral bottom
     for (
       let i = this.getRandomIndex(this.bottoms.length);
@@ -394,6 +405,10 @@ export class OutfitSelectService {
       }
     }
 
+    if (!neutralOutfit['bottom']) {
+      neutralOutfit['bottom'] = this.bottoms[this.getRandomIndex(this.bottoms.length)];
+    }
+    
     // get and assign neutral outerwear
     for (
       let i = this.getRandomIndex(this.outerwears.length);
@@ -407,11 +422,13 @@ export class OutfitSelectService {
       }
     }
 
-    neutralOutfit['shoes'] = this.shoes[this.getRandomIndex(this.shoes.length)];
-    neutralOutfit['accessory'] = this.accessories[
-      this.getRandomIndex(this.accessories.length)
-    ];
+    if (!neutralOutfit['outerwear']) {
+      neutralOutfit['outerwear'] = this.outerwears[this.getRandomIndex(this.outerwears.length)];
+    }
 
+    neutralOutfit['shoes'] = this.shoes[this.getRandomIndex(this.shoes.length)]
+    neutralOutfit['accessory'] = this.accessories[this.getRandomIndex(this.accessories.length)]
+    
     return neutralOutfit;
   }
 

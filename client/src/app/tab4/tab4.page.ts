@@ -3,6 +3,7 @@ import { ApiService } from '../services/api/api.service';
 import { ModalController, NavParams } from '@ionic/angular';
 import { ItemOptionsModal } from '../modals/item-options-modal/item-options-modal.component';
 import { OutfitSelectService } from '../services/outfit-select.service';
+import { UserService } from '../services/user/user.service';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class Tab4Page implements OnInit {
     private apiService: ApiService,
     public modalController: ModalController,
     public outfitSelectService: OutfitSelectService,
+    public userService: UserService,
   ) {}
 
   ngOnInit() {
@@ -30,7 +32,7 @@ export class Tab4Page implements OnInit {
   }
 
   getAllItems() {
-    this.apiService.getCloset(data => {
+    this.apiService.getCloset(this.userService.profile['nickname'], data => {
       console.log(data);
       this.closet = data;
     });
