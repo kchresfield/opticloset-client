@@ -18,7 +18,6 @@ export class UserService {
         'Authorization': `Bearer ${localStorage.access_token}`,
       },
     }).toPromise().then((userInfo) => {
-      console.log(userInfo);
       this.profile = userInfo;
       return this.profile;
     });

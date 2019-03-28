@@ -47,17 +47,19 @@ export class TabsPage implements OnInit {
   }
 
   getCloset() {
-    this.outfitSelectService.getClosetFromDB(this.userService.profile['nickname'], data => { // invoke the getClosetFromDBandSort method from outfitSelectService to
-      this.outfitSelectService.save('closet', data); // save a regular closet on the service
-      const sortedCloset = [...data];
-      sortedCloset.sort((a, b) => {
-        return a.count_worn - b.count_worn; // sort the closet from least worn to most worn
+    this.userService.getUser().then((profile) => {
+      this.outfitSelectService.getClosetFromDB(profile['nickname'], data => { // invoke the getClosetFromDBandSort method from outfitSelectService to
+        this.outfitSelectService.save('closet', data); // save a regular closet on the service
+        const sortedCloset = [...data];
+        sortedCloset.sort((a, b) => {
+          return a.count_worn - b.count_worn; // sort the closet from least worn to most worn
+        });
+        sortedCloset.forEach(clothing => { // for each item in the sorted closet
+          clothing.lastUpdated = new Date(clothing.updatedAt).toString().slice(3, 15); // add a property lastUpdated
+        });
+        this.outfitSelectService.save('sortedCloset', sortedCloset); // save the sorted closet on the service
       });
-      sortedCloset.forEach(clothing => { // for each item in the sorted closet
-        clothing.lastUpdated = new Date(clothing.updatedAt).toString().slice(3, 15); // add a property lastUpdated
-      });
-      this.outfitSelectService.save('sortedCloset', sortedCloset); // save the sorted closet on the service
-    });
+    })
   }
 
   // gets sellList from local storage and saves it on service to be shared between components

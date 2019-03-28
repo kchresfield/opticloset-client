@@ -43,7 +43,6 @@ export class Tab1Page implements OnInit {
     this.outfitSelected = false;
     this.presentLoadingWithOptions();
     this.userService.getUser().then((profile) => {
-      console.log(profile['nickname'])
       this.apiService.getCloset(profile['nickname'], clothes => {
         this.closet = clothes;
         this.outfitSelectService.save('closet', this.closet);
