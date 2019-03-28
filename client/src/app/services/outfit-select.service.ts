@@ -1,6 +1,7 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { mockCloset } from './mockClosetData.js';
 import { ApiService } from '../services/api/api.service';
+import { UserService } from '../services/user/user.service';
 
 
 @Injectable({
@@ -18,11 +19,14 @@ export class OutfitSelectService {
   accessories: any;
   shoes: any;
   
-  constructor(public apiService: ApiService) {}
+  constructor(
+    public apiService: ApiService,
+    public userService: UserService,
+  ) {}
 
   // retrieve closet from DB using apiService
-  getClosetFromDB(cb) {
-    this.apiService.getCloset(cb);
+  getClosetFromDB(username, cb) {
+    this.apiService.getCloset(username, cb);
   }
 
   // to save outfit from tab1

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api/api.service';
 import { getLView } from '@angular/core/src/render3/state';
 import { OutfitSelectService } from '../services/outfit-select.service';
-
+import { UserService } from '../services/user/user.service';
 
 @Component({
   selector: 'app-tabs',
@@ -14,7 +14,11 @@ export class TabsPage implements OnInit {
   temperature: any;
   conditions: any;
 
-  constructor(private apiService: ApiService, private outfitSelectService: OutfitSelectService) {}
+  constructor(
+    private apiService: ApiService, 
+    private outfitSelectService: OutfitSelectService,
+    public userService: UserService,
+  ) {}
   ngOnInit() {
     this.getWeather();
     this.getCloset();
@@ -40,7 +44,7 @@ export class TabsPage implements OnInit {
   }
 
   getCloset() {
-    this.outfitSelectService.getClosetFromDB(data => { // invoke the getClosetFromDBandSort method from outfitSelectService to
+    this.outfitSelectService.getClosetFromDB(this.userService.profile['nickname'], data => { // invoke the getClosetFromDBandSort method from outfitSelectService to
       this.outfitSelectService.save('closet', data); // save a regular closet on the service
       const sortedCloset = [...data];
       sortedCloset.sort((a, b) => {

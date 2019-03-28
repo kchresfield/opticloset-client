@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {Subject} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
 import * as auth0 from 'auth0-js';
 import { AUTH_CONFIG } from './auth.config';
+import { UserService } from '../user/user.service';
 
 (window as any).global = window;
 
@@ -23,7 +23,11 @@ export class AuthService {
 
   userProfile: any;
 
-  constructor(public router: Router, public http: HttpClient) {
+  constructor(
+    public router: Router, 
+    public http: HttpClient,
+    public userService: UserService,
+  ) {
     // Check if user is logged In when Initializing
     const loggedIn = this.isLoggedIn = this.isAuthenticated();
     this.isLoggedIn$.next(loggedIn);
@@ -42,15 +46,6 @@ export class AuthService {
         this.setSession(authResult);
         const loggedIn = this.isLoggedIn = true;
         this.isLoggedIn$.next(loggedIn);
-        this.http.get('https://opticloset.auth0.com/userinfo', {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.access_token}`,
-          },
-        }).subscribe((userInfo) => {
-          console.log(userInfo);
-          this.router.navigate(['/home/tabs/tab1']);
-        })
       } else if (err) {
         const loggedIn = this.isLoggedIn = false;
         this.isLoggedIn$.next(loggedIn);

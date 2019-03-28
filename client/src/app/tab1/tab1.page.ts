@@ -4,6 +4,7 @@ import { ToastController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { OutfitSelectService } from '../services/outfit-select.service';
 import { AuthService } from '../services/auth/auth.service';
+import { UserService } from '../services/user/user.service';
 
 
 @Component({
@@ -33,7 +34,7 @@ export class Tab1Page implements OnInit {
     public loadingController: LoadingController,
     public toastController: ToastController,
     public outfitSelectService: OutfitSelectService,
-    private authService: AuthService,
+    public userService: UserService,
   ) {}
 
   ngOnInit() {
@@ -41,15 +42,18 @@ export class Tab1Page implements OnInit {
     this.isLoading = true;
     this.outfitSelected = false;
     this.presentLoadingWithOptions();
-    this.apiService.getCloset(clothes => {
-      this.closet = clothes;
-      this.outfitSelectService.save('closet', this.closet);
-      // this.chooseOutfit();
-      this.outfitSelectService.setMock();
-      this.outfitSelectService.chooseMatchingOutfit(null, null);
-      this.outfit = this.outfitSelectService.getOutfit();
-      this.isLoading = false;
-    });
+    this.userService.getUser().then((profile) => {
+      console.log(profile['nickname'])
+      this.apiService.getCloset(profile['nickname'], clothes => {
+        this.closet = clothes;
+        this.outfitSelectService.save('closet', this.closet);
+        // this.chooseOutfit();
+        this.outfitSelectService.setMock();
+        this.outfitSelectService.chooseMatchingOutfit(null, null);
+        this.outfit = this.outfitSelectService.getOutfit();
+        this.isLoading = false;
+      });
+    })
     // testing for matching feature
     // this.outfitSelectService.setMock();
     // this.outfitSelectService.chooseMatchingOutfit(null, null);

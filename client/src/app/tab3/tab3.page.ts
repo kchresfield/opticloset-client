@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api/api.service';
+import { UserService } from '../services/user/user.service';
 
 
 const selectedItemsToSellObj = {};
@@ -12,10 +13,13 @@ const selectedItemsToSellObj = {};
 export class Tab3Page {
   filteredCloset: any;
 
-  constructor(private apiService: ApiService) { }
+  constructor(
+    private apiService: ApiService,
+    public userService: UserService,
+  ) { }
 
   ngOnInit() {
-    this.apiService.getCloset(clothes => {
+    this.apiService.getCloset(this.userService.profile['nickname'], clothes => {
       console.log(clothes)
       this.filteredCloset = [...clothes];
     });

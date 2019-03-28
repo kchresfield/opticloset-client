@@ -20,6 +20,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { OutfitSelectService } from './services/outfit-select.service';
 import { AuthService } from './services/auth/auth.service';
+import { UserService } from './services/user/user.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,6 +38,7 @@ import { AuthService } from './services/auth/auth.service';
     SplashScreen,
     ApiService,
     AuthService,
+    UserService,
     OutfitSelectService,
     Geolocation,
     LocalNotifications,

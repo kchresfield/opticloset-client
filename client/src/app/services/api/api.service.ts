@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { WeatherConditions } from '../../weather-conditions';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { UserService } from '../user/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,8 @@ export class ApiService {
   
   constructor(
     private httpClient: HttpClient,
-    private geolocation: Geolocation
+    private geolocation: Geolocation,
+    public userService: UserService,
   ) {}
 
   public currentConditions: object = {};
@@ -81,8 +82,8 @@ export class ApiService {
       });
   }
 
-  getCloset(callback) {
-    this.httpClient.get(`${this.apiURL}/closet/1`).subscribe(data => {
+  getCloset(username, callback) {
+    this.httpClient.get(`${this.apiURL}/closet/${username}`).subscribe(data => {
       callback(data);
     });
   }
