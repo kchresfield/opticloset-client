@@ -52,6 +52,7 @@ export class Tab1Page implements OnInit {
         this.outfitSelectService.chooseMatchingOutfit(null, null);
         this.outfit = this.outfitSelectService.getOutfit();
         this.isLoading = false;
+        this.loadingController.dismiss();
       });
     })
     // testing for matching feature
@@ -78,7 +79,7 @@ export class Tab1Page implements OnInit {
   async presentLoadingWithOptions() {
     const loading = await this.loadingController.create({
       spinner: null,
-      duration: 3000,
+      // duration: 3000,
       message: 'One moment while we select your outfit...',
       translucent: true,
       cssClass: 'custom-class custom-loading'
