@@ -6,6 +6,9 @@ import {
   ILocalNotificationActionType,
   ILocalNotification
 } from '@ionic-native/local-notifications/ngx';
+import { ApiService } from '../services/api/api.service';
+import { ToastController } from '@ionic/angular';
+
 
 
 @Component({
@@ -18,11 +21,17 @@ export class NotificationsPage implements OnInit {
   time: string;
   hours: number;
   minutes: number;
+  conditions: any;
+  temperature: any;
+  username: any;
+  location: any;
   constructor(
     private plt: Platform,
     private localNotifications: LocalNotifications,
     private alertCtrl: AlertController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private apiService: ApiService,
+    public toastController: ToastController,
   ) {
     this.plt.ready().then(() => {
       // this.localNotifications.on('click').subscribe(res => {
@@ -53,7 +62,9 @@ export class NotificationsPage implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.setNavBar();
+  }
 
   scheduleNotification() {
     //   // this.localNotifications.schedule({
@@ -89,6 +100,7 @@ export class NotificationsPage implements OnInit {
         trigger: { every: { hour: this.hours, minute: this.minutes } }
       });
     }
+    this.presentToast(`Your daily alert is set for ${this.time}`);
   }
 
   showAlert(header, sub, msg, buttons) {
@@ -112,8 +124,30 @@ export class NotificationsPage implements OnInit {
     this.localNotifications.cancelAll();
   }
 
-  // printTime() {
-  //   console.log(this.scheduled, this.time, this.time.split(':'));
-  // }
+  print() {
+    console.log(
+      this,
+      this.apiService.get('conditions'),
+      this.apiService.get('temperature')
+    );
+  }
 
+  setNavBar() {
+    this.conditions = this.apiService.get('conditions');
+    this.temperature = this.apiService.get('temperature');
+    this.username = this.apiService.get('username');
+    this.location = this.apiService.get('location');
+  }
+
+  // present toast based on the server's response
+  async presentToast(message) {
+    const toast = await this.toastController.create({
+      message: message,
+      position: 'middle',
+      animated: true,
+      duration: 3000
+    });
+    toast.present();
+    // this.outfitSelected = true;
+  }
 }

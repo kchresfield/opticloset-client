@@ -40,6 +40,10 @@ export class TabsPage implements OnInit {
       if (data.weather.includes('sun') || data.weather.includes('clear')) {
         this.conditions = 'sunny';
       }
+      this.apiService.save('conditions', this.conditions);
+      this.apiService.save('temperature', this.temperature);
+      this.apiService.save('username', 'Laura Pena');
+      // this.apiService.save('userName', 'Laura Pena');
     });
   }
 
