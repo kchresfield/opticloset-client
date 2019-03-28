@@ -86,7 +86,7 @@ export class OutfitSelectService {
   }
 
   setMock() {
-    // this.closet = mockCloset;
+    this.closet = mockCloset;
     this.shuffle(this.closet);
     this.tops = this.closet.filter(clothing => clothing['id_category'] === 2);
     console.log(`Tops length is ${this.tops.length}`);
@@ -437,7 +437,39 @@ export class OutfitSelectService {
   }
 
   // filters closet by occasion, returns new array of clothingItem objects
-  filterByOccasion(closet, occasion) {}
+  filterByOccasion(occasion) {
+    const occasions = {
+      casual: 1,
+      formal: 2,
+      business: 3,
+      goingOut: 4,
+      athletic: 5,
+    }
+
+    this.tops = this.closet.filter(
+      clothing => clothing['id_occasion'] === occasions[occasion]
+    );
+
+    this.onePieces = this.closet.filter(
+      clothing => clothing['id_occasion'] === occasions[occasion]
+    );
+
+    this.outerwears = this.closet.filter(
+      clothing => clothing['id_occasion'] === occasions[occasion]
+    );
+
+    this.accessories = this.closet.filter(
+      clothing => clothing['id_occasion'] === occasions[occasion]
+    );
+
+    this.bottoms = this.closet.filter(
+      clothing => clothing['id_occasion'] === occasions[occasion]
+    );
+
+    this.shoes = this.closet.filter(
+      clothing => clothing['id_occasion'] === occasions[occasion]
+    );
+  }
 
   // select matching outfit
   // takes in match method and reassigns OOTD to outfit with that method
@@ -454,11 +486,15 @@ export class OutfitSelectService {
       console.log(`Random occasion method is ${occasion}`);
     }
 
+    this.filterByOccasion(occasion);
+
     // current outfit selected by method
     const currOutfitSelection = this[method]();
 
     // reassign outfit to be outfit chosen by method
     this.outfit = currOutfitSelection;
     console.log(this.outfit, 'Outfit selected');
+    
+    this.setMock();
   }
 }
