@@ -22,6 +22,9 @@ import { OutfitSelectService } from './services/outfit-select.service';
 import { AuthService } from './services/auth/auth.service';
 import { UserService } from './services/user/user.service';
 
+// import { NavParams } from '@ionic/angular';
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -42,6 +45,7 @@ import { UserService } from './services/user/user.service';
     OutfitSelectService,
     Geolocation,
     LocalNotifications,
+    // NavParams,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

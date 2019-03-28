@@ -15,8 +15,8 @@
         <ion-select-option value="all"selected>All</ion-select-option>
         <ion-select-option value="top">Tops</ion-select-option>
         <ion-select-option value="bottom">Bottoms</ion-select-option>
-        <ion-select-option value="outerware">Outerwares</ion-select-option>
-        <ion-select-option value="one-piece">One-Pieces</ion-select-option>
+        <ion-select-option value="outerwear">Outerwear</ion-select-option>
+        <ion-select-option value="one-piece">One-Piece</ion-select-option>
         <ion-select-option value="shoes">Shoes</ion-select-option>
         <ion-select-option value="accessory">Accessories</ion-select-option>
       </ion-select>
@@ -28,7 +28,7 @@
 <ion-content>
   <ion-grid class="closet">
     <ion-row>
-      <ion-col id="test" size="6" (click)="presentModal(clothingItem); print(clothingItem)"
+      <ion-col id="test" size="6" (click)="presentModal(clothingItem); select(clothingItem); print(clothingItem)"
         *ngFor="let clothingItem of closet">
         <!-- <div class="clothingItem">{{clothingItem.category}}</div> -->
         <img class="displayed" [src]="clothingItem.imageUrl">

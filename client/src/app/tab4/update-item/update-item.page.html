@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Update Item</ion-title>
+    <ion-title (click)="print()">Update Item</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -8,84 +8,95 @@
 
   <ion-content>
     <ion-card-title>Attributes</ion-card-title>
+    <img class="displayed" [src]="selectedItem.imageUrl">
     <div>
-      <ion-button #comfortable color="light" (click)="attributeItem('2')">Comfortable</ion-button>
-      <ion-button #heavy color="light" (click)="attributeItem('4')">Heavy</ion-button>
-      <ion-button #tight [color]="buttonColor" (click)="attributeItem('3')">Tight</ion-button>
-      <ion-button #short [color]="buttonColor" (click)="attributeItem('5')">Short</ion-button>
-      <ion-button #long [color]="buttonColor" (click)="attributeItem('6')">Long</ion-button>
-      <ion-button #basic [color]="buttonColor" (click)="attributeItem('1')">Basic</ion-button>
-      <ion-button #loose [color]="buttonColor" (click)="attributeItem('8')">Loose</ion-button>
-      <ion-button #light [color]="buttonColor" (click)="attributeItem('9')">Light</ion-button>
-      <ion-button #solid [color]="buttonColor" (click)="attributeItem('10')">Solid</ion-button>
-      <ion-button #patterned [color]="buttonColor" (click)="attributeItem('11')">Patterned</ion-button>
-  
-  
+      <ion-button #long [color]="this.buttonColors['long']" (click)="attributeItem('1'); toggleNamedColor('long')">Long</ion-button>
+      <ion-button #short [color]="this.buttonColors['short']" (click)="attributeItem('2'); toggleNamedColor('short')">Short</ion-button>
+      <ion-button #light [color]="this.buttonColors['light']" (click)="attributeItem('3'); toggleNamedColor('light')">Light</ion-button>
+      <ion-button #heavy [color]="this.buttonColors['heavy']" (click)="attributeItem('4'); toggleNamedColor('heavy')">Heavy</ion-button>
+      <ion-button #tight [color]="this.buttonColors['tight']" (click)="attributeItem('5'); toggleNamedColor('tight')">Tight</ion-button>
+      <ion-button #loose [color]="this.buttonColors['loose']" (click)="attributeItem('6'); toggleNamedColor('loose')">Loose</ion-button>
+      <ion-button #comfortable [color]="this.buttonColors['comfortable']" (click)="attributeItem('7'); toggleNamedColor('comfortable')">Comfortable</ion-button>
+      <ion-button #basic [color]="this.buttonColors['basic']" (click)="attributeItem('8'); toggleNamedColor('basic')">Basic</ion-button>
+      <ion-button #shiny [color]="this.buttonColors['shiny']" (click)="attributeItem('9'); toggleNamedColor('shiny')">Shiny</ion-button>
+      <ion-button #solid [color]="this.buttonColors['solid']" (click)="attributeItem('10'); toggleNamedColor('solid')">Solid</ion-button>
+      <ion-button #patterned [color]="this.buttonColors['patterned']" (click)="attributeItem('11'); toggleNamedColor('patterned')">Patterned</ion-button> 
     </div>
-    <h2>Color</h2>
-    <div *ngFor="let color of topTwoColors" (click)="colorUserClicked(color)">
+    <h2>
+      <b>
+        Color
+      </b>
+    </h2>
+    <div *ngFor="let color of selectedColors" (click)="colorUserClicked(color)">
       <ion-button [color]="buttonColor" class="colorGenerated">{{color}}</ion-button>
     </div>
     <div>- or -</div>
     <ion-item>
-      <ion-label>Select Primary Color</ion-label>
+      <ion-label>Update Color</ion-label>
       <ion-select cancelText="Cancel" okText="Done" [(ngModel)]="chosenColor"
-        [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit" (ionChange)="colorUserClicked(chosenColor)">
-        <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Blue</ion-select-option>
-        <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Red</ion-select-option>
-        <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">White</ion-select-option>
-        <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Black</ion-select-option>
-        <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Grey</ion-select-option>
-        <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Yellow</ion-select-option>
-        <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Green</ion-select-option>
-        <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Tan</ion-select-option>
-        <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Purple</ion-select-option>
-        <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Pink</ion-select-option>
-        <ion-select-option [disabled]="chosenColor==false && numberOfChecks>=checkBoxLimit">Orange</ion-select-option>
+        [disabled]="chosenColor==false" (ionChange)="colorUserClicked(chosenColor)">
+        <ion-select-option [disabled]="chosenColor==false">Blue</ion-select-option>
+        <ion-select-option [disabled]="chosenColor==false">Red</ion-select-option>
+        <ion-select-option [disabled]="chosenColor==false">White</ion-select-option>
+        <ion-select-option [disabled]="chosenColor==false">Black</ion-select-option>
+        <ion-select-option [disabled]="chosenColor==false">Grey</ion-select-option>
+        <ion-select-option [disabled]="chosenColor==false">Yellow</ion-select-option>
+        <ion-select-option [disabled]="chosenColor==false">Green</ion-select-option>
+        <ion-select-option [disabled]="chosenColor==false">Tan</ion-select-option>
+        <ion-select-option [disabled]="chosenColor==false">Purple</ion-select-option>
+        <ion-select-option [disabled]="chosenColor==false">Pink</ion-select-option>
+        <ion-select-option [disabled]="chosenColor==false">Orange</ion-select-option>
       </ion-select>
     </ion-item>
     <h2>Occasion</h2>
     <div>
-      <ion-button [color]="buttonColor" (click)="occasionItem('1')">Casual</ion-button>
-      <ion-button [color]="buttonColor" (click)="occasionItem('5')">Formal</ion-button>
-      <ion-button [color]="buttonColor" (click)="occasionItem('2')">Business</ion-button>
-      <ion-button [color]="buttonColor" (click)="occasionItem('4')">Going Out</ion-button>
-      <ion-button [color]="buttonColor" (click)="occasionItem('3')">Athletic</ion-button>
+      <ion-button [color]="this.buttonColors['casual']" (click)="occasionItem('1'); toggleNamedColor('casual')">Casual</ion-button>
+      <ion-button [color]="this.buttonColors['formal']" (click)="occasionItem('2'); toggleNamedColor('formal')">Formal</ion-button>
+      <ion-button [color]="this.buttonColors['business']" (click)="occasionItem('3'); toggleNamedColor('business')">Business</ion-button>
+      <ion-button [color]="this.buttonColors['goingOut']" (click)="occasionItem('4'); toggleNamedColor('goingOut')">Going Out</ion-button>
+      <ion-button [color]="this.buttonColors['athletic']" (click)="occasionItem('5'); toggleNamedColor('athletic')">Athletic</ion-button>
     </div>
     <h2>Category</h2>
-    <div *ngFor="let category of finished" (click)="categorySelected(category)">
+    <div *ngFor="let category of selectedCategory" (click)="selectCategory(category)">
       <ion-button [color]="buttonColor" class="category">{{category}}</ion-button>
     </div>
     <div>- or -</div>
     <ion-item>
       <ion-label>Select One</ion-label>
       <ion-select multiple="false" cancelText="Cancel" okText="Done" [(ngModel)]="chosenCategory"
-        (ionChange)="categorySelected(chosenCategory)">
-        <ion-select-option value="top">Top</ion-select-option>
-        <ion-select-option value="bottom">Orange</ion-select-option>
-        <ion-select-option value="one-piece">One Piece</ion-select-option>
-        <ion-select-option value="outerware">Outerware</ion-select-option>
-        <ion-select-option value="shoes">Shoes</ion-select-option>
-        <ion-select-option value="accessories">Accessories</ion-select-option>
+        (ionChange)="selectCategory(chosenCategory)">
+        <ion-select-option value="1">One Piece</ion-select-option>
+        <ion-select-option value="2">Top</ion-select-option>
+        <ion-select-option value="3">Bottom</ion-select-option>
+        <ion-select-option value="4">Outerwear</ion-select-option>
+        <ion-select-option value="5">Accessory</ion-select-option>
+        <ion-select-option value="6">Shoes</ion-select-option>
+
       </ion-select>
     </ion-item>
     <div>
       <ion-card-title>Price</ion-card-title>
       <ion-item id="rounded">
         <ion-label fixed>$</ion-label>
-        <ion-input type="text" [(ngModel)]="price" value=""></ion-input>
+        <ion-input type="text" [(ngModel)]="price" value="" placeholder="{{initialprice}}" inputmode="numeric"></ion-input>
       </ion-item>
     </div>
   
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button routerLink="/home/tabs/tab2" (click)="addItem()">
-        <ion-icon name="save"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-row>
+          <ion-col>
+            <ion-fab-button routerLink="/home/tabs/tab4">
+              <ion-icon name="close-circle"></ion-icon>
+            </ion-fab-button>
+          </ion-col>
+          <ion-col>
+            <ion-fab-button routerLink="/home/tabs/tab4" (click)="updateItem()">
+              <ion-icon name="save"></ion-icon>
+            </ion-fab-button>
+          </ion-col>
+        </ion-row>
+      </ion-fab>
   
-    <img [src]="url" *ngIf="url">
   </ion-content>
   
-  <!-- 67 routerLink="/home/tabs/tab2" -->
-
 </ion-content>
