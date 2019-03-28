@@ -2,8 +2,8 @@
   <ion-grid fixed>
     <ion-row>
       <ion-col>
-        <ion-item #S class="ion-justify-content-center">
-          <ion-select>
+        <ion-item #S class="ion-justify-content-center select">
+          <ion-select [(ngModel)]="matchMethod" (ionChange)="setMatchMethod()" >
             <ion-select-option value="random" selected>Random</ion-select-option>
             <ion-select-option value="colorMatch">ColorMatch</ion-select-option>
             <ion-select-option value="allNeutral">All Neutrals</ion-select-option>
@@ -13,7 +13,7 @@
       </ion-col>
       <ion-col>
         <ion-item #S class="ion-justify-content-center">
-          <ion-select>
+          <ion-select [(ngModel)]="occasion" (ionChange)="setMatchMethod()" >
             <ion-select-option value="random" selected>Random</ion-select-option>
             <ion-select-option value="casual">Casual</ion-select-option>
             <ion-select-option value="formal">Formal</ion-select-option>

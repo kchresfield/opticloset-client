@@ -444,12 +444,12 @@ export class OutfitSelectService {
   // order of selection: occasion => weather => matching
   chooseMatchingOutfit(method, occasion) {
     // if no method is selected, select random matching method
-    if (!method) {
+    if (!method || method === 'random') {
       method = this.chooseMatchMethod();
       console.log(`Random match method is ${method}`);
     }
     // if no occasion is selected, select random occasion
-    if (!occasion) {
+    if (!occasion || method === 'random') {
       occasion = this.chooseOccasion();
       console.log(`Random occasion method is ${occasion}`);
     }

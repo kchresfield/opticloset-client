@@ -24,6 +24,8 @@ export class Tab1Page implements OnInit {
   shoe: Object; // 13
   isLoading: Boolean;
   outfitSelected: Boolean;
+  matchMethod: any;
+  occasion: any;
 
   // @HostBinding('class.is-open')
   // isOpen = false;
@@ -46,7 +48,6 @@ export class Tab1Page implements OnInit {
       this.apiService.getCloset(profile['nickname'], clothes => {
         this.closet = clothes;
         this.outfitSelectService.save('closet', this.closet);
-        // this.chooseOutfit();
         this.outfitSelectService.setMock();
         this.outfitSelectService.chooseMatchingOutfit(null, null);
         this.outfit = this.outfitSelectService.getOutfit();
@@ -90,26 +91,10 @@ export class Tab1Page implements OnInit {
     return Math.floor(Math.random() * maxInt);
   };
 
-  chooseOutfit = () => {
-    // copy closet and filter by category
-    const tops = [...this.closet].filter((clothing) => clothing['id_category'] === 2);
-    const onePieces = [...this.closet].filter((clothing) => clothing['id_category'] === 1);
-    const outerwears = [...this.closet].filter((clothing) => clothing['id_category'] === 4);
-    const accessories = [...this.closet].filter((clothing) => clothing['id_category'] === 5);
-    const bottoms = [...this.closet].filter((clothing) => clothing['id_category'] === 3);
-    const shoes = [...this.closet].filter((clothing) => clothing['id_category'] === 6);
-
-    this.outfit = {
-      top: tops[this.getRandomIndex(tops.length)],
-      onePiece: onePieces[this.getRandomIndex(onePieces.length)],
-      outerwear: outerwears[this.getRandomIndex(outerwears.length)],
-      accessory: accessories[this.getRandomIndex(accessories.length)],
-      bottom: bottoms[this.getRandomIndex(bottoms.length)],
-      shoes: shoes[this.getRandomIndex(shoes.length)],
-    };
-
-    this.outfitSelectService.saveOutfit(this.outfit);
-
+  setMatchMethod () {
+    console.log(this.matchMethod, 'match', this.occasion, 'occasion');
+    this.outfitSelectService.chooseMatchingOutfit(this.matchMethod, this.occasion)
+    this.outfit = this.outfitSelectService.getOutfit();
   }
 
   retrieveOutfit() {
