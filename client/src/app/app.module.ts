@@ -19,6 +19,8 @@ import { Router } from '@angular/router';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { OutfitSelectService } from './services/outfit-select.service';
+import { AuthService } from './services/auth/auth.service';
+import { UserService } from './services/user/user.service';
 
 // import { NavParams } from '@ionic/angular';
 
@@ -38,6 +40,8 @@ import { OutfitSelectService } from './services/outfit-select.service';
     Camera,
     SplashScreen,
     ApiService,
+    AuthService,
+    UserService,
     OutfitSelectService,
     Geolocation,
     LocalNotifications,

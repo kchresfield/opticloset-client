@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {Subject} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
 import * as auth0 from 'auth0-js';
 import { AUTH_CONFIG } from './auth.config';
+import { UserService } from '../user/user.service';
 
 (window as any).global = window;
 
@@ -17,13 +17,17 @@ export class AuthService {
     domain: AUTH_CONFIG.domain,
     responseType: 'token id_token',
     audience: `https://${AUTH_CONFIG.domain}/userinfo`,
-    redirectUri: `http://${AUTH_CONFIG.host}:8100/home`,
+    redirectUri: `http://${AUTH_CONFIG.host}:8100/callback`,
     scope: 'openid profile'
   });
 
   userProfile: any;
 
-  constructor(public router: Router, public http: HttpClient) {
+  constructor(
+    public router: Router, 
+    public http: HttpClient,
+    public userService: UserService,
+  ) {
     // Check if user is logged In when Initializing
     const loggedIn = this.isLoggedIn = this.isAuthenticated();
     this.isLoggedIn$.next(loggedIn);
@@ -35,32 +39,23 @@ export class AuthService {
   }
 
   public handleAuthentication(): void {
+    // debugger;
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
         this.setSession(authResult);
         const loggedIn = this.isLoggedIn = true;
         this.isLoggedIn$.next(loggedIn);
-        this.router.navigate(['/home']);
-        // http req here to /userinfo to grab user prof from Auth0
-        this.http.get('https://opticloset.auth0.com/userinfo', {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.access_token}`,
-          },
-        }).subscribe((userInfo) => {
-          console.log(userInfo);
-        })
       } else if (err) {
         const loggedIn = this.isLoggedIn = false;
         this.isLoggedIn$.next(loggedIn);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
       }
-      console.log(this.isLoggedIn);
     });
   }
 
   private setSession(authResult): void {
+    // debugger;
     // Set the time that the Access Token will expire at
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
     localStorage.setItem('access_token', authResult.accessToken);
@@ -70,6 +65,7 @@ export class AuthService {
 
   public logout(): void {
     // Remove tokens and expiry time from localStorage
+    console.log('logging out')
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
@@ -82,6 +78,7 @@ export class AuthService {
     // Check whether the current time is past the
     // Access Token's expiry time
     const expiresAt = JSON.parse(localStorage.getItem('expires_at') || '{}');
+    // debugger;
     return new Date().getTime() < expiresAt;
   }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api/api.service';
+import { UserService } from '../services/user/user.service';
 import { OutfitSelectService } from '../services/outfit-select.service';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
