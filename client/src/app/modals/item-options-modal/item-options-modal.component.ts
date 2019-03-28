@@ -4,6 +4,7 @@ import { ApiService } from '../../services/api/api.service';
 import { OutfitSelectService } from '../../services/outfit-select.service';
 import { ToastController } from '@ionic/angular';
 import { Router, Routes } from '@angular/router';
+import { UserService } from '../../services/user/user.service';
 
 
 
@@ -25,18 +26,28 @@ export class ItemOptionsModal {
     private apiService: ApiService,
     public toastController: ToastController,
     private outfitSelectService: OutfitSelectService,
-    private router: Router
+    private router: Router,
+    public userService: UserService,
   ) {
     // componentProps can also be accessed at construction time using NavParams
   }
 
   removeFromCloset() {
     console.log(this.navParams.data);
-    this.apiService.deleteClothingItem(
-      this.navParams.data.item.id_clothing_item
-    );
-    this.closeAfterDeletion();
-    this.presentToast();
+    this.apiService
+      .deleteClothingItem(this.navParams.data.item.id_clothing_item)
+      .toPromise()
+      .then(() => {
+        this.apiService.getCloset(
+          this.userService.profile['nickname'], updatedCloset => {
+            console.log(updatedCloset);
+            this.outfitSelectService.restore('closet', updatedCloset);
+            this.outfitSelectService.restore('tab4Closet', updatedCloset);
+            this.closeAfterDeletion();
+            this.presentToast();
+          }
+        );
+      });
   }
 
   close() {
@@ -66,7 +77,6 @@ export class ItemOptionsModal {
   }
 
   add() {
-
     // Get the existing data
     this.existing = localStorage.getItem('itemsToSell');
 
@@ -75,13 +85,18 @@ export class ItemOptionsModal {
     this.existing = this.existing ? JSON.parse(this.existing) : {};
 
     // Add new data to localStorage Array
-    this.existing[this.outfitSelectService.selectedItem.id_clothing_item] = this.outfitSelectService.selectedItem;
+    this.existing[
+      this.outfitSelectService.selectedItem.id_clothing_item
+    ] = this.outfitSelectService.selectedItem;
 
     // Save back to localStorage
     localStorage.setItem('itemsToSell', JSON.stringify(this.existing));
 
     // Add item to sellArr on service so tab3 gets 'refreshed' as it refers to the same array
-    this.outfitSelectService.add('sellArr', this.outfitSelectService.selectedItem);
+    this.outfitSelectService.add(
+      'sellArr',
+      this.outfitSelectService.selectedItem
+    );
   }
 
   chooseItem() {
