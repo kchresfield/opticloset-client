@@ -52,7 +52,7 @@ export class Tab2Page {
     })
       .then((picture) => {
         // this.logService.log('heyyyyyyyyyy');
-        return this.http.post('https://api.cloudinary.com/v1_1/opticloset/image/upload', { 
+        return this.http.post('https://api.cloudinary.com/v1_1/opticloset/image/upload', {
           file: picture,
           upload_preset: "opticloset",
         }).toPromise();

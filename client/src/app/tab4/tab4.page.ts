@@ -28,7 +28,7 @@ export class Tab4Page implements OnInit {
     // this.getAllItems();
     // this.open = this.itemOptionsModal.open;
     this.setCloset();
-    this.setFilter();
+    // this.setFilter();
   }
 
   getAllItems() {
@@ -39,7 +39,11 @@ export class Tab4Page implements OnInit {
   }
 
   setCloset() {
-    this.closet = this.outfitSelectService.get('closet');
+    // save a copy of the closet from the service onto the service as tab4Closet
+    this.outfitSelectService.save('tab4Closet', [...this.outfitSelectService.closet]);
+
+    // setting the relationship between the closet no tab4 and the tab4Closet on the service
+    this.closet = this.outfitSelectService.get('tab4Closet');
   }
 
   async presentModal(item) {
@@ -52,8 +56,8 @@ export class Tab4Page implements OnInit {
     return await modal.present();
   }
 
-  print(item) {
-    console.log(item);
+  print() {
+    console.log(this, this.outfitSelectService.get('closet'));
   }
 
   select(item) {
@@ -66,8 +70,11 @@ export class Tab4Page implements OnInit {
 
   setFilter() {
 
-    const tempCloset = [...this.outfitSelectService.get('closet')];
-    const filteredCloset = tempCloset.filter(clothing => {
+    // reset the tab4Closet on service to match the current full closet from the service
+    this.outfitSelectService.restore('tab4Closet', this.outfitSelectService.closet);
+
+    // create a filtered closet
+    const tempCloset = this.outfitSelectService.get('tab4Closet').filter(clothing => {
       // checks if startDate and endDate have been selected
       if (this.category !== 'all') {
         // checks if clothing worn date is in between startDate and endDate
@@ -77,11 +84,14 @@ export class Tab4Page implements OnInit {
       }
       return true;
     });
-    this.closet = filteredCloset;
+
+    // replace the tab4Closet on service by the filtered closet
+    this.outfitSelectService.restore('tab4Closet', tempCloset);
+
   }
 
   onChange() {
     this.setFilter();
-    console.log(this);
+    // console.log(this);
   }
 }

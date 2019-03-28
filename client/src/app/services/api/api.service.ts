@@ -10,7 +10,10 @@ export class ApiService {
   apiURL = 'http://localhost:8080';
   // apiURL = 'http://172.24.9.131:8080';
   // apiURL = 'http://ec2-3-17-178-179.us-east-2.compute.amazonaws.com:8080';
-
+  conditions: any;
+  temperature: any;
+  userName: any;
+  location: any;
   constructor(
     private httpClient: HttpClient,
     private geolocation: Geolocation,
@@ -22,6 +25,7 @@ export class ApiService {
   // weather API helpers to server
   async getConditions(callback) {
     const latLong = await this.getCoordinates();
+    this.location = latLong;
     console.log(latLong, 'latLong');
     if (!latLong) {
       this.httpClient.get(`${this.apiURL}/weather`).subscribe(data => {
@@ -68,15 +72,12 @@ export class ApiService {
 
   deleteClothingItem(itemId) {
     console.log(itemId);
-    this.httpClient
+    return this.httpClient
       .request('delete', `${this.apiURL}/closet/1`, {
         body: {
           clothingItemId: itemId
         },
         responseType: 'text'
-      })
-      .subscribe(result => {
-        console.log(result);
       });
   }
 
@@ -97,5 +98,13 @@ export class ApiService {
     this.httpClient.get(`${this.apiURL}/closet/${username}`).subscribe(data => {
       callback(data);
     });
+  }
+
+  save(prop, value) {
+    this[prop] = value;
+  }
+
+  get(prop) {
+    return this[prop];
   }
 }

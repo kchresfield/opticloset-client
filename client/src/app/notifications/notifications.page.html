@@ -1,22 +1,39 @@
 <ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-icon name="settings" size="large" (click)="print()" routerLink="/home"></ion-icon>
+    <div class="logo"><img src='../assets/logo-blue-background.png' height="40"></div>
+    <ion-icon id="cond" name={{this.conditions}} size="large"></ion-icon>
+    <span id="temp">{{this.temperature}}°</span>
+  </ion-toolbar>
   <ion-toolbar>
-    <ion-title>
-      User Profile
-    </ion-title>
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+      </ion-avatar>
+        <ion-label>{{this.username}}</ion-label>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
 
+<!-- <ion-item>
+  <ion-avatar slot="start">
+    <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+  </ion-avatar>
+  <ion-label>Item Avatar</ion-label>
+</ion-item> -->
+
 <ion-content padding>
 
-  <ion-button routerLink="/home"></ion-button>
+<!-- <ion-item-divider> -->
+
   <ion-item>
-    <ion-label>Select Time for Notifications</ion-label>
-    <ion-datetime [(ngModel)]="time" displayFormat="h:mm A" minuteValues="0,15,30,45" placeholder="Select Time" ></ion-datetime>
+    <ion-label>Select time for your daily notifications</ion-label>
+    <ion-datetime [(ngModel)]="time" displayFormat="h:mm A" minuteValues="0,15,30,45"></ion-datetime>
   </ion-item>
   <!-- <ion-button expand="block" (click)="scheduleNotification()">Schedule</ion-button> -->
   <ion-button expand="block" (click)="repeatingDaily()">Set up your daily notification</ion-button>
-  <ion-button expand="block" (click)="getAll()">Get All</ion-button>
-  <ion-button expand="block" (click)="cancelNotifications()">Cancel notifications</ion-button>
+  <ion-button expand="block" (click)="getAll()">See your scheduled notification</ion-button>
+  <ion-button expand="block" (click)="cancelNotifications()">Cancel notification</ion-button>
   <!-- <ion-button expand="block" (click)="printTime()">Get Time</ion-button> -->
   <ion-list>
     <ion-item *ngFor="let n of scheduled">
@@ -28,4 +45,5 @@
     </ion-item>
   </ion-list>
 
+  <!-- </ion-item-divider> -->
 </ion-content>
