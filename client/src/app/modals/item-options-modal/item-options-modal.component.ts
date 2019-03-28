@@ -34,9 +34,15 @@ export class ItemOptionsModal {
     console.log(this.navParams.data);
     this.apiService.deleteClothingItem(
       this.navParams.data.item.id_clothing_item
-    );
-    this.closeAfterDeletion();
-    this.presentToast();
+    ).toPromise().then(() => {
+      this.apiService.getCloset((updatedCloset) => {
+        console.log(updatedCloset);
+        this.outfitSelectService.restore('closet', updatedCloset);
+        this.outfitSelectService.restore('tab4Closet', updatedCloset);
+        this.closeAfterDeletion();
+        this.presentToast();
+      });
+    });
   }
 
   close() {

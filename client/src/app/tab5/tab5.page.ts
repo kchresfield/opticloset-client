@@ -83,8 +83,8 @@ export class Tab5Page implements OnInit {
     this.closet = this.outfitSelectService.get('sortedCloset');
   }
   retrieveItem() {
-    console.log('closet from api service', this.outfitSelectService.get('closet'));
-    console.log('sorted Closet from api service', this.outfitSelectService.get('sortedCloset'));
-    console.log('filtered Closet from api service', this);
+    console.log('closet from outfitSelect service', this.outfitSelectService.get('closet'));
+    console.log('sorted Closet from outfitSelect service', this.outfitSelectService.get('sortedCloset'));
+    console.log('closet from tab5', this.closet);
   }
 }

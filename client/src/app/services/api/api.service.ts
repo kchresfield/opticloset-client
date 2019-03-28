@@ -71,15 +71,12 @@ export class ApiService {
 
   deleteClothingItem(itemId) {
     console.log(itemId);
-    this.httpClient
+    return this.httpClient
       .request('delete', `${this.apiURL}/closet/1`, {
         body: {
           clothingItemId: itemId
         },
         responseType: 'text'
-      })
-      .subscribe(result => {
-        console.log(result);
       });
   }
 
