@@ -20,6 +20,7 @@ export class Tab5Page implements OnInit {
 
   ngOnInit() {
     this.setCloset();
+    this.endDate = new Date()
   }
 
   // checks if current 'diplayed' closet is smaller than the initial closet on the service

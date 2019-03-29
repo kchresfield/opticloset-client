@@ -32,15 +32,15 @@
   </ion-list-header>
   <!-- date picker -->
   <ion-item>
-    <ion-label>Start Date</ion-label>
+    <ion-label>Worn since</ion-label>
     <ion-datetime [(ngModel)]="startDate" (ionChange)="setFilter()" display-format="MMM  D YYYY"
       picker-format="MMMM D YYYY" placeholder="Select Date"></ion-datetime>
   </ion-item>
-  <ion-item>
+  <!-- <ion-item>
     <ion-label>End Date</ion-label>
     <ion-datetime [(ngModel)]="endDate" (ionChange)="setFilter()" display-format="MMM D YYYY"
       picker-format="MMMM D YYYY" placeholder="Select Date"></ion-datetime>
-  </ion-item>
+  </ion-item> -->
 
   <!-- clothing item rendering -->
   <ion-grid>
