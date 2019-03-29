@@ -11,7 +11,7 @@ import { UserService } from '../services/user/user.service';
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
-  providers: [ApiService, ToastController, AuthService]
+  providers: [ApiService, ToastController, AuthService,]
 })
 export class Tab1Page implements OnInit {
   closet: Array<Object>;
@@ -40,10 +40,11 @@ export class Tab1Page implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log('local storage', localStorage);
+    const self = this;
     this.isLoading = true;
     this.outfitSelected = false;
-    this.presentLoadingWithOptions();
+    this.presentLoadingOutfit();
+    
     this.userService.getUser().then((profile) => {
       this.apiService.getCloset(profile['nickname'], clothes => {
         this.closet = clothes;
@@ -52,7 +53,9 @@ export class Tab1Page implements OnInit {
         this.outfitSelectService.chooseMatchingOutfit(null, null);
         this.outfit = this.outfitSelectService.getOutfit();
         this.isLoading = false;
-        this.loadingController.dismiss();
+        setTimeout(function () { 
+          self.loadingController.dismiss();
+        }, 3000);
       });
     })
     // testing for matching feature
@@ -76,11 +79,10 @@ export class Tab1Page implements OnInit {
     this.outfitSelected = true;
   }
 
-  async presentLoadingWithOptions() {
+  async presentLoadingOutfit() {
     const loading = await this.loadingController.create({
       spinner: null,
-      // duration: 3000,
-      message: 'One moment while we select your outfit...',
+      message: `One moment while we select your outfit...`,
       translucent: true,
       cssClass: 'custom-class custom-loading'
     });

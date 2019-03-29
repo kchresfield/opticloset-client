@@ -18,6 +18,8 @@ export class OutfitSelectService {
   onePieces: any;
   accessories: any;
   shoes: any;
+
+  temp: Number;
   
   constructor(
     public apiService: ApiService,
@@ -86,7 +88,7 @@ export class OutfitSelectService {
   }
 
   setMock() {
-    this.closet = mockCloset;
+    // this.closet = mockCloset;
     this.shuffle(this.closet);
     this.tops = this.closet.filter(clothing => clothing['id_category'] === 2);
     console.log(`Tops length is ${this.tops.length}`);
@@ -189,7 +191,10 @@ export class OutfitSelectService {
   colorMatch() {
     const colorOutfit = {};
     // select random top
-    let currPiece = this.tops[this.getRandomIndex(this.tops.length)];
+    let randoIndex = this.getRandomIndex(this.tops.length);
+    console.log(randoIndex);
+    let currPiece = this.tops[randoIndex];
+    console.log(currPiece);
     // declare matchingColors variable
     let matchingColors;
     // current color
@@ -434,6 +439,64 @@ export class OutfitSelectService {
 
   checkWeather() {
     //remember to import weather apiservice for weather
+    
+    if (this.temp <= 60) {
+      this.tops = this.closet.filter(
+        clothing => ['heavy', 'long'].some(attribute => clothing.includes(attribute))
+      );
+      this.onePieces = this.closet.filter(
+        clothing => ['heavy', 'long'].some(attribute => clothing.includes(attribute))
+      );
+      this.outerwears = this.closet.filter(
+        clothing => ['heavy', 'long'].some(attribute => clothing.includes(attribute))
+      );
+      this.accessories = this.closet.filter(
+        clothing => ['heavy', 'long'].some(attribute => clothing.includes(attribute))
+      );
+      this.bottoms = this.closet.filter(
+        clothing => ['heavy', 'long'].some(attribute => clothing.includes(attribute))
+      );
+      this.shoes = this.closet.filter(
+        clothing => ['heavy', 'long'].some(attribute => clothing.includes(attribute))
+      );
+    }
+    if (this.temp > 60 && this.temp <= 70) {
+      this.tops = this.closet.filter(
+        clothing => ['light', 'long'].some(attribute => clothing.includes(attribute))
+      );
+      this.onePieces = this.closet.filter(
+        clothing => ['light', 'long'].some(attribute => clothing.includes(attribute))
+      );
+      this.outerwears = this.closet.filter(
+        clothing => ['light', 'long'].some(attribute => clothing.includes(attribute))
+      );
+      this.accessories = this.closet.filter(
+        clothing => ['light', 'long'].some(attribute => clothing.includes(attribute))
+      );
+      this.bottoms = this.closet.filter(
+        clothing => ['light', 'long'].some(attribute => clothing.includes(attribute))
+      );
+      this.shoes = this.closet.filter(
+        clothing => ['light', 'long'].some(attribute => clothing.includes(attribute))
+      );
+    }
+    if (this.temp > 70 && this.temp <= 80) {
+      // prime weather, entire closet is available
+    }
+    if (this.temp > 80) {
+      this.tops = this.tops.filter(
+        clothing => ['light', 'short', 'loose'].some(attribute => clothing.includes(attribute))
+      );
+      this.onePieces = this.onePieces.filter(
+        clothing => ['light', 'short', 'loose'].some(attribute => clothing.includes(attribute))
+      );
+      this.outerwears = this.outerwears.filter(
+        clothing => ['light', 'short', 'loose'].some(attribute => clothing.includes(attribute))
+      );
+      this.bottoms = this.bottoms.filter(
+        clothing => ['light', 'short', 'loose'].some(attribute => clothing.includes(attribute))
+      );
+    }
   }
 
   // filters closet by occasion, returns new array of clothingItem objects
@@ -446,30 +509,66 @@ export class OutfitSelectService {
       athletic: 5,
     }
 
-    this.tops = this.closet.filter(
+
+    // this.outerwears = this.closet.filter(
+    //   clothing => clothing['id_category'] === 4
+    // );
+    // console.log(`outerwears length is ${this.outerwears.length}`);
+    // this.accessories = this.closet.filter(
+    //   clothing => clothing['id_category'] === 5
+    // );
+    // console.log(`accessories length is ${this.accessories.length}`);
+    // this.bottoms = this.closet.filter(
+    //   clothing => clothing['id_category'] === 3
+    // );
+    // console.log(`bottoms length is ${this.bottoms.length}`);
+    // this.shoes = this.closet.filter(clothing => clothing['id_category'] === 6);
+    // console.log(`shoes length is ${this.shoes.length}`);
+
+    this.tops = this.tops.filter(
+      clothing => clothing['id_occasion'] === occasions[occasion]
+    );
+    if (this.tops.length === 0) {
+      this.tops = this.closet.filter(clothing => clothing['id_category'] === 2);
+    }
+
+    this.onePieces = this.onePieces.filter(
       clothing => clothing['id_occasion'] === occasions[occasion]
     );
 
-    this.onePieces = this.closet.filter(
+    if (this.onePieces.length === 0) {
+      this.onePieces = this.closet.filter(clothing => clothing['id_category'] === 1);
+    }
+    
+    this.outerwears = this.outerwears.filter(
       clothing => clothing['id_occasion'] === occasions[occasion]
-    );
+      );
 
-    this.outerwears = this.closet.filter(
+    if (this.outerwears.length === 0) {
+      this.outerwears = this.closet.filter(clothing => clothing['id_category'] === 4);
+    }
+    
+    this.accessories = this.accessories.filter(
       clothing => clothing['id_occasion'] === occasions[occasion]
-    );
-
-    this.accessories = this.closet.filter(
+      );
+    if (this.accessories.length === 0) {
+      this.accessories = this.closet.filter(clothing => clothing['id_category'] === 5);
+    }
+    
+    this.bottoms = this.bottoms.filter(
       clothing => clothing['id_occasion'] === occasions[occasion]
-    );
-
-    this.bottoms = this.closet.filter(
+      );
+    if (this.bottoms.length === 0) {
+      this.bottoms = this.closet.filter(clothing => clothing['id_category'] === 3);
+    }
+    
+    this.shoes = this.shoes.filter(
       clothing => clothing['id_occasion'] === occasions[occasion]
-    );
-
-    this.shoes = this.closet.filter(
-      clothing => clothing['id_occasion'] === occasions[occasion]
-    );
-  }
+      );
+    if (this.shoes.length === 0) {
+      this.shoes = this.closet.filter(clothing => clothing['id_category'] === 6);
+    }
+    }
 
   // select matching outfit
   // takes in match method and reassigns OOTD to outfit with that method
