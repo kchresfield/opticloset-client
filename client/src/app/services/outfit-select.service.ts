@@ -509,22 +509,6 @@ export class OutfitSelectService {
       athletic: 5,
     }
 
-
-    // this.outerwears = this.closet.filter(
-    //   clothing => clothing['id_category'] === 4
-    // );
-    // console.log(`outerwears length is ${this.outerwears.length}`);
-    // this.accessories = this.closet.filter(
-    //   clothing => clothing['id_category'] === 5
-    // );
-    // console.log(`accessories length is ${this.accessories.length}`);
-    // this.bottoms = this.closet.filter(
-    //   clothing => clothing['id_category'] === 3
-    // );
-    // console.log(`bottoms length is ${this.bottoms.length}`);
-    // this.shoes = this.closet.filter(clothing => clothing['id_category'] === 6);
-    // console.log(`shoes length is ${this.shoes.length}`);
-
     this.tops = this.tops.filter(
       clothing => clothing['id_occasion'] === occasions[occasion]
     );
