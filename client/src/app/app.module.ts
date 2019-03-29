@@ -21,6 +21,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { OutfitSelectService } from './services/outfit-select.service';
 import { AuthService } from './services/auth/auth.service';
 import { UserService } from './services/user/user.service';
+import { Tab4Page } from './tab4/tab4.page';
 
 // import { NavParams } from '@ionic/angular';
 
@@ -45,6 +46,7 @@ import { UserService } from './services/user/user.service';
     OutfitSelectService,
     Geolocation,
     LocalNotifications,
+    Tab4Page,
     // NavParams,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

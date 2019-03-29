@@ -5,13 +5,13 @@ import { LoadingController } from '@ionic/angular';
 import { OutfitSelectService } from '../services/outfit-select.service';
 import { AuthService } from '../services/auth/auth.service';
 import { UserService } from '../services/user/user.service';
-
+import { Tab4Page } from '../tab4/tab4.page';
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
-  providers: [ApiService, ToastController, AuthService,]
+  providers: [ApiService, ToastController, AuthService, Tab4Page]
 })
 export class Tab1Page implements OnInit {
   closet: Array<Object>;
@@ -37,6 +37,7 @@ export class Tab1Page implements OnInit {
     public toastController: ToastController,
     public outfitSelectService: OutfitSelectService,
     public userService: UserService,
+    public tab4Page: Tab4Page,
   ) {}
 
   ngOnInit() {
@@ -82,6 +83,7 @@ export class Tab1Page implements OnInit {
   async presentLoadingOutfit() {
     const loading = await this.loadingController.create({
       spinner: null,
+      duration: 4000,
       message: `One moment while we select your outfit...`,
       translucent: true,
       cssClass: 'custom-class custom-loading'
@@ -102,5 +104,11 @@ export class Tab1Page implements OnInit {
 
   retrieveOutfit() {
     console.log(this.outfitSelectService.getOutfit());
+  }
+
+  changeClothingItem(category) {
+    console.log(category)
+    // this.tab4Page.category = category;
+    // this.tab4Page.setFilter();
   }
 }
