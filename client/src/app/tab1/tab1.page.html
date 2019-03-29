@@ -2,8 +2,8 @@
   <ion-grid fixed>
     <ion-row>
       <ion-col>
-        <ion-item #S class="ion-justify-content-center">
-          <ion-select>
+        <ion-item #S class="ion-justify-content-center select">
+          <ion-select [(ngModel)]="matchMethod" (ionChange)="setMatchMethod()" >
             <ion-select-option value="random" selected>Random</ion-select-option>
             <ion-select-option value="colorMatch">ColorMatch</ion-select-option>
             <ion-select-option value="allNeutral">All Neutrals</ion-select-option>
@@ -13,7 +13,7 @@
       </ion-col>
       <ion-col>
         <ion-item #S class="ion-justify-content-center">
-          <ion-select>
+          <ion-select [(ngModel)]="occasion" (ionChange)="setMatchMethod()" >
             <ion-select-option value="random" selected>Random</ion-select-option>
             <ion-select-option value="casual">Casual</ion-select-option>
             <ion-select-option value="formal">Formal</ion-select-option>
@@ -32,7 +32,7 @@
             <div *ngIf="!outfit['accessory']">
               You currently have no Accessory in your closet. Go add some!
             </div>
-            <div *ngIf="outfit['accessory']">
+            <div *ngIf="outfit['accessory']" routerLink="/home/tabs/tab4" (click)="changeClothingItem('accessory')">
               <ion-img [src]="outfit['accessory'].imageUrl"></ion-img>
             </div>
           </div>
@@ -45,7 +45,7 @@
             <div *ngIf="!outfit['top']">
               You currently have no Top in your closet. Go add some!
             </div>
-            <div *ngIf="outfit['top']">
+            <div *ngIf="outfit['top']" routerLink="/home/tabs/tab4" (click)="changeClothingItem('top')">
               <ion-img [src]="outfit['top'].imageUrl"></ion-img>
             </div>
           </div>
@@ -60,7 +60,7 @@
             <div *ngIf="!outfit['outerwear']">
               You currently have no Outerwear in your closet. Go add some!
             </div>
-            <div *ngIf="outfit['outerwear']">
+            <div *ngIf="outfit['outerwear']" routerLink="/home/tabs/tab4" (click)="changeClothingItem('outerwear')">
               <ion-img [src]="outfit['outerwear'].imageUrl"></ion-img>
             </div>
           </div>
@@ -72,7 +72,7 @@
             <div *ngIf="!outfit['bottom']">
               You currently have no Bottom in your closet. Go add some!
             </div>
-            <div *ngIf="outfit['bottom']">
+            <div *ngIf="outfit['bottom']" routerLink="/home/tabs/tab4" (click)="changeClothingItem('bottom')">
               <ion-img [src]="outfit['bottom'].imageUrl"></ion-img>
             </div>
           </div>
@@ -89,7 +89,7 @@
       </ion-col>
       <ion-col>
         <ion-item>
-          <div *ngIf="!isLoading && outfit['shoes']; else elseBlock">
+          <div *ngIf="!isLoading && outfit['shoes']; else elseBlock" routerLink="/home/tabs/tab4" (click)="changeClothingItem('shoes')">
             <ion-img [src]="outfit['shoes'].imageUrl"></ion-img>
           </div>
         </ion-item>

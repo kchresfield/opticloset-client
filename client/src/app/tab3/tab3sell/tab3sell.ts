@@ -51,6 +51,8 @@ export class Tab3Sell implements OnInit {
       // this.router.navigate(['../tabs/tab3']);
       localStorage.removeItem('itemsToSell');
     }
+
+    this.apiService.deleteClothingItem(this.firstItemInObjectKey);
     // if there are items in the array
     // Go to the sell-on-ebay page
     // Display the new item to be sold

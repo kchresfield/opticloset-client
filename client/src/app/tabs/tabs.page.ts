@@ -3,11 +3,14 @@ import { ApiService } from '../services/api/api.service';
 import { getLView } from '@angular/core/src/render3/state';
 import { OutfitSelectService } from '../services/outfit-select.service';
 import { UserService } from '../services/user/user.service';
+import { Tab1Page } from '../tab1/tab1.page';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tabs',
   templateUrl: 'tabs.page.html',
   styleUrls: ['tabs.page.scss'],
+  providers: [ Tab1Page ]
 })
 export class TabsPage implements OnInit {
   data: any;
@@ -20,6 +23,8 @@ export class TabsPage implements OnInit {
     private apiService: ApiService, 
     private outfitSelectService: OutfitSelectService,
     public userService: UserService,
+    public tab1Page: Tab1Page,
+    public loadingController: LoadingController,
   ) {}
   ngOnInit() {
     this.getWeather();
@@ -51,8 +56,23 @@ export class TabsPage implements OnInit {
       this.apiService.save('conditions', this.conditions);
       this.apiService.save('temperature', this.temperature);
       this.apiService.save('username', 'Laura Pena');
-      // this.apiService.save('userName', 'Laura Pena');
+      const self = this;
+      setTimeout(function () {
+        // self.presentLoadingWeather();
+      }, 300);
     });
+  }
+
+  async presentLoadingWeather() {
+    console.log(this.apiService.temperature, this.apiService.currentConditions)
+    const loading = await this.loadingController.create({
+      spinner: null,
+      duration: 3000,
+      message: `${this.apiService.temperature} and ${this.apiService.currentConditions}`,
+      translucent: true,
+      cssClass: 'custom-class custom-loading'
+    });
+    return await loading.present();
   }
 
   getCloset() {

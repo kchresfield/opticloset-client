@@ -5,13 +5,13 @@ import { LoadingController } from '@ionic/angular';
 import { OutfitSelectService } from '../services/outfit-select.service';
 import { AuthService } from '../services/auth/auth.service';
 import { UserService } from '../services/user/user.service';
-
+import { Tab4Page } from '../tab4/tab4.page';
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
-  providers: [ApiService, ToastController, AuthService]
+  providers: [ApiService, ToastController, AuthService, Tab4Page]
 })
 export class Tab1Page implements OnInit {
   closet: Array<Object>;
@@ -24,6 +24,8 @@ export class Tab1Page implements OnInit {
   shoe: Object; // 13
   isLoading: Boolean;
   outfitSelected: Boolean;
+  matchMethod: any;
+  occasion: any;
 
   // @HostBinding('class.is-open')
   // isOpen = false;
@@ -35,22 +37,26 @@ export class Tab1Page implements OnInit {
     public toastController: ToastController,
     public outfitSelectService: OutfitSelectService,
     public userService: UserService,
+    public tab4Page: Tab4Page,
   ) {}
 
   ngOnInit() {
-    console.log('local storage', localStorage);
+    const self = this;
     this.isLoading = true;
     this.outfitSelected = false;
-    this.presentLoadingWithOptions();
+    this.presentLoadingOutfit();
+    
     this.userService.getUser().then((profile) => {
       this.apiService.getCloset(profile['nickname'], clothes => {
         this.closet = clothes;
         this.outfitSelectService.save('closet', this.closet);
-        // this.chooseOutfit();
         this.outfitSelectService.setMock();
         this.outfitSelectService.chooseMatchingOutfit(null, null);
         this.outfit = this.outfitSelectService.getOutfit();
         this.isLoading = false;
+        setTimeout(function () { 
+          self.loadingController.dismiss();
+        }, 3000);
       });
     })
     // testing for matching feature
@@ -74,11 +80,11 @@ export class Tab1Page implements OnInit {
     this.outfitSelected = true;
   }
 
-  async presentLoadingWithOptions() {
+  async presentLoadingOutfit() {
     const loading = await this.loadingController.create({
       spinner: null,
-      duration: 3000,
-      message: 'One moment while we select your outfit...',
+      duration: 4000,
+      message: `One moment while we select your outfit...`,
       translucent: true,
       cssClass: 'custom-class custom-loading'
     });
@@ -90,29 +96,20 @@ export class Tab1Page implements OnInit {
     return Math.floor(Math.random() * maxInt);
   };
 
-  chooseOutfit = () => {
-    // copy closet and filter by category
-    const tops = [...this.closet].filter((clothing) => clothing['id_category'] === 2);
-    const onePieces = [...this.closet].filter((clothing) => clothing['id_category'] === 1);
-    const outerwears = [...this.closet].filter((clothing) => clothing['id_category'] === 4);
-    const accessories = [...this.closet].filter((clothing) => clothing['id_category'] === 5);
-    const bottoms = [...this.closet].filter((clothing) => clothing['id_category'] === 3);
-    const shoes = [...this.closet].filter((clothing) => clothing['id_category'] === 6);
-
-    this.outfit = {
-      top: tops[this.getRandomIndex(tops.length)],
-      onePiece: onePieces[this.getRandomIndex(onePieces.length)],
-      outerwear: outerwears[this.getRandomIndex(outerwears.length)],
-      accessory: accessories[this.getRandomIndex(accessories.length)],
-      bottom: bottoms[this.getRandomIndex(bottoms.length)],
-      shoes: shoes[this.getRandomIndex(shoes.length)],
-    };
-
-    this.outfitSelectService.saveOutfit(this.outfit);
-
+  setMatchMethod () {
+    console.log(this.matchMethod, 'match', this.occasion, 'occasion');
+    this.outfitSelectService.chooseMatchingOutfit(this.matchMethod, this.occasion)
+    this.outfit = this.outfitSelectService.getOutfit();
   }
 
   retrieveOutfit() {
     console.log(this.outfitSelectService.getOutfit());
+  }
+
+  changeClothingItem(category) {
+    this.tab4Page.category = category;
+    setTimeout(() => {
+      this.tab4Page.setFilter();
+    }, 0);
   }
 }

@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../services/api/api.service';
 import { Router } from '@angular/router';
 import { LogService } from 'app/services/log/log.service';
+import { LoadingController } from '@ionic/angular';
 
 const exampleData = JSON.parse(`
       {"categories":[{"id":"ai_V0WFhmCF","name":"pattern","value":0.9943732,"app_id":"main"},{"id":"ai_phDKFgpM","name":"textile","value":0.99300545,"app_id":"main"},{"id":"ai_L92T2QtK","name":"decoration","value":0.9916602,"app_id":"main"},{"id":"ai_MkcRJRjB","name":"fabric","value":0.98865557,"app_id":"main"},{"id":"ai_87Z9fCb7","name":"cotton","value":0.9838859,"app_id":"main"},{"id":"ai_JBPqff8z","name":"art","value":0.9797507,"app_id":"main"},{"id":"ai_wZCn67qV","name":"style","value":0.9797402,"app_id":"main"},{"id":"ai_J50Tm7NJ","name":"texture","value":0.9733018,"app_id":"main"},{"id":"ai_1p2zMmqb","name":"retro","value":0.9717443,"app_id":"main"},{"id":"ai_pZCcDdmx","name":"tribal","value":0.9690703,"app_id":"main"},{"id":"ai_MKSwLDhD","name":"print","value":0.96896344,"app_id":"main"},{"id":"ai_XclQc6bP","name":"traditional","value":0.967233,"app_id":"main"},{"id":"ai_cMfj16kJ","name":"design","value":0.95592403,"app_id":"main"},{"id":"ai_Tmkhmvx1","name":"embroidery","value":0.9520859,"app_id":"main"},{"id":"ai_psff54bp","name":"handmade","value":0.9502452,"app_id":"main"},{"id":"ai_hS0cvZDj","name":"ornate","value":0.9340418,"app_id":"main"},{"id":"ai_cQkZTSJn","name":"handicraft","value":0.92621124,"app_id":"main"},{"id":"ai_Dm5GLXnB","name":"illustration","value":0.92275614,"app_id":"main"},{"id":"ai_2Bh4VMrb","name":"artistic","value":0.92263335,"app_id":"main"},{"id":"ai_RSdbFzLw","name":"silk","value":0.92174745,"app_id":"main"}],"colorsOptions":[{"label":"Gray","color":"#8C888C"},{"label":"Blue","color":"#544B5C"},{"label":"Green","color":"#5F6473"},{"label":"Purple","color":"#7B4353"},{"label":"Pink","color":"#CBBBBF"},{"label":"White","color":"#FDFDFD"},{"label":"Brown","color":"#745B64"}],"cleanUrl":"http://d2f1mfcynop4j.cloudfront.net/999181/20190322/457837518/f833a94bc4ea4b97b612ce060b5cdf21_RES.png","idOfTheImg":"48"}
@@ -18,7 +19,7 @@ const wait = (ms = 6000) => new Promise(res => setTimeout(res, ms));
     
 })
 export class Tab2Page {
-
+  
   currentImage:any;
   uploadedImage:any;
   test: any;
@@ -30,8 +31,20 @@ export class Tab2Page {
     private apiService: ApiService,
     private router: Router,
     private logService: LogService,
+    public loadingController: LoadingController,
   ) { }
-  
+
+  async cameraLoading() {
+    const loading = await this.loadingController.create({
+      spinner: null,
+      duration: 40000,
+      message: 'One moment while we upload your item...',
+      translucent: true,
+      cssClass: 'custom-class custom-loading'
+    });
+    return await loading.present();
+  }
+
   takePicture() {
     const options: CameraOptions = {
       quality: 100,
@@ -46,6 +59,7 @@ export class Tab2Page {
 
     this.camera.getPicture(options).then((imageData) => {
       this.currentImage = 'data:image/jpeg;base64,' + imageData;
+      this.cameraLoading();
       return this.currentImage;
     }, (err) => {
       this.logService.log(err);
@@ -68,6 +82,9 @@ export class Tab2Page {
       })
       .then((response) => {
         localStorage.setItem('response', response);
+      })
+      .then(() => {
+        this.loadingController.dismiss();
       })
       .then(() => {
         this.router.navigate(['/attribute']);
