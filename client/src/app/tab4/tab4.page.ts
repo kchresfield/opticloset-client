@@ -69,7 +69,6 @@ export class Tab4Page implements OnInit {
   }
 
   setFilter() {
-
     // reset the tab4Closet on service to match the current full closet from the service
     this.outfitSelectService.restore('tab4Closet', this.outfitSelectService.closet);
 

@@ -107,8 +107,9 @@ export class Tab1Page implements OnInit {
   }
 
   changeClothingItem(category) {
-    console.log(category)
-    // this.tab4Page.category = category;
-    // this.tab4Page.setFilter();
+    this.tab4Page.category = category;
+    setTimeout(() => {
+      this.tab4Page.setFilter();
+    }, 0);
   }
 }
