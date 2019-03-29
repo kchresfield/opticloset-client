@@ -14,6 +14,7 @@ export class ApiService {
   temperature: any;
   userName: any;
   location: any;
+  address: any;
   constructor(
     private httpClient: HttpClient,
     private geolocation: Geolocation,
@@ -25,19 +26,20 @@ export class ApiService {
   // weather API helpers to server
   async getConditions(callback) {
     const latLong = await this.getCoordinates();
-    this.location = latLong;
-    console.log(latLong, 'latLong');
-    if (!latLong) {
+    // this.location = latLong;
+    // console.log(latLong, 'latLong');
+    if (!this.location) {
       this.httpClient.get(`${this.apiURL}/weather`).subscribe(data => {
         callback(data);
       });
     }
-    if (latLong) {
+    if (this.location) {
+      console.log('here');
       this.httpClient
         .get(`${this.apiURL}/weather`, {
           params: {
-            latitude: latLong['lat'].toString(),
-            longitude: latLong['long'].toString()
+            latitude: this.location['lat'].toString(),
+            longitude: this.location['long'].toString()
           }
         })
         .subscribe(data => {
@@ -51,11 +53,25 @@ export class ApiService {
       .getCurrentPosition()
       .then(resp => {
         return { lat: resp.coords.latitude, long: resp.coords.longitude };
+      }).then((location) => {
+        this.location = location;
+        this.httpClient.get(`${this.apiURL}/location?latlng=${location.lat},${location.long}`).toPromise()
+          .then((address) => {
+            this.address = address;
+          });
       })
       .catch(error => {
         console.log('Error getting location:', error);
       });
   }
+
+  getLocation() {
+    this.httpClient.get(`${this.apiURL}/location?latlng=${this.location.lat},${this.location.lon}`)
+    .subscribe((address) =>{
+      this.address = address;
+    });
+  }
+
 
   addClothingItem(callback) {
     this.httpClient

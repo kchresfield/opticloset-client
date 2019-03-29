@@ -30,7 +30,12 @@ export class TabsPage implements OnInit {
     this.getWeather();
     this.getCloset();
     this.getSellList();
+    // this.getAddress();
   }
+
+  // getAddress() {
+  //   this.apiService.getLocation();
+  // }
 
   getWeather() {
     this.apiService.getConditions(data => {
@@ -94,5 +99,9 @@ export class TabsPage implements OnInit {
       this.sellArr.push(this.sellList[id]);
     });
     this.outfitSelectService.save('sellArr', this.sellArr);
+  }
+
+  print() {
+    console.log(this.apiService);
   }
 }
