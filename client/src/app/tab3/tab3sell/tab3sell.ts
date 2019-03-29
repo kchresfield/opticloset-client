@@ -19,10 +19,10 @@ export class Tab3Sell implements OnInit {
   filteredCloset: any;
   pricePaid: any;
   redirect: any;
-  title:string;
-  description:string;
-  condition:string = condition.condition;
-  listingPrice:string;
+  title: string;
+  description: string;
+  condition: string = condition.condition;
+  listingPrice: string;
 
   constructor(
     private apiService: ApiService,

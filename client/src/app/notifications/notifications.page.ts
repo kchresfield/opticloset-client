@@ -136,7 +136,7 @@ export class NotificationsPage implements OnInit {
     this.conditions = this.apiService.get('conditions');
     this.temperature = this.apiService.get('temperature');
     this.username = this.apiService.get('username');
-    this.location = this.apiService.get('location');
+    this.location = this.apiService.address[0].split(', ').slice(1).join(', ');
   }
 
   // present toast based on the server's response
