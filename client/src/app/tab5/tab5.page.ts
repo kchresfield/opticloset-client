@@ -15,12 +15,16 @@ export class Tab5Page implements OnInit {
   filteredCloset: any;
   startDate: Date;
   endDate: Date;
-
-  constructor(private apiService: ApiService, public outfitSelectService: OutfitSelectService) { }
+  ppwA: any;
+  ppwB: any;
+  constructor(
+    private apiService: ApiService,
+    public outfitSelectService: OutfitSelectService
+  ) {}
 
   ngOnInit() {
     this.setCloset();
-    this.endDate = new Date()
+    this.endDate = new Date();
   }
 
   // checks if current 'diplayed' closet is smaller than the initial closet on the service
@@ -42,13 +46,44 @@ export class Tab5Page implements OnInit {
       this.closet.sort((a, b) => {
         return b.count_worn - a.count_worn;
       });
-      }
+    }
     if (method === 'least2Most') {
       this.closet.sort((a, b) => {
         return a.count_worn - b.count_worn;
       });
     }
+    if (method === 'high2Low') {
+      this.closet.sort((a, b) => {
+        if (a.count_worn > 0) {
+          this.ppwA = (a.price / a.count_worn).toFixed(2);
+        } else {
+          this.ppwA = a.price;
+        }
+        if (b.count_worn > 0) {
+          this.ppwB = (b.price / b.count_worn).toFixed(2);
+        } else {
+          this.ppwB = b.price;
+        }
+        return this.ppwB - this.ppwA;
+      });
+    }
+    if (method === 'low2High') {
+      this.closet.sort((a, b) => {
+        if (a.count_worn > 0) {
+          this.ppwA = (a.price / a.count_worn).toFixed(2);
+        } else {
+          this.ppwA = a.price;
+        }
+        if (b.count_worn > 0) {
+          this.ppwB = (b.price / b.count_worn).toFixed(2);
+        } else {
+          this.ppwB = b.price;
+        }
+        return this.ppwA - this.ppwB;
+      });
+      }
   }
+
 
   setFilter() {
     // creates a copy of the initial closet from the service, sort it & filters it
@@ -63,8 +98,10 @@ export class Tab5Page implements OnInit {
         // checks if clothing worn date is in between startDate and endDate
         // console.log('test2', this.startDate, this.endDate);
         return (
-          new Date(this.startDate.valueOf()) <= new Date(clothing.updatedAt.valueOf()) &&
-          new Date(this.endDate.valueOf()) >= new Date(clothing.updatedAt.valueOf())
+          new Date(this.startDate.valueOf()) <=
+            new Date(clothing.updatedAt.valueOf()) &&
+          new Date(this.endDate.valueOf()) >=
+            new Date(clothing.updatedAt.valueOf())
         );
       }
       return true;
@@ -84,8 +121,14 @@ export class Tab5Page implements OnInit {
     this.closet = this.outfitSelectService.get('sortedCloset');
   }
   retrieveItem() {
-    console.log('closet from outfitSelect service', this.outfitSelectService.get('closet'));
-    console.log('sorted Closet from outfitSelect service', this.outfitSelectService.get('sortedCloset'));
+    console.log(
+      'closet from outfitSelect service',
+      this.outfitSelectService.get('closet')
+    );
+    console.log(
+      'sorted Closet from outfitSelect service',
+      this.outfitSelectService.get('sortedCloset')
+    );
     console.log('closet from tab5', this.closet);
   }
 }
