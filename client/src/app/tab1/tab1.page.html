@@ -1,5 +1,6 @@
 <ion-content>
   <ion-item-divider>
+<<<<<<< HEAD
     <ion-grid fixed>
       <ion-row>
         <ion-col>
@@ -31,6 +32,37 @@
   </ion-item-divider>
 
   <ion-grid fixed>
+=======
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col>
+        <ion-item #S class="ion-justify-content-center select">
+          <ion-select [(ngModel)]="matchMethod" placeholder="Select a method" (ionChange)="setMatchMethod()">
+            <ion-select-option value="random" selected>Random</ion-select-option>
+            <ion-select-option value="colorMatch">ColorMatch</ion-select-option>
+            <ion-select-option value="allNeutral">All Neutrals</ion-select-option>
+            <ion-select-option value="monochromatic">Monochromatic</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item #S class="ion-justify-content-center">
+          <ion-select [(ngModel)]="occasion" (ionChange)="setMatchMethod()">
+            <ion-select-option value="random" selected>Random</ion-select-option>
+            <ion-select-option value="casual">Casual</ion-select-option>
+            <ion-select-option value="formal">Formal</ion-select-option>
+            <ion-select-option value="business">Business</ion-select-option>
+            <ion-select-option value="goingOut">Going Out</ion-select-option>
+            <ion-select-option value="athletic">Athletic</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-item-divider>
+
+  <ion-grid fixed>
+>>>>>>> eeb0acfd9c0995324dcce09261a0d97bb6781679
     <ion-row class="ion-align-items-center ion-justify-content-center">
       <ion-col>
         <ion-item>

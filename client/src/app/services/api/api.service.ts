@@ -7,8 +7,8 @@ import { UserService } from '../user/user.service';
   providedIn: 'root'
 })
 export class ApiService {
-  // apiURL = 'http://localhost:8080';
-  apiURL = 'http://172.24.0.55:8080';
+  apiURL = 'http://localhost:8080';
+  // apiURL = 'http://172.24.0.55:8080';
   // apiURL = 'http://ec2-3-17-178-179.us-east-2.compute.amazonaws.com:8080';
   conditions: any;
   temperature: any;
@@ -66,10 +66,10 @@ export class ApiService {
   }
 
   getLocation() {
-    this.httpClient.get(`${this.apiURL}/location?latlng=${this.location.lat},${this.location.lon}`)
-    .subscribe((address) =>{
-      this.address = address;
-    });
+    // this.httpClient.get(`${this.apiURL}/location?latlng=${this.location.lat},${this.location.lon}`)
+    // .subscribe((address) =>{
+    //   this.address = address;
+    // });
   }
 
 
