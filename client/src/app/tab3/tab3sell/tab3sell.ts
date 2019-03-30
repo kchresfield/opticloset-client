@@ -4,13 +4,15 @@ import { HttpClient } from '@angular/common/http';
 import { ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { OutfitSelectService } from '../../services/outfit-select.service';
 
 const condition = { condition: 'test' };
 
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3sell.html',
-  styleUrls: ['tab3sell.scss']
+  styleUrls: ['tab3sell.scss'],
+  // providers: [OutfitSelectService],
 })
 export class Tab3Sell implements OnInit {
   parsedLocalStorage: any;
@@ -30,6 +32,7 @@ export class Tab3Sell implements OnInit {
     public toastController: ToastController,
     public alertController: AlertController,
     private router: Router,
+    public outfitSelectService: OutfitSelectService,
     ) { }
 
   ngOnInit() {
@@ -44,6 +47,14 @@ export class Tab3Sell implements OnInit {
   }
 
   nextItem(){
+    this.apiService.deleteClothingItem(this.firstItemInObjectKey);
+    const arrOfClothesToSell = this.outfitSelectService.get('sellArr');
+    // debugger;
+    for (let i = 0; i < arrOfClothesToSell.length; i++){
+      if (arrOfClothesToSell[i].id_clothing_item === Object.keys(this.parsedLocalStorage)[0]){
+        arrOfClothesToSell.splice(i, 1);
+      }
+    }
     // Deletes the clothing item from the object
     delete this.parsedLocalStorage[this.firstItemInObjectKey];
     // If, after the deletion, there are no more clothing items in the array
@@ -52,7 +63,6 @@ export class Tab3Sell implements OnInit {
       localStorage.removeItem('itemsToSell');
     }
 
-    this.apiService.deleteClothingItem(this.firstItemInObjectKey);
     // if there are items in the array
     // Go to the sell-on-ebay page
     // Display the new item to be sold
