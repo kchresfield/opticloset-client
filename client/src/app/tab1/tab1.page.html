@@ -4,7 +4,8 @@
       <ion-row>
         <ion-col>
           <ion-item #S class="ion-justify-content-center select">
-            <ion-select [(ngModel)]="matchMethod" placeholder="Select a method" (ionChange)="setMatchMethod()">
+            <ion-label>Match Method</ion-label>
+            <ion-select [(ngModel)]="matchMethod" placeholder="Select One" (ionChange)="setMatchMethod()">
               <ion-select-option value="random" selected>Random</ion-select-option>
               <ion-select-option value="colorMatch">ColorMatch</ion-select-option>
               <ion-select-option value="allNeutral">All Neutrals</ion-select-option>
@@ -14,7 +15,8 @@
         </ion-col>
         <ion-col>
           <ion-item #S class="ion-justify-content-center">
-            <ion-select [(ngModel)]="occasion" (ionChange)="setMatchMethod()">
+            <ion-label>Occasion</ion-label>
+            <ion-select [(ngModel)]="occasion" placeholder="Select One" (ionChange)="setMatchMethod()">
               <ion-select-option value="random" selected>Random</ion-select-option>
               <ion-select-option value="casual">Casual</ion-select-option>
               <ion-select-option value="formal">Formal</ion-select-option>
