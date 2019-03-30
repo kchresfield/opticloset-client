@@ -1,9 +1,13 @@
 
 <ion-content>
+  <div class="title">
   <h1 style="text-align:center" (click)="print()">Sell List for eBay</h1>
-    <ion-button (click)="sellAll()">Sell All</ion-button>
-    <ion-button (click)="reset()">Keep All</ion-button>
-    <ion-button routerLink="/sell-on-ebay" (click)="sell()">Sell Selected</ion-button>
+  </div>
+  <ion-buttons class="center">
+    <ion-button fill="solid" (click)="sellAll()">Sell All</ion-button>
+    <ion-button fill="solid "(click)="reset()">Keep All</ion-button>
+    <ion-button fill="solid" routerLink="/sell-on-ebay" (click)="sell()">Sell Selected</ion-button>
+  </ion-buttons>
 
 
 
@@ -16,8 +20,8 @@
         </ion-label>
       </ion-col>
       <!-- clothing stats -->
-      <ion-col>
-        <ion-list>
+      <ion-col col-6 offset-3 text-center>
+        <ion-list class="mid">
           <ion-radio-group>
             <ion-item>
               <ion-label>Keep</ion-label>
