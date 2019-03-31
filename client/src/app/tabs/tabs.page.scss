@@ -13,6 +13,12 @@
   transform: translateX(450%);
 }
 
+.my-custom-modal-css .modal-wrapper {
+  height: 50% !important;
+  top: 0;
+  position: absolute; 
+  display: block;  
+}
 
 // @media not all and (min-height: 600px) and (min-width: 768px) {
 //   ion-modal ion-backdrop {
