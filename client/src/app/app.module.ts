@@ -23,8 +23,6 @@ import { AuthService } from './services/auth/auth.service';
 import { UserService } from './services/user/user.service';
 import { Tab4Page } from './tab4/tab4.page';
 
-// import { NavParams } from '@ionic/angular';
-
 
 @NgModule({
   declarations: [AppComponent],
@@ -47,7 +45,6 @@ import { Tab4Page } from './tab4/tab4.page';
     Geolocation,
     LocalNotifications,
     Tab4Page,
-    // NavParams,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

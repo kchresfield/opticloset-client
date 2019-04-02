@@ -15,8 +15,6 @@ import { UserService } from '../../services/user/user.service';
   providers: [ToastController]
 })
 export class ItemOptionsModal {
-  // "value" passed in componentProps
-  // @Input() value: number;
   myParameter: boolean;
   myOtherParameter: Date;
   existing: any;
@@ -27,38 +25,41 @@ export class ItemOptionsModal {
     public toastController: ToastController,
     private outfitSelectService: OutfitSelectService,
     private router: Router,
-    public userService: UserService,
-  ) {
-    // componentProps can also be accessed at construction time using NavParams
-  }
+    public userService: UserService
+  ) {}
 
+  // removes selected item from closet
   removeFromCloset() {
     console.log(this.navParams.data);
     this.apiService
-      .deleteClothingItem(this.navParams.data.item.id_clothing_item)
+      .deleteClothingItem(this.navParams.data.item.id_clothing_item) // delete from DB
       .toPromise()
       .then(() => {
         this.apiService.getCloset(
-          this.userService.profile['nickname'], updatedCloset => {
+          // then retrieve the udpated closet from DB
+          this.userService.profile['nickname'],
+          updatedCloset => {
             console.log(updatedCloset);
-            this.outfitSelectService.restore('closet', updatedCloset);
-            this.outfitSelectService.restore('tab4Closet', updatedCloset);
-            this.closeAfterDeletion();
-            this.presentToast();
+            this.outfitSelectService.restore('closet', updatedCloset); // updates closet on outfitSelectService
+            this.outfitSelectService.restore('tab4Closet', updatedCloset); // updates tab4Closet on outfitSelectService
+            this.closeAfterDeletion(); // closes modal
+            this.presentToast(); // display the toast => user feedback
           }
         );
       });
   }
 
+  // close modal
   close() {
     this.modalController.dismiss();
-    console.log(this.navParams);
   }
 
+  // close modal
   closeAfterDeletion() {
     this.modalController.dismiss(1);
   }
 
+  // display a toast
   async presentToast() {
     const toast = await this.toastController.create({
       message: 'Item removed!',
@@ -69,6 +70,7 @@ export class ItemOptionsModal {
     toast.present();
   }
 
+  // update the selected item on the outfitSelectService
   changeSelectedItem() {
     this.outfitSelectService.set(
       this.navParams.data.item.category,
@@ -76,15 +78,21 @@ export class ItemOptionsModal {
     );
   }
 
+  // update the sortedCloset on outfitSelectService to the selected item so only see its stats in tab 5/stats page
+  chooseItem() {
+    this.outfitSelectService.change('sortedCloset', this.navParams.data.item);
+  }
+
+  //
   add() {
-    // Get the existing data
+    // Get the existing data on local storage
     this.existing = localStorage.getItem('itemsToSell');
 
     // If no existing data, create an array
     // Otherwise, convert the localStorage string to an array
     this.existing = this.existing ? JSON.parse(this.existing) : {};
 
-    // Add new data to localStorage Array
+    // Add new data/item to localStorage Array
     this.existing[
       this.outfitSelectService.selectedItem.id_clothing_item
     ] = this.outfitSelectService.selectedItem;
@@ -99,9 +107,6 @@ export class ItemOptionsModal {
     );
   }
 
-  chooseItem() {
-    this.outfitSelectService.change('sortedCloset', this.navParams.data.item);
-  }
 }
 
 
