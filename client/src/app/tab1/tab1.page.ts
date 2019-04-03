@@ -71,10 +71,11 @@ export class Tab1Page implements OnInit {
 
   async presentToast() {
     const toast = await this.toastController.create({
-      message: 'Great Choice!',
+      message: `Great Choice!`,
       position: 'middle',
       animated: true,
-      duration: 3000
+      duration: 3000,
+      cssClass: 'choice-toast',
     });
     toast.present();
     this.outfitSelected = true;
