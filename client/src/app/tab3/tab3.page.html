@@ -1,14 +1,23 @@
 
 <ion-content>
   <div class="title">
-  <h1 style="text-align:center" (click)="print()">Sell List for eBay</h1>
+    <h1 style="text-align:center" (click)="print()">Sell List for</h1>
   </div>
-  <ion-buttons class="center">
-    <ion-button fill="solid" (click)="sellAll()">Sell All</ion-button>
-    <ion-button fill="solid "(click)="reset()">Keep All</ion-button>
-    <ion-button fill="solid" routerLink="/sell-on-ebay" (click)="sell()">Sell Selected</ion-button>
-  </ion-buttons>
+  <!-- <div id="eBayLogo" text-align="center">
+  <img src='../../assets/1280px-EBay_logo.svg.png' height="30" (click)="print()">
+  </div> -->
 
+<div id="banner">
+    <img
+      src='../../assets/1280px-EBay_logo.svg.png' height="30" (click)="print()"/>
+  </div>
+
+  <ion-buttons class="center">
+    <ion-button fill="solid" routerLink="/sell-on-ebay" (click)="sell()">Sell Selected</ion-button>
+    <ion-button fill="solid" (click)="sellAll()">Sell All</ion-button>
+    <ion-button fill="solid " (click)="reset()">Keep All</ion-button>
+    <!-- <ion-button fill="solid" routerLink="/sell-on-ebay" (click)="sell()">Items posted on eBay</ion-button> -->
+  </ion-buttons>
 
 
   <ion-grid>
