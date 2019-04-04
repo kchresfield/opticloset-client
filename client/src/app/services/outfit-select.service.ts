@@ -83,6 +83,14 @@ export class OutfitSelectService {
     this[prop].splice(0, this[prop].length);
   }
 
+  remove(prop, item) {
+    this[prop].forEach((postedItem, i) => {
+      if (postedItem.id_clothing_item === item.id_clothing_item) {
+        this[prop].splice(i, 1);
+      }
+    });
+  }
+
   // return the current outfit of the day
   getOutfit() {
     return this.outfit;
