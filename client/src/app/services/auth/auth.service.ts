@@ -39,7 +39,6 @@ export class AuthService {
   }
 
   public handleAuthentication(): void {
-    // debugger;
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
@@ -55,7 +54,6 @@ export class AuthService {
   }
 
   private setSession(authResult): void {
-    // debugger;
     // Set the time that the Access Token will expire at
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
     localStorage.setItem('access_token', authResult.accessToken);
@@ -78,7 +76,6 @@ export class AuthService {
     // Check whether the current time is past the
     // Access Token's expiry time
     const expiresAt = JSON.parse(localStorage.getItem('expires_at') || '{}');
-    // debugger;
     return new Date().getTime() < expiresAt;
   }
 

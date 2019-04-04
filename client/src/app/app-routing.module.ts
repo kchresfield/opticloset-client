@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'attribute', loadChildren: './attributes/tab2.attrubite.module#Tab2AttributePageModule' },
   { path: 'notifications', loadChildren: './notifications/notifications.module#NotificationsPageModule' },
   { path: 'sell-on-ebay', loadChildren: './tab3/tab3sell/tab3sell.module#Tab3SellModule' },
+  // { path: 'posted-list', loadChildren: './tab3/posted-list/posted-list.module#PostedListPageModule' },
 ];
 @NgModule({
   imports: [
