@@ -7,19 +7,19 @@ import { IonicModule } from '@ionic/angular';
 
 import { PostedListPage } from './posted-list.page';
 
-const routes: Routes = [
-  {
-    path: '',
-    component: PostedListPage
-  }
-];
+// const routes: Routes = [
+//   {
+//     path: 'posted-list',
+//     component: PostedListPage
+//   }
+// ];
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild([{ path: 'posted-list', component: PostedListPage }])
   ],
   declarations: [PostedListPage]
 })

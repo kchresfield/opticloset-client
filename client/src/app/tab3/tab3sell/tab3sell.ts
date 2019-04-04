@@ -46,7 +46,7 @@ export class Tab3Sell implements OnInit {
     this.pricePaid = this.firstItemInObjectValue.price;
   }
 
-  nextItem(){
+  nextItem() {
     this.apiService.deleteClothingItem(this.firstItemInObjectKey);
     const arrOfClothesToSell = this.outfitSelectService.get('sellArr');
     // debugger;

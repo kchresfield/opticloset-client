@@ -1,9 +1,34 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>postedList</ion-title>
+    <ion-back-button></ion-back-button>
+    <ion-title>Currently posted for sale</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+  <ion-grid>
+    <ion-row class="ion-align-items-start" *ngFor="let item of list">
+      <ion-col>
+        <!-- clothing image -->
+        <ion-label>
+          <ion-img class="thumb" [src]="item.imageUrl"></ion-img>
+        </ion-label>
+      </ion-col>
+      <!-- item stats -->
+      <ion-col>
+        <ion-list>
+          <ion-item>
+            <ion-label>Title: {{item.lastUpdated}}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Description: {{item.count_worn}}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Price: {{item.price}}</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>
