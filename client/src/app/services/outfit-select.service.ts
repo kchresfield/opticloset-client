@@ -18,9 +18,8 @@ export class OutfitSelectService {
   onePieces: any;
   accessories: any;
   shoes: any;
-
   temp: Number;
-  
+
   constructor(
     public apiService: ApiService,
     public userService: UserService,
@@ -79,6 +78,7 @@ export class OutfitSelectService {
     }
   }
 
+  // empty a collection on the service
   empty(prop) {
     this[prop].splice(0, this[prop].length);
   }
@@ -119,8 +119,8 @@ export class OutfitSelectService {
   // helper functions for colormatching algo
 
   shuffle(array) {
-    var currentIndex = array.length;
-    var temporaryValue, randomIndex;
+    let currentIndex = array.length;
+    let temporaryValue, randomIndex;
 
     // While there remain elements to shuffle...
     while (0 !== currentIndex) {

@@ -13,7 +13,8 @@ const condition = { condition: 'test' };
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3sell.html',
-  styleUrls: ['tab3sell.scss']
+  styleUrls: ['tab3sell.scss'],
+  // providers: [OutfitSelectService],
 })
 export class Tab3Sell implements OnInit {
   parsedLocalStorage: any = JSON.parse(localStorage.getItem('itemsToSell'));

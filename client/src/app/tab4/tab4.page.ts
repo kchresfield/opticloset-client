@@ -49,7 +49,8 @@ export class Tab4Page implements OnInit {
   async presentModal(item) {
     const modal = await this.modalController.create({
       component: ItemOptionsModal,
-      componentProps: { item: item }
+      componentProps: { item: item },
+      cssClass: 'my-custom-modal-css',
     });
     // this.itemCategory = category;
     // console.log(this.itemCategory);
