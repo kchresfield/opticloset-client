@@ -6,9 +6,11 @@ import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { OutfitSelectService } from '../../services/outfit-select.service';
 import { UserService } from '../../services/user/user.service';
+import { HttpHeaders } from '@angular/common/http';
 
 
 const condition = { condition: 'test' };
+
 
 @Component({
   selector: 'app-tab3',
@@ -31,6 +33,7 @@ export class Tab3Sell implements OnInit {
   arr: any = this.outfitSelectService.get('sellArr').slice();
   parsedSelectedItemsToSell: any = JSON.parse(localStorage.getItem('selectedItemsToSell'));
   apiURL: string = 'http://172.24.0.217:8080';
+  parsedPostedList: any = JSON.parse(localStorage.getItem('postedList'));
 
   constructor(
     private apiService: ApiService,
@@ -101,25 +104,35 @@ export class Tab3Sell implements OnInit {
         console.log(err)})
     })
   
+//sku, title, description, condition, image
+    this.http.put('http://172.24.0.217:8080/ebayPost', {
+      title: this.title,
+      description: this.description,
+      image: this.filteredCloset,
+      condition: condition.condition,
+      sku: this.firstItemInObjectKey,
+    }).subscribe((response) => {
+      console.log(response);
+    });
 
-    // this.http.put(`https://api.sandbox.ebay.com/sell/inventory/v1/inventory_item/${this.firstItemInObjectKey}`, {
-    //     "availability": {
-    //       "shipToLocationAvailability": {
-    //         "quantity": 1
-    //       }
-    //     },
-    //     "condition": condition.condition,
-    //     "product": {
-    //       "title": this.title,
-    //       "description": this.description,
-    //       "mpn": "CHDHX-401",
-    //       "imageUrls": [
-    //         this.filteredCloset,
-    //       ]
-    //     }
-    // }).subscribe((response) => {
-    //   console.log(response);
-    // });
+
+    // Adding information to the localstorage
+    this.parsedPostedList.push({
+        title: this.title,
+        description: this.description,
+        image: this.filteredCloset,
+        pricePosted: this.listingPrice,
+    })
+
+    // Adds item to the local storage
+    localStorage.setItem('postedList', JSON.stringify(this.parsedPostedList));
+    // Add items to the posted-list property
+    this.outfitSelectService.add('postedList', {
+      title: this.title,
+      description: this.description,
+      image: this.filteredCloset,
+      pricePosted: this.listingPrice,
+    });
 
     if(Object.keys(this.parsedSelectedItemsToSell).length === 0 || this.parsedSelectedItemsToSell === undefined || this.parsedSelectedItemsToSell === null){
       // localStorage.removeItem('itemsToSell');
@@ -168,6 +181,7 @@ export class Tab3Sell implements OnInit {
       text: 'I\'m sure',
       handler: () => {
         this.nextItem();
+        this.presentToast()
         // this.router.navigate(['home/tabs/tab3']);
       }
       }],

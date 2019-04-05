@@ -1,9 +1,6 @@
 
 <ion-content>
   <!-- <h1 style="text-align:center" (click)="print()">Sell List for eBay</h1> -->
-    <ion-button (click)="sellAll()">Sell All</ion-button>
-    <ion-button (click)="reset()">Keep All</ion-button>
-    <ion-button (click)="sell()">Sell Selected</ion-button>
   <div class="title">
     <h1 style="text-align:center" (click)="print()">Sell List for</h1>
   </div>
@@ -14,9 +11,9 @@
   </div>
 
   <ion-buttons class="center">
-    <ion-button fill="solid" routerLink="/sell-on-ebay" (click)="sell()">Sell Selected</ion-button>
     <ion-button fill="solid" (click)="sellAll()">Sell All</ion-button>
     <ion-button fill="solid " (click)="reset()">Keep All</ion-button>
+    <ion-button fill="solid" (click)="sell()">Sell Selected</ion-button>
     <!-- <ion-button fill="solid" routerLink="/sell-on-ebay" (click)="sell()">Items posted on eBay</ion-button> -->
   </ion-buttons>
 
