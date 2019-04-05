@@ -123,11 +123,6 @@ export class TabsPage implements OnInit {
 
   }
 
-  
-  
-  
-  
-
   print() {
     console.log(this.outfitSelectService);
   }
