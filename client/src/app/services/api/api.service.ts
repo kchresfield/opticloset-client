@@ -7,8 +7,8 @@ import { UserService } from '../user/user.service';
   providedIn: 'root'
 })
 export class ApiService {
-  apiURL = 'http://localhost:8080';
-  // apiURL = 'http://172.24.9.131:8080';
+  // apiURL = 'http://localhost:8080';
+  apiURL = 'http://172.24.9.131:8080';
   // apiURL = 'http://ec2-3-17-178-179.us-east-2.compute.amazonaws.com:8080';
   // apiURL = 'http:/70.165.89.4:8080';
 
