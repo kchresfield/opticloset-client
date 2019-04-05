@@ -107,6 +107,10 @@ export class TabsPage implements OnInit {
 
   // gets postedList (items currently on eBay) from local storage and saves it on service to be shared between components
   getPostedList() {
+    // Creating a new service on tabs initilization
+    // first parses local storage into an object with nested objects
+    // Gets all values of keys (which in itself are objects)
+    this.outfitSelectService.save('postedList', Object.values(JSON.parse(localStorage.getItem('postedList'))));
     // this.apiService.getList(this.userService.profile['nickname'], data => {
     //   // invoke the getList method from apiService to retrieve all items flagged as 'selling = true'
     //   this.outfitSelectService.save('postedArr', data); // saving the list of items on the service to be accessible
