@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 
 
 
-let selectedItemsToSellObj = {};
+let selectedItemsToSellObj;
 
 @Component({
   selector: 'app-tab3',
@@ -26,8 +26,11 @@ export class Tab3Page implements OnInit {
   ) {}
 
   ngOnInit() {
+    selectedItemsToSellObj = {};
     // setting relationship between tab3 listArr and sellArr on service for dynamic refreshing
     this.listArr = this.outfitSelectService.get('sellArr');
+    console.log(this.listArr);
+    localStorage.removeItem('selectedItemsToSell');
   }
 
   radioValueSellOrKeep(clothingId, keepOrSell, clothingInfo) {
@@ -37,25 +40,21 @@ export class Tab3Page implements OnInit {
     if (keepOrSell === 0 && selectedItemsToSellObj[clothingId]) {
       delete selectedItemsToSellObj[clothingId];
     }
-    console.log(selectedItemsToSellObj);
   }
 
   sell(){
     if (!Object.keys(selectedItemsToSellObj).length) {
       return this.presentToast();
     }
-    localStorage.setItem('itemsToSell', JSON.stringify(selectedItemsToSellObj));
+    localStorage.setItem('selectedItemsToSell', JSON.stringify(selectedItemsToSellObj));
     this.router.navigate(['/sell-on-ebay']);
   }
 
   sellAll() {}
 
-  print() {
-    console.log(this.listArr, this.outfitSelectService.get('sellArr'));
-  }
   reset() {
     selectedItemsToSellObj = {};
-    delete localStorage.itemsToSell;
+    // delete localStorage.itemsToSell;
     this.outfitSelectService.empty('sellArr');
   }
 

@@ -22,13 +22,14 @@ export class PostedListPage implements OnInit {
 
   getList() {
     // this.list = this.outfitSelectService.get('postedArr');
-    this.list = this.outfitSelectService.get('closet');
+    this.list = this.outfitSelectService.get('postedList');
 
   }
 
   removeItem(item) {
     console.log(item);
-    this.outfitSelectService.remove('closet', item);
+    this.outfitSelectService.removeI('postedList', item);
+    
   }
 
   removeFromList(item) {

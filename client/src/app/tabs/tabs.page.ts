@@ -86,6 +86,9 @@ export class TabsPage implements OnInit {
       this.outfitSelectService.getClosetFromDB(profile['nickname'], data => {
         // invoke the getClosetFromDBandSort method from outfitSelectService to
         this.outfitSelectService.save('closet', data); // save a regular closet on the service
+
+        // save a copy of the closet from the service onto the service as tab4Closet
+        this.outfitSelectService.save('tab4Closet', [...this.outfitSelectService.closet]);
         const sortedCloset = [...data];
         sortedCloset.sort((a, b) => {
           return a.count_worn - b.count_worn; // sort the closet from least worn to most worn
@@ -107,6 +110,14 @@ export class TabsPage implements OnInit {
 
   // gets postedList (items currently on eBay) from local storage and saves it on service to be shared between components
   getPostedList() {
+    // Creating a new service on tabs initilization
+    // first parses local storage into an object with nested objects
+
+    if (!localStorage.getItem('postedList')) {
+      localStorage.setItem('postedList', JSON.stringify({}));
+    }
+      // Gets all values of keys (which in itself are objects)
+      this.outfitSelectService.save('postedList', Object.values(JSON.parse(localStorage.getItem('postedList'))));
     // this.apiService.getList(this.userService.profile['nickname'], data => {
     //   // invoke the getList method from apiService to retrieve all items flagged as 'selling = true'
     //   this.outfitSelectService.save('postedArr', data); // saving the list of items on the service to be accessible

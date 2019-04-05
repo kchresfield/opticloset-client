@@ -9,10 +9,10 @@ describe('PostedListPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PostedListPage ],
+      declarations: [PostedListPage],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
