@@ -32,7 +32,7 @@ export class Tab3Sell implements OnInit {
   index: number;
   arr: any = this.outfitSelectService.get('sellArr').slice();
   parsedSelectedItemsToSell: any = JSON.parse(localStorage.getItem('selectedItemsToSell'));
-  apiURL: string = 'http://172.24.0.217:8080';
+  apiURL: string = 'http:/70.165.89.4:8080';
   parsedPostedList: any = JSON.parse(localStorage.getItem('postedList'));
 
   constructor(
@@ -103,9 +103,9 @@ export class Tab3Sell implements OnInit {
       .catch((err) => {
         console.log(err)})
     })
-  
+
 //sku, title, description, condition, image
-    this.http.put('http://172.24.0.217:8080/ebayPost', {
+    this.http.put(`${this.apiURL}/ebayPost`, {
       title: this.title,
       description: this.description,
       image: this.filteredCloset,
@@ -122,6 +122,7 @@ export class Tab3Sell implements OnInit {
         description: this.description,
         image: this.filteredCloset,
         pricePosted: this.listingPrice,
+        id: this.firstItemInObjectKey,
     };
 
     // Adds item to the local storage
@@ -133,6 +134,7 @@ export class Tab3Sell implements OnInit {
       description: this.description,
       image: this.filteredCloset,
       pricePosted: this.listingPrice,
+      id: this.firstItemInObjectKey,
     });
 
     if(Object.keys(this.parsedSelectedItemsToSell).length === 0 || this.parsedSelectedItemsToSell === undefined || this.parsedSelectedItemsToSell === null){

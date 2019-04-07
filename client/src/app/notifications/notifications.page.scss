@@ -1,5 +1,12 @@
-#temp { float:right }
-#cond { float:right }
+#temp { 
+  float:right;
+  margin-top: 1%;
+  font-size: x-large;
+}
+
+#cond { 
+  float:right;
+}
 
 .ion-page {
   height: 30%;
@@ -9,6 +16,8 @@
   margin-left: auto;
   margin-right: auto;
   position: absolute;
-  top: 10%;
+  top: 5%;
   transform: translateX(450%);
 }
+
+
