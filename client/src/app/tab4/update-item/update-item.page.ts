@@ -110,11 +110,11 @@ export class UpdateItemPage implements OnInit {
   ) {}
 
   public toggleNamedColor(item): void {
-    if (this.buttonColors[item] === 'light') {
-      this.buttonColors[item] = 'primary';
-    } else {
-      this.buttonColors[item] = 'light';
-    }
+    // if (this.buttonColors[item] === 'light') {
+    //   this.buttonColors[item] = 'primary';
+    // } else {
+    //   this.buttonColors[item] = 'light';
+    // }
   }
 
   ngOnInit() {
@@ -167,17 +167,17 @@ export class UpdateItemPage implements OnInit {
       }
     });
 
-    // if (!this.price) {
-    //   this.price = this.initialprice;
-    // }
+    if (!this.price) {
+      this.price = this.initialprice;
+    }
     // create the updated item to be input in the DB
     this.updatedItem = {
       id_clothing_item: this.selectedItem.id_clothing_item,
-      id_category: this.selectedCategoryID,
-      price: this.price,
+      id_category: Number(this.selectedCategoryID),
+      price: Number(this.price),
       id_image: this.selectedItem.id_image,
       count_worn: this.selectedItem.count_worn,
-      id_occasion: this.selectedOccasionID,
+      id_occasion: Number(this.selectedOccasionID),
       attribute: this.selectedAttributes.join(', '),
       color: this.selectedColors.join(', '),
       category: this.selectedCategory[0],
@@ -190,6 +190,11 @@ export class UpdateItemPage implements OnInit {
         this.presentToast('Oops, something went wrong. Try again!');
       }
     });
+    this.outfitSelectService.removeI('tab4Closet', this.selectedItem);
+    this.outfitSelectService.removeI('closet', this.selectedItem);
+    const temp = Object.assign(this.selectedItem, this.updatedItem);
+    this.outfitSelectService.add('tab4Closet', temp);
+    this.outfitSelectService.add('closet', temp);
   }
 
   print() {
@@ -204,14 +209,28 @@ export class UpdateItemPage implements OnInit {
     }
   }
 
-  occasionItem(input) {
+  // occasionItem(input) {
+  //   debugger;
+  //   this.selectedOccasionID = input;
+  //   // if (allOccasions[input] === true) {
+  //   //   this.allOccasions[input] = false;
+  //   // } else {
+  //   //   this.allOccasions[input] = true;
+  //   // }
+  // }
+
+  occasionItem(input, occasion) {
     this.selectedOccasionID = input;
-    // if (allOccasions[input] === true) {
-    //   this.allOccasions[input] = false;
-    // } else {
-    //   this.allOccasions[input] = true;
-    // }
-  }
+    if (this.buttonColors[occasion] === 'light') {
+      for (let key in this.allOccasions) {
+        this.buttonColors[key] = "light";
+      }
+      this.buttonColors[occasion] = 'primary';
+    } else {
+      this.buttonColors[occasion] = 'light';
+    }
+    // console.log(input)
+  };
 
   selectCategory(input) {
     this.selectedCategory.splice(0, 2, `${category[input][0].toUpperCase()}${category[input].slice(1)}`);

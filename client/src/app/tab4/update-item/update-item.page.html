@@ -50,11 +50,11 @@
     </ion-item>
     <h2>Occasion</h2>
     <div>
-      <ion-button [color]="this.buttonColors['casual']" (click)="occasionItem('1'); toggleNamedColor('casual')">Casual</ion-button>
-      <ion-button [color]="this.buttonColors['formal']" (click)="occasionItem('2'); toggleNamedColor('formal')">Formal</ion-button>
-      <ion-button [color]="this.buttonColors['business']" (click)="occasionItem('3'); toggleNamedColor('business')">Business</ion-button>
-      <ion-button [color]="this.buttonColors['goingOut']" (click)="occasionItem('4'); toggleNamedColor('goingOut')">Going Out</ion-button>
-      <ion-button [color]="this.buttonColors['athletic']" (click)="occasionItem('5'); toggleNamedColor('athletic')">Athletic</ion-button>
+      <ion-button [color]="this.buttonColors['casual']" (click)="occasionItem('1', 'casual'); toggleNamedColor('casual')">Casual</ion-button>
+      <ion-button [color]="this.buttonColors['formal']" (click)="occasionItem('2', 'formal'); toggleNamedColor('formal')">Formal</ion-button>
+      <ion-button [color]="this.buttonColors['business']" (click)="occasionItem('3','business'); toggleNamedColor('business')">Business</ion-button>
+      <ion-button [color]="this.buttonColors['goingOut']" (click)="occasionItem('4', 'goingOut'); toggleNamedColor('goingOut')">Going Out</ion-button>
+      <ion-button [color]="this.buttonColors['athletic']" (click)="occasionItem('5', 'athletic'); toggleNamedColor('athletic')">Athletic</ion-button>
     </div>
     <h2>Category</h2>
     <div *ngFor="let category of selectedCategory" (click)="selectCategory(category)">
