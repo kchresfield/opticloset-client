@@ -2,13 +2,85 @@
   <!-- <img [src]="currentImage" *ngIf="currentImage"> -->
 
   <h1 style="text-align:center">Upload Your Closet!</h1>
-
-  <img class='camera' src="assets/camera-tab2.png">
-
+  <ion-item lines=none>
+    Before you start importing pictures, read these easy photo tips to make sure you’ll get the best photos for your digital closet.
+  </ion-item>
+  <!-- <ion-list> -->
+    <ion-list-header>
+      Bright Light
+    </ion-list-header>
+    <ion-item lines=none>
+      <ul>
+        <li>
+          Take your photo in the brightest light possible (preferably natural light)
+        </li>
+        <li>
+          Avoid getting dark shadows in your photo
+        </li>
+        <li>
+          Sunlight gives the most accurate colors
+        </li>
+      </ul>
+    </ion-item>
+    <ion-list-header>
+      Background
+    </ion-list-header>
+    <ion-item lines=none>
+      <ul>
+        <li>
+          Photograph on a smooth, solid-color background that’s a completely different color than the clothing. (Sheets fresh out the dryer, the back of a flat door or bulletin board paper work great!) 
+        </li>
+        <li>
+          Background color should make the clothing stand out
+        </li>
+        <li>
+          Don’t use carpet, fleece, wooden floors, the back of a door or any other textured surface
+        </li>
+      </ul>
+    </ion-item>
+    <ion-list-header>
+      Background Color
+    </ion-list-header>
+    <ion-item lines=none>
+      <ul>
+        <li>
+          You can use any color as long as it’s a completely different color from the clothing
+        </li>
+        <li>
+          For patterned clothes, avoid using any of the colors that are in the pattern
+        </li>
+        <li>
+          Use a dark background for light clothes and vice versa
+        </li>
+      </ul>
+    </ion-item>
+    <ion-list-header>
+      Framing
+    </ion-list-header>
+    <ion-item lines=none>
+      <ul>
+        <li>
+          Smooth out your background neatly and avoid getting anything but the sheet and clothing in the photo
+        </li>
+        <li>
+          You don’t want to see the surrounding floor, clutter, dark shadows or feet
+        </li>
+      </ul>
+    </ion-item>
+    <ion-list-header>
+      Focus
+    </ion-list-header>
+    <ion-item lines=none>
+      <ul>
+        <li>
+          Wipe off your phone’s camera lens with a soft cloth and make sure your photo is in focus
+        </li>
+      </ul>
+    </ion-item> 
+    <br><br><br>
+  <!-- </ion-list> -->
   <!-- <img [src]="uploadedImage" *ngIf="uploadedImage"> -->
-  <div></div>
-  <div></div>
-  <ion-fab vertical="bottom">
+  <ion-fab vertical="bottom" slot="fixed">
     <ion-row>
       <ion-col>
         <ion-fab-button color="medium" class='button1' (click)="takePicture()">
