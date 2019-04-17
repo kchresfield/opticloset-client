@@ -8,6 +8,20 @@ ion-grid {
 
   ion-row {
     height: 33.33% !important;
+    // border: thin solid black !important;
   }
 
+  ion-col {
+    text-align: center;
+  }
+
+  .images{
+    max-height: 33% !important;
+    // height: 33%;
+    // max-width: 33%;
+  }
+//   .col{
+// background: gray;
+// border: think solid black;
+// }
 }

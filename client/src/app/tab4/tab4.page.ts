@@ -39,8 +39,7 @@ export class Tab4Page implements OnInit {
   }
 
   setCloset() {
-    // save a copy of the closet from the service onto the service as tab4Closet
-    this.outfitSelectService.save('tab4Closet', [...this.outfitSelectService.closet]);
+
 
     // setting the relationship between the closet no tab4 and the tab4Closet on the service
     this.closet = this.outfitSelectService.get('tab4Closet');
@@ -49,7 +48,8 @@ export class Tab4Page implements OnInit {
   async presentModal(item) {
     const modal = await this.modalController.create({
       component: ItemOptionsModal,
-      componentProps: { item: item }
+      componentProps: { item: item },
+      cssClass: 'my-custom-modal-css',
     });
     // this.itemCategory = category;
     // console.log(this.itemCategory);

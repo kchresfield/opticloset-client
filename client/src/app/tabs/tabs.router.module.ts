@@ -31,7 +31,12 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: '../tab3/tab3.module#Tab3PageModule'
-          }
+          },
+          {
+            path: '/posted-list',
+            loadChildren:
+              '../tab3/posted-list/posted-list.module#PostedListPageModule'
+          },
         ]
       },
       {
@@ -39,11 +44,12 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../tab4/tab4.module#Tab4PageModule',
+            loadChildren: '../tab4/tab4.module#Tab4PageModule'
           },
           {
             path: '/update-item',
-            loadChildren: '../tab4/update-item/update-item.module#UpdateItemPageModule'
+            loadChildren:
+              '../tab4/update-item/update-item.module#UpdateItemPageModule'
           }
         ]
       },
@@ -58,13 +64,13 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/home/tabs/tab1',
+        redirectTo: '/home/tabs/tab1'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/home/tabs/tab1',
+    redirectTo: '/home/tabs/tab1'
   }
 ];
 

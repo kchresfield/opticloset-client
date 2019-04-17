@@ -211,7 +211,7 @@ export class Tab2Attribute {
       id_image: this.imgId,
       count_worn: 0,
       id_occasion: parseInt(selectedOccasion),
-      attribute: JSON.stringify(arrOfAttrId),
+      attribute: arrOfAttrId.join(', '),
       color: JSON.stringify(arrOfColors),
     }).toPromise()
     .then(() => {

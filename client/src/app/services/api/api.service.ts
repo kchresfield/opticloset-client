@@ -8,8 +8,14 @@ import { UserService } from '../user/user.service';
 })
 export class ApiService {
   // apiURL = 'http://localhost:8080';
+<<<<<<< HEAD
   apiURL = 'http://172.24.0.55:8080';
+=======
+  apiURL = 'http://172.24.9.131:8080';
+>>>>>>> 5cb11981484587d60416023561ec168d6b002e1a
   // apiURL = 'http://ec2-3-17-178-179.us-east-2.compute.amazonaws.com:8080';
+  // apiURL = 'http:/70.165.89.4:8080';
+
   conditions: any;
   temperature: any;
   userName: any;
@@ -18,7 +24,7 @@ export class ApiService {
   constructor(
     private httpClient: HttpClient,
     private geolocation: Geolocation,
-    public userService: UserService,
+    public userService: UserService
   ) {}
 
   public currentConditions: object = {};
@@ -53,10 +59,15 @@ export class ApiService {
       .getCurrentPosition()
       .then(resp => {
         return { lat: resp.coords.latitude, long: resp.coords.longitude };
-      }).then((location) => {
+      })
+      .then(location => {
         this.location = location;
-        this.httpClient.get(`${this.apiURL}/location?latlng=${location.lat},${location.long}`).toPromise()
-          .then((address) => {
+        this.httpClient
+          .get(
+            `${this.apiURL}/location?latlng=${location.lat},${location.long}`
+          )
+          .toPromise()
+          .then(address => {
             this.address = address;
           });
       })
@@ -71,7 +82,6 @@ export class ApiService {
     //   this.address = address;
     // });
   }
-
 
   addClothingItem(callback) {
     this.httpClient
@@ -88,32 +98,38 @@ export class ApiService {
 
   deleteClothingItem(itemId) {
     console.log(itemId);
-    return this.httpClient
-      .request('delete', `${this.apiURL}/closet/1`, {
-        body: {
-          clothingItemId: itemId
-        },
-        responseType: 'text'
-      });
+    return this.httpClient.request('delete', `${this.apiURL}/closet/1`, {
+      body: {
+        clothingItemId: itemId
+      },
+      responseType: 'text'
+    });
   }
 
   updateClothingItem(item) {
     console.log(item);
-    
-    return this.httpClient
-    .request('put', `${this.apiURL}/closet/1`, {
+
+    return this.httpClient.request('put', `${this.apiURL}/closet/1`, {
       body: item,
       responseType: 'text'
     });
     // .subscribe(result => {
-      //   console.log(result);
-      // });
+    //   console.log(result);
+    // });
   }
-    
+
   getCloset(username, callback) {
     this.httpClient.get(`${this.apiURL}/closet/${username}`).subscribe(data => {
       callback(data);
     });
+  }
+
+  getList(username, callback) {
+    this.httpClient
+      .get(`${this.apiURL}/closet/${username}/sell`)
+      .subscribe(data => {
+        callback(data);
+      });
   }
 
   save(prop, value) {
