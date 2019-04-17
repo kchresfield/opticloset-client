@@ -2,10 +2,10 @@
 
   <ion-header>
     <ion-toolbar class="vertical-align"color="tertiary">
-      <ion-icon name="settings"size="large" routerLink="/notifications"></ion-icon>
-      <div class="logo"><img src='../assets/logo-blue-background.png' height="40" (click)="print()"></div>
-      <ion-icon id="cond" name={{this.conditions}} size="large"></ion-icon>
-      <span id="temp">{{this.temperature}}°</span>
+      <ion-icon class="customIcons" name="settings"size="large" routerLink="/notifications"></ion-icon>
+      <div class="logo"><img src='../assets/OptiCloset-light-grey-logo.png' height="40" (click)="print()"></div>
+      <ion-icon class="customIcons" id="cond" name={{this.conditions}} size="large"></ion-icon>
+      <span class="customIcons" id="temp">{{this.temperature}}°</span>
     </ion-toolbar>
   </ion-header>
   <ion-tab-bar ion-tab-bar color="danger" slot="bottom" slot="bottom">

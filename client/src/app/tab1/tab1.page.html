@@ -39,7 +39,7 @@
               You currently have no Accessory in your closet. Go add some!
             </div>
             <div *ngIf="outfit['accessory']" routerLink="/home/tabs/tab4" (click)="changeClothingItem('accessory')">
-              <ion-img [src]="outfit['accessory'].imageUrl"></ion-img>
+              <ion-img class="images" [src]="outfit['accessory'].imageUrl"></ion-img>
             </div>
           </div>
           <ng-template #elseBlock>Loading</ng-template>

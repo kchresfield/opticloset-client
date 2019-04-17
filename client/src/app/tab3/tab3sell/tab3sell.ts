@@ -117,15 +117,16 @@ export class Tab3Sell implements OnInit {
 
 
     // Adding information to the localstorage
-    this.parsedPostedList.push({
+    this.parsedPostedList[this.firstItemInObjectKey] = {
         title: this.title,
         description: this.description,
         image: this.filteredCloset,
         pricePosted: this.listingPrice,
-    })
+    };
 
     // Adds item to the local storage
     localStorage.setItem('postedList', JSON.stringify(this.parsedPostedList));
+
     // Add items to the posted-list property
     this.outfitSelectService.add('postedList', {
       title: this.title,
