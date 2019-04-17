@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab3Page } from './tab3.page';
 import { PostedListPageModule } from './posted-list/posted-list.module';
+import { Tab3SellModule } from './tab3sell/tab3sell.module';
+
 
 @NgModule({
   imports: [
@@ -12,9 +14,11 @@ import { PostedListPageModule } from './posted-list/posted-list.module';
     CommonModule,
     FormsModule,
     PostedListPageModule,
+    Tab3SellModule,
     RouterModule.forChild([
       { path: '', component: Tab3Page },
-      { path: 'posted-list', component: PostedListPageModule }
+      { path: 'posted-list', component: PostedListPageModule },
+      { path: 'sell-on-ebay', component: Tab3SellModule }
     ])
   ],
   declarations: [Tab3Page],

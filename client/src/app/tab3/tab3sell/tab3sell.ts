@@ -105,7 +105,7 @@ export class Tab3Sell implements OnInit {
     })
   
 //sku, title, description, condition, image
-    this.http.put('http://172.24.0.217:8080/ebayPost', {
+    this.http.put(`${this.apiURL}/ebayPost`, {
       title: this.title,
       description: this.description,
       image: this.filteredCloset,
@@ -117,21 +117,24 @@ export class Tab3Sell implements OnInit {
 
 
     // Adding information to the localstorage
-    this.parsedPostedList.push({
+    this.parsedPostedList[this.firstItemInObjectKey] = {
         title: this.title,
         description: this.description,
         image: this.filteredCloset,
         pricePosted: this.listingPrice,
-    })
+        id: this.firstItemInObjectKey,
+    };
 
     // Adds item to the local storage
     localStorage.setItem('postedList', JSON.stringify(this.parsedPostedList));
+
     // Add items to the posted-list property
     this.outfitSelectService.add('postedList', {
       title: this.title,
       description: this.description,
       image: this.filteredCloset,
       pricePosted: this.listingPrice,
+      id: this.firstItemInObjectKey,
     });
 
     if(Object.keys(this.parsedSelectedItemsToSell).length === 0 || this.parsedSelectedItemsToSell === undefined || this.parsedSelectedItemsToSell === null){

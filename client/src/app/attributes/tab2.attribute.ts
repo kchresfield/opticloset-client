@@ -204,7 +204,7 @@ export class Tab2Attribute {
     };
     
     // this.logService.log((clothesData));
-    this.httpClient.post('http://172.24.0.217:8080/closet/1', {
+    this.httpClient.post(`${this.apiService.apiURL}/closet/1`, {
       id_user: 1,
       id_category: parseInt(category.category),
       price: parseInt(price),
