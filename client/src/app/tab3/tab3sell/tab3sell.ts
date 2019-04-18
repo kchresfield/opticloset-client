@@ -145,7 +145,7 @@ export class Tab3Sell implements OnInit {
       // Go back to the sell page to sell the rest of the clothes
       console.log(Object.keys(this.parsedSelectedItemsToSell).length, '11111111111111111');
       this.ngOnInit();
-      this.router.navigate(['/sell-on-ebay']);
+      this.router.navigate(['home/tabs/tab3/sell-on-ebay']);
     }
   }
 
