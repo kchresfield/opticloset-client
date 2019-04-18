@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { OutfitSelectService } from '../../services/outfit-select.service';
 import { UserService } from '../../services/user/user.service';
 import { HttpHeaders } from '@angular/common/http';
+import { AUTH_CONFIG } from '../../services/auth/auth.config';
 
 
 const condition = { condition: 'test' };
@@ -32,7 +33,7 @@ export class Tab3Sell implements OnInit {
   index: number;
   arr: any = this.outfitSelectService.get('sellArr').slice();
   parsedSelectedItemsToSell: any = JSON.parse(localStorage.getItem('selectedItemsToSell'));
-  apiURL: string = 'http://172.24.0.217:8080';
+  apiURL: string = `http://10.135.48.96:8080`;
   parsedPostedList: any = JSON.parse(localStorage.getItem('postedList'));
 
   constructor(

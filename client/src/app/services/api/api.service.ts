@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { UserService } from '../user/user.service';
+import { AUTH_CONFIG } from '../auth/auth.config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
   // apiURL = 'http://localhost:8080';
-  apiURL = 'http://10.135.48.96:8080';
+  apiURL = `http://${AUTH_CONFIG.host}:8080`;
   // apiURL = 'http://ec2-3-17-178-179.us-east-2.compute.amazonaws.com:8080';
   // apiURL = 'http:/70.165.89.4:8080';
 

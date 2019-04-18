@@ -129,7 +129,7 @@ export class Tab2Page {
       })
       .then((cloudResponse: CloudinaryResposne) => {
         const { url } = cloudResponse;
-        // this.logService.log(cloudResponse);
+        this.logService.log(cloudResponse);
         return this.http.post(`${api_URL}/clothingImage/1`, {
           "response": {
             "url": url,

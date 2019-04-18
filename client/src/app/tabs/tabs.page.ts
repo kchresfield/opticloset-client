@@ -89,6 +89,9 @@ export class TabsPage implements OnInit {
       this.outfitSelectService.getClosetFromDB(profile['nickname'], data => {
         // invoke the getClosetFromDBandSort method from outfitSelectService to
         this.outfitSelectService.save('closet', data); // save a regular closet on the service
+
+        // save a copy of the closet from the service onto the service as tab4Closet
+        this.outfitSelectService.save('tab4Closet', [...this.outfitSelectService.closet]);
         const sortedCloset = [...data];
         sortedCloset.sort((a, b) => {
           return a.count_worn - b.count_worn; // sort the closet from least worn to most worn
