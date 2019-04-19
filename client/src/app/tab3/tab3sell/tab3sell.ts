@@ -35,6 +35,7 @@ export class Tab3Sell implements OnInit {
   parsedSelectedItemsToSell: any = JSON.parse(localStorage.getItem('selectedItemsToSell'));
   apiURL: string = `http://10.135.48.96:8080`;
   parsedPostedList: any = JSON.parse(localStorage.getItem('postedList'));
+  parsedPostedListBackup: any = JSON.parse(localStorage.getItem('posted-list'));
 
   constructor(
     private apiService: ApiService,
@@ -106,6 +107,7 @@ export class Tab3Sell implements OnInit {
     })
   
 //sku, title, description, condition, image
+// Should be post
     this.http.put(`${this.apiURL}/ebayPost`, {
       title: this.title,
       description: this.description,
@@ -118,7 +120,7 @@ export class Tab3Sell implements OnInit {
 
 
     // Adding information to the localstorage
-    this.parsedPostedList[this.firstItemInObjectKey] = {
+    this.parsedPostedListBackup[this.firstItemInObjectKey] = {
         title: this.title,
         description: this.description,
         image: this.filteredCloset,
@@ -127,15 +129,15 @@ export class Tab3Sell implements OnInit {
     };
 
     // Adds item to the local storage
-    localStorage.setItem('postedList', JSON.stringify(this.parsedPostedList));
+    localStorage.setItem('posted-list', JSON.stringify(this.parsedPostedListBackup));
 
-    // Add items to the posted-list property
+    // Add items to the postedList property in outfitselect service
     this.outfitSelectService.add('postedList', {
       title: this.title,
       description: this.description,
       image: this.filteredCloset,
       pricePosted: this.listingPrice,
-      id: this.firstItemInObjectKey,
+      id_clothing_item: this.firstItemInObjectKey,
     });
 
     if(Object.keys(this.parsedSelectedItemsToSell).length === 0 || this.parsedSelectedItemsToSell === undefined || this.parsedSelectedItemsToSell === null){

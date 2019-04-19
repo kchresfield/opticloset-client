@@ -119,7 +119,7 @@ export class TabsPage implements OnInit {
     if (!localStorage.getItem('posted-list') || localStorage.getItem('posted-list') == null){
       return localStorage.setItem('posted-list', JSON.stringify({}));
     };
-    this.outfitSelectService.save('postedList', Object.values(JSON.parse(localStorage.getItem('postedList'))));
+    this.outfitSelectService.save('postedList', Object.values(JSON.parse(localStorage.getItem('posted-list'))));
     // this.apiService.getList(this.userService.profile['nickname'], data => {
     //   // invoke the getList method from apiService to retrieve all items flagged as 'selling = true'
     //   this.outfitSelectService.save('postedArr', data); // saving the list of items on the service to be accessible
@@ -134,6 +134,6 @@ export class TabsPage implements OnInit {
 
   print() {
     console.log(this.outfitSelectService);
-    this.logService.log(this.outfitSelectService);
+    // this.logService.log(this.outfitSelectService);
   }
 }
