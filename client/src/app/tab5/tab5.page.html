@@ -21,8 +21,8 @@
           <ion-radio (ionSelect)="sortCloset('least2Most')" checked></ion-radio>
         </ion-col>
         <ion-col offset='3'>
-          <ion-label class="tab5Labs">Most Expensive</ion-label>
-          <ion-radio item-left (ionSelect)="sortCloset('high2Low')" checked></ion-radio>
+          <ion-label class="tab5Labs">Least Expensive</ion-label>
+          <ion-radio item-left (ionSelect)="sortCloset('low2High')"></ion-radio>
         </ion-col>
       </ion-row>
         <ion-row class="ion-align-items-start">
@@ -31,8 +31,8 @@
             <ion-radio (ionSelect)="sortCloset('most2Least')"></ion-radio>
           </ion-col>
           <ion-col offset='3'>
-            <ion-label class="tab5Labs">Least Expensive</ion-label>
-            <ion-radio item-left (ionSelect)="sortCloset('low2High')"></ion-radio>
+            <ion-label class="tab5Labs">Most Expensive</ion-label>
+            <ion-radio item-left (ionSelect)="sortCloset('high2Low')" checked></ion-radio>
           </ion-col>
         </ion-row>
     </ion-grid>
@@ -47,7 +47,7 @@
   <!-- date picker -->
   <ion-item>
     <ion-label>Worn since</ion-label>
-    <ion-datetime [(ngModel)]="startDate" (ionChange)="setFilter()" display-format="MMM  D YYYY"
+    <ion-datetime class="dateSelector" [(ngModel)]="startDate" (ionChange)="setFilter()" display-format="MMM  D YYYY"
       picker-format="MMMM D YYYY" placeholder="Select Date"></ion-datetime>
   </ion-item>
   <!-- <ion-item>
