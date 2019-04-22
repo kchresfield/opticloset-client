@@ -22,6 +22,10 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: '../tab2/tab2.module#Tab2PageModule'
+          },
+          {
+            path: '/attributes', 
+            loadChildren: '../attributes/tab2.attrubite.module#Tab2AttributePageModule'
           }
         ]
       },
@@ -36,6 +40,11 @@ const routes: Routes = [
             path: '/posted-list',
             loadChildren:
               '../tab3/posted-list/posted-list.module#PostedListPageModule'
+          },
+          {
+            path: '/sell-on-ebay',
+            loadChildren:
+              '../tab3/tab3sell/tab3sell.module#Tab3SellModule'
           },
         ]
       },
