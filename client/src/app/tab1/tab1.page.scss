@@ -25,3 +25,11 @@ ion-grid {
 // border: think solid black;
 // }
 }
+
+.uploadedPhoto{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  transform: rotate(90deg);
+  max-height: 33% !important;
+}

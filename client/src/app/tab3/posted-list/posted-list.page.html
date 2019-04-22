@@ -14,7 +14,9 @@
           <ion-col>
             <!-- clothing image -->
             <ion-label>
-              <ion-img class="thumb" [src]="item.image"></ion-img>
+              <!-- <ion-img class="thumb" [src]="item.image"></ion-img> -->
+              <div *ngIf="item.image[4] === ':'; else elseBlock"><img class="uploadedPhoto" [src]="item.image"></div>
+              <ng-template #elseBlock><img [src]="item.image"></ng-template>
             </ion-label>
           </ion-col>
           <!-- item stats -->

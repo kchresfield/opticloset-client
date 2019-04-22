@@ -1,5 +1,7 @@
 <ion-content>
-  <img [src]="filteredCloset" height="300" class="center">
+  <!-- <img [src]="filteredCloset" height="300" class="center"> -->
+  <div *ngIf="filteredCloset[4] === ':'; else elseBlock"><img class="uploadedPhoto" [src]="filteredCloset"></div>
+  <ng-template #elseBlock><img [src]="filteredCloset"></ng-template>
   <div>
     <h3>Title:</h3><ion-input class="input" [(ngModel)]="title" placeholder="Title"></ion-input>
   </div>

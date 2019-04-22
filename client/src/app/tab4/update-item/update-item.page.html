@@ -8,7 +8,9 @@
 
   <ion-content>
     <ion-card-title>Attributes</ion-card-title>
-    <img class="displayed" [src]="selectedItem.imageUrl">
+    <!-- <img class="displayed" [src]="selectedItem.imageUrl"> -->
+    <div *ngIf="selectedItem.imageUrl[4] === ':'; else elseBlock"><img class="uploadedPhoto" [src]="selectedItem.imageUrl"></div>
+    <ng-template #elseBlock><img class="displayed" [src]="selectedItem.imageUrl"></ng-template>
     <div>
       <ion-button #long [color]="this.buttonColors['long']" (click)="attributeItem('1'); toggleNamedColor('long')">Long</ion-button>
       <ion-button #short [color]="this.buttonColors['short']" (click)="attributeItem('2'); toggleNamedColor('short')">Short</ion-button>

@@ -33,7 +33,7 @@ export class Tab3Sell implements OnInit {
   index: number;
   arr: any = this.outfitSelectService.get('sellArr').slice();
   parsedSelectedItemsToSell: any = JSON.parse(localStorage.getItem('selectedItemsToSell'));
-  apiURL: string = `http://10.135.48.96:8080`;
+  apiURL: string = `http://${AUTH_CONFIG.host}:8080`;
   parsedPostedList: any = JSON.parse(localStorage.getItem('postedList'));
   parsedPostedListBackup: any = JSON.parse(localStorage.getItem('posted-list'));
 

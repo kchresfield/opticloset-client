@@ -13,3 +13,10 @@
   grid-template-rows: 62px 62px 62px;
   line-height: 1
 }
+
+.uploadedPhoto{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  transform: rotate(90deg);
+}
