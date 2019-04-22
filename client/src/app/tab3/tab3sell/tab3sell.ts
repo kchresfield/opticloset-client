@@ -33,7 +33,8 @@ export class Tab3Sell implements OnInit {
   index: number;
   arr: any = this.outfitSelectService.get('sellArr').slice();
   parsedSelectedItemsToSell: any = JSON.parse(localStorage.getItem('selectedItemsToSell'));
-  apiURL: string = `http://10.135.48.96:8080`;
+  apiURL = 'http://localhost:8080';
+  // apiURL: string = `http://10.135.48.96:8080`;
   parsedPostedList: any = JSON.parse(localStorage.getItem('postedList'));
   parsedPostedListBackup: any = JSON.parse(localStorage.getItem('posted-list'));
 
@@ -65,7 +66,7 @@ export class Tab3Sell implements OnInit {
     delete this.parsedSelectedItemsToSell[this.firstItemInObjectKey];
     localStorage.setItem('itemsToSell', JSON.stringify(this.parsedLocalStorage));
     localStorage.setItem('selectedItemsToSell', JSON.stringify(this.parsedSelectedItemsToSell));
-    
+
     // Deletes the clothing item from the tab3 page
     for (let i = 0; i < this.outfitSelectService.get('sellArr').length; i++) {
       if ((this.outfitSelectService.get('sellArr')[i].id_clothing_item).toString() === this.firstItemInObjectKey) {
@@ -96,6 +97,7 @@ export class Tab3Sell implements OnInit {
 
 
     this.userService.getUser().then((profile) => {
+      // debugger;
       this.http.patch(`${this.apiURL}/closet/${profile['nickname']}/sell`, {
         "clothingId" : this.firstItemInObjectKey,
       })
@@ -105,7 +107,7 @@ export class Tab3Sell implements OnInit {
       .catch((err) => {
         console.log(err)})
     })
-  
+
 //sku, title, description, condition, image
 // Should be post
     this.http.put(`${this.apiURL}/ebayPost`, {

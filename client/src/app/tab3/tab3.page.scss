@@ -39,3 +39,13 @@
 .mid{
   vertical-align: middle;
 }
+
+.list-ios {
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 8px;
+  margin-bottom: 0px;
+  display: grid;
+  align-items: center;
+  grid-template-rows: 52px 52px 52px 52px;
+}

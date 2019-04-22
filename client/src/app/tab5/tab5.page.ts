@@ -113,7 +113,6 @@ export class Tab5Page implements OnInit {
   // reset the start & end dates and replace the sortedCloset on the service by an initial closet
   resetFilter() {
     this.startDate = undefined;
-    this.endDate = undefined;
     this.checkAndRestoreCloset();
   }
 

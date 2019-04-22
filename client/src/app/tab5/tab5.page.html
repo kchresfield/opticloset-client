@@ -2,53 +2,52 @@
   <ion-radio-group>
     <!-- Sort title -->
     <ion-list-header>
-      <ion-label (click)="retrieveItem()">
+      <ion-label class="test"(click)="retrieveItem()">
       Sort By
       </ion-label>
-      <ion-label (click)="checkAndRestoreCloset()">
+      <!-- <ion-label class="bigger"(click)="checkAndRestoreCloset()">
         See All
-      </ion-label>
+      </ion-label> -->
+      <ion-button class="test" color="tertiary" (click)="resetFilter()">See all
+      </ion-button>
     </ion-list-header>
 
 
     <!-- Sort methods -->
     <ion-grid>
-      <ion-row>
-        <ion-col>
-            <ion-label>Least Worn</ion-label>
-            <ion-radio (ionSelect)="sortCloset('least2Most')" checked></ion-radio>
+      <ion-row class="ion-align-items-start">
+        <ion-col class="ion-align-items-start">
+          <ion-label class="tab5Labs">Least Worn</ion-label>
+          <ion-radio (ionSelect)="sortCloset('least2Most')" checked></ion-radio>
         </ion-col>
-        <ion-col>
-              <ion-label>Most Worn</ion-label>
-              <ion-radio (ionSelect)="sortCloset('most2Least')"></ion-radio>
+        <ion-col offset='3'>
+          <ion-label class="tab5Labs">Least Expensive</ion-label>
+          <ion-radio item-left (ionSelect)="sortCloset('low2High')"></ion-radio>
         </ion-col>
       </ion-row>
-            <ion-row>
-              <ion-col>
-                <ion-label>$$$ > $</ion-label>
-                <ion-radio (ionSelect)="sortCloset('high2Low')" checked></ion-radio>
-              </ion-col>
-              <ion-col>
-                <ion-label>$ < $$$</ion-label>
-                <ion-radio (ionSelect)="sortCloset('low2High')"></ion-radio>
-              </ion-col>
-            </ion-row>
+        <ion-row class="ion-align-items-start">
+          <ion-col class="ion-align-items-start">
+            <ion-label class="tab5Labs">Most Worn</ion-label>
+            <ion-radio (ionSelect)="sortCloset('most2Least')"></ion-radio>
+          </ion-col>
+          <ion-col offset='3'>
+            <ion-label class="tab5Labs">Most Expensive</ion-label>
+            <ion-radio item-left (ionSelect)="sortCloset('high2Low')" checked></ion-radio>
+          </ion-col>
+        </ion-row>
     </ion-grid>
 </ion-radio-group>
 
   <!-- date picker title -->
-  <ion-list-header>
-    <ion-label>
-      Filter
-    </ion-label>
-    <ion-label (click)="resetFilter()">
+  <!-- <ion-list-header> -->
+    <!-- <ion-label (click)="resetFilter()">
       Reset Filters
-    </ion-label>
-  </ion-list-header>
+    </ion-label> -->
+  <!-- </ion-list-header> -->
   <!-- date picker -->
   <ion-item>
     <ion-label>Worn since</ion-label>
-    <ion-datetime [(ngModel)]="startDate" (ionChange)="setFilter()" display-format="MMM  D YYYY"
+    <ion-datetime class="dateSelector" [(ngModel)]="startDate" (ionChange)="setFilter()" display-format="MMM  D YYYY"
       picker-format="MMMM D YYYY" placeholder="Select Date"></ion-datetime>
   </ion-item>
   <!-- <ion-item>
@@ -69,18 +68,18 @@
         <!-- clothing stats -->
       <ion-col>
         <ion-list>
-          <ion-item>
-            <ion-label>Last Worn: {{clothing.lastUpdated}}</ion-label>
+          <ion-item no-padding>
+            <ion-label> <b>Last Worn: </b>{{clothing.lastUpdated}}</ion-label>
           </ion-item>
-          <ion-item>
-            <ion-label>Times Worn: {{clothing.count_worn}}</ion-label>
+          <ion-item no-padding>
+            <ion-label> <b>Times Worn: </b>{{clothing.count_worn}}</ion-label>
           </ion-item>
-          <ion-item>
-            <ion-label>Price: {{clothing.price}}</ion-label>
+          <ion-item no-padding>
+            <ion-label> <b>Price: $</b>{{clothing.price}}</ion-label>
           </ion-item>
-          <ion-item>
-            <ion-label>Price per Wear:
-              {{clothing.count_worn === 0 ? clothing.price : (clothing.price/clothing.count_worn).toFixed(2)}}
+          <ion-item no-padding>
+            <ion-label> <b>Price per Wear: $</b>
+            {{clothing.count_worn === 0 ? clothing.price : (clothing.price/clothing.count_worn).toFixed(2)}}
             </ion-label>
           </ion-item>
         </ion-list>

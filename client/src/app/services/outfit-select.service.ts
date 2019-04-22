@@ -105,25 +105,25 @@ export class OutfitSelectService {
     // this.closet = mockCloset;
     this.shuffle(this.closet);
     this.tops = this.closet.filter(clothing => clothing['id_category'] === 2);
-    console.log(`Tops length is ${this.tops.length}`);
+    // console.log(`Tops length is ${this.tops.length}`);
     this.onePieces = this.closet.filter(
       clothing => clothing['id_category'] === 1
     );
-    console.log(`onePieces length is ${this.onePieces.length}`);
+    // console.log(`onePieces length is ${this.onePieces.length}`);
     this.outerwears = this.closet.filter(
       clothing => clothing['id_category'] === 4
     );
-    console.log(`outerwears length is ${this.outerwears.length}`);
+    // console.log(`outerwears length is ${this.outerwears.length}`);
     this.accessories = this.closet.filter(
       clothing => clothing['id_category'] === 5
     );
-    console.log(`accessories length is ${this.accessories.length}`);
+    // console.log(`accessories length is ${this.accessories.length}`);
     this.bottoms = this.closet.filter(
       clothing => clothing['id_category'] === 3
     );
-    console.log(`bottoms length is ${this.bottoms.length}`);
+    // console.log(`bottoms length is ${this.bottoms.length}`);
     this.shoes = this.closet.filter(clothing => clothing['id_category'] === 6);
-    console.log(`shoes length is ${this.shoes.length}`);
+    // console.log(`shoes length is ${this.shoes.length}`);
   }
 
   // helper functions for colormatching algo
@@ -206,9 +206,9 @@ export class OutfitSelectService {
     const colorOutfit = {};
     // select random top
     let randoIndex = this.getRandomIndex(this.tops.length);
-    console.log(randoIndex);
+    // console.log(randoIndex);
     let currPiece = this.tops[randoIndex];
-    console.log(currPiece);
+    // console.log(currPiece);
     // declare matchingColors variable
     let matchingColors;
     // current color
@@ -227,7 +227,7 @@ export class OutfitSelectService {
       i < this.bottoms.length;
       i++
     ) {
-      console.log(`Color bottoms index is ${i}`);
+      // console.log(`Color bottoms index is ${i}`);
       // check if matching colors have been selected
       if (matchingColors) {
         // if matching colors have been selected, then check if current bottom's color is considered matching
@@ -261,7 +261,7 @@ export class OutfitSelectService {
       j < this.outerwears.length;
       j++
     ) {
-      console.log(`Color outerwears index is ${j}`);
+      // console.log(`Color outerwears index is ${j}`);
       // check if current bottom matches top by color
       if (matchingColors) {
         if (matchingColors.includes(this.outerwears[j].color)) {
@@ -290,7 +290,7 @@ export class OutfitSelectService {
       k < this.shoes.length;
       k++
     ) {
-      console.log(`Color shoes index is ${k}`);
+      // console.log(`Color shoes index is ${k}`);
       // check if current shoes matches top by color
       if (matchingColors) {
         if (matchingColors.includes(this.shoes[k].color)) {
@@ -317,7 +317,7 @@ export class OutfitSelectService {
       l < this.accessories.length;
       l++
     ) {
-      console.log(`Color accessories index is ${l}`);
+      // console.log(`Color accessories index is ${l}`);
       // check if current accessory matches top by color
       if (matchingColors) {
         if (matchingColors.includes(this.accessories[l].color)) {
@@ -336,7 +336,7 @@ export class OutfitSelectService {
       currColor = currPiece.color.split(', ')[0];
     }
 
-    console.log('matching colors', matchingColors);
+    // console.log('matching colors', matchingColors);
     return colorOutfit;
   }
 
@@ -357,7 +357,7 @@ export class OutfitSelectService {
       i < this.bottoms.length;
       i++
     ) {
-      console.log(`Mono bottoms index is ${i}`);
+      // console.log(`Mono bottoms index is ${i}`);
       // check if current bottom matches top by color
       if (this.bottoms[i].color.includes(color)) {
         monoOutfit['bottom'] = this.bottoms[i];
@@ -376,7 +376,7 @@ export class OutfitSelectService {
       i < this.outerwears.length;
       i++
     ) {
-      console.log(`Mono outerwears index is ${i}`);
+      // console.log(`Mono outerwears index is ${i}`);
       // check if current outerwear matches top by color
       if (this.outerwears[i].color.includes(color)) {
         monoOutfit['outerwear'] = this.outerwears[i];
@@ -407,7 +407,7 @@ export class OutfitSelectService {
       i < this.tops.length;
       i++
     ) {
-      console.log(`Neutral tops index is ${i}`);
+      // console.log(`Neutral tops index is ${i}`);
       if (this.isNeutral(this.tops[i].color)) {
         neutralOutfit['top'] = this.tops[i];
         break;
@@ -423,7 +423,7 @@ export class OutfitSelectService {
       i < this.bottoms.length;
       i++
     ) {
-      console.log(`Neutral bottoms index is ${i}`);
+      // console.log(`Neutral bottoms index is ${i}`);
       if (this.isNeutral(this.bottoms[i].color)) {
         neutralOutfit['bottom'] = this.bottoms[i];
         break;
@@ -442,7 +442,7 @@ export class OutfitSelectService {
       i < this.outerwears.length;
       i++
     ) {
-      console.log(`Neutral outerwears index is ${i}`);
+      // console.log(`Neutral outerwears index is ${i}`);
       if (this.isNeutral(this.outerwears[i].color)) {
         neutralOutfit['outerwear'] = this.outerwears[i];
         break;
@@ -605,12 +605,12 @@ export class OutfitSelectService {
     // if no method is selected, select random matching method
     if (!method || method === 'random') {
       method = this.chooseMatchMethod();
-      console.log(`Random match method is ${method}`);
+      // console.log(`Random match method is ${method}`);
     }
     // if no occasion is selected, select random occasion
     if (!occasion || method === 'random') {
       occasion = this.chooseOccasion();
-      console.log(`Random occasion method is ${occasion}`);
+      // console.log(`Random occasion method is ${occasion}`);
     }
 
     this.filterByOccasion(occasion);
@@ -620,7 +620,7 @@ export class OutfitSelectService {
 
     // reassign outfit to be outfit chosen by method
     this.outfit = currOutfitSelection;
-    console.log(this.outfit, 'Outfit selected');
+    // console.log(this.outfit, 'Outfit selected');
 
     this.setMock();
   }

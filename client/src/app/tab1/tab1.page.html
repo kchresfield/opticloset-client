@@ -52,7 +52,7 @@
               You currently have no Top in your closet. Go add some!
             </div>
             <div *ngIf="outfit['top']" routerLink="/home/tabs/tab4" (click)="changeClothingItem('top')">
-              <ion-img [src]="outfit['top'].imageUrl"></ion-img>
+              <ion-img class="images" [src]="outfit['top'].imageUrl"></ion-img>
             </div>
           </div>
         </ion-item>
@@ -67,7 +67,7 @@
               You currently have no Outerwear in your closet. Go add some!
             </div>
             <div *ngIf="outfit['outerwear']" routerLink="/home/tabs/tab4" (click)="changeClothingItem('outerwear')">
-              <ion-img [src]="outfit['outerwear'].imageUrl"></ion-img>
+              <ion-img class="images" [src]="outfit['outerwear'].imageUrl"></ion-img>
             </div>
           </div>
         </ion-item>
@@ -79,7 +79,7 @@
               You currently have no Bottom in your closet. Go add some!
             </div>
             <div *ngIf="outfit['bottom']" routerLink="/home/tabs/tab4" (click)="changeClothingItem('bottom')">
-              <ion-img [src]="outfit['bottom'].imageUrl"></ion-img>
+              <ion-img class="images" [src]="outfit['bottom'].imageUrl"></ion-img>
             </div>
           </div>
         </ion-item>
@@ -88,7 +88,7 @@
 
     <ion-row class="ion-align-items-center ion-justify-content-center">
       <ion-col>
-        <ion-button color="tertiary" (click)="presentToast()">{{outfitSelected ? 'Current Outfit' : 'Confirm Outfit'}}
+        <ion-button class="confirmButton" color="tertiary" (click)="presentToast()">{{outfitSelected ? 'Current Outfit' : 'Confirm Outfit'}}
         </ion-button>
         <!-- <ion-button color="secondary" (click)="retrieveOutfit()">
         </ion-button> -->
@@ -97,7 +97,7 @@
         <ion-item>
           <div *ngIf="!isLoading && outfit['shoes']; else elseBlock" routerLink="/home/tabs/tab4"
             (click)="changeClothingItem('shoes')">
-            <ion-img [src]="outfit['shoes'].imageUrl"></ion-img>
+            <ion-img class="images" [src]="outfit['shoes'].imageUrl"></ion-img>
           </div>
         </ion-item>
       </ion-col>

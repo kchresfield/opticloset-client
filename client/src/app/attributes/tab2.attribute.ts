@@ -100,7 +100,7 @@ export class Tab2Attribute {
     business: 'light',
     goingOut: 'light',
     athletic: 'light',
-  }
+  };
 
   ngOnInit() {
     this.categories = JSON.parse(localStorage.getItem('response')).categories;
@@ -159,7 +159,7 @@ export class Tab2Attribute {
     }
     console.log(input)
   };
-  
+
   categorySelected(input){
     category.category = input.toLowerCase();
     console.log(input.toLowerCase());
