@@ -110,11 +110,11 @@ export class UpdateItemPage implements OnInit {
   ) {}
 
   public toggleNamedColor(item): void {
-    // if (this.buttonColors[item] === 'light') {
-    //   this.buttonColors[item] = 'primary';
-    // } else {
-    //   this.buttonColors[item] = 'light';
-    // }
+    if (this.buttonColors[item] === 'light') {
+      this.buttonColors[item] = 'primary';
+    } else {
+      this.buttonColors[item] = 'light';
+    }
   }
 
   ngOnInit() {
@@ -229,8 +229,7 @@ export class UpdateItemPage implements OnInit {
     } else {
       this.buttonColors[occasion] = 'light';
     }
-    // console.log(input)
-  };
+  }
 
   selectCategory(input) {
     this.selectedCategory.splice(0, 2, `${category[input][0].toUpperCase()}${category[input].slice(1)}`);
