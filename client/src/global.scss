@@ -73,24 +73,29 @@ ion-tab-button#tab-button-tab5 {
 }
 
 .displayed {
-    // display: block;
-    // margin-left: auto;
-    // margin-right: auto;
-    // max-height: 40px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     height: 160px;
 }
 .images {
-    // display: block;
-    // margin-left: auto;
-    // margin-right: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     // max-height: 40px;
-    max-height: 33%;
+    height: 210px;
 }
 
 .dateSelector{
   padding-right: 30px;
 }
 
+.tab3Images{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 180px;
+}
 // ion-radio {
 //   // margin: 0;
 //   // padding-right: 10px;
