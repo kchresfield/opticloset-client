@@ -10,9 +10,7 @@ import { Tab3Sell } from './tab3sell';
     IonicModule,
     CommonModule,
     FormsModule,
-    RouterModule.forChild([
-      { path: '', component: Tab3Sell },
-    ])
+    RouterModule.forChild([{ path: 'sell-on-ebay', component: Tab3Sell }])
   ],
   declarations: [Tab3Sell]
 })

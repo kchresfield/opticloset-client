@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab2Page } from './tab2.page';
 import { FileUploadModule } from 'ng2-file-upload';
+import { Tab2AttributePageModule } from '../attributes/tab2.attrubite.module';
 
 
 @NgModule({
@@ -13,7 +14,11 @@ import { FileUploadModule } from 'ng2-file-upload';
     CommonModule,
     FormsModule,
     FileUploadModule,
-    RouterModule.forChild([{ path: '', component: Tab2Page }])
+    Tab2AttributePageModule,
+    RouterModule.forChild([
+      { path: '', component: Tab2Page },
+      { path: 'attributes', component: Tab2AttributePageModule }
+    ])
   ],
   declarations: [Tab2Page]
 })

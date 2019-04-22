@@ -11,7 +11,7 @@ import { Tab2Attribute } from './tab2.attribute';
     IonicModule,
     CommonModule,
     FormsModule,
-    RouterModule.forChild([{ path: '', component: Tab2Attribute }])
+    RouterModule.forChild([{ path: 'attributes', component: Tab2Attribute }])
   ],
   declarations: [Tab2Attribute]
 })

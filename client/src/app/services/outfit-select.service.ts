@@ -63,8 +63,10 @@ export class OutfitSelectService {
 
   // add item to array on service
   add(prop, item) {
+    console.log('hit add', prop, item);
     let exist = false;
     this[prop].forEach(sellItem => {
+      console.log(sellItem, item)
       if (sellItem.id_clothing_item === item.id_clothing_item) {
         exist = true;
       }
@@ -73,6 +75,7 @@ export class OutfitSelectService {
     if (exist === false) {
       this[prop].push(item);
     }
+    console.log(exist);
   }
 
   // empty a collection on the service

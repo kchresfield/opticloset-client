@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { OutfitSelectService } from '../../services/outfit-select.service';
 import { UserService } from '../../services/user/user.service';
 import { HttpHeaders } from '@angular/common/http';
+import { AUTH_CONFIG } from '../../services/auth/auth.config';
 
 
 const condition = { condition: 'test' };
@@ -33,7 +34,9 @@ export class Tab3Sell implements OnInit {
   arr: any = this.outfitSelectService.get('sellArr').slice();
   parsedSelectedItemsToSell: any = JSON.parse(localStorage.getItem('selectedItemsToSell'));
   apiURL = 'http://localhost:8080';
+  // apiURL: string = `http://10.135.48.96:8080`;
   parsedPostedList: any = JSON.parse(localStorage.getItem('postedList'));
+  parsedPostedListBackup: any = JSON.parse(localStorage.getItem('posted-list'));
 
   constructor(
     private apiService: ApiService,
@@ -106,19 +109,20 @@ export class Tab3Sell implements OnInit {
     })
 
 //sku, title, description, condition, image
-    // this.http.put(`${this.apiURL}/ebayPost`, {
-    //   title: this.title,
-    //   description: this.description,
-    //   image: this.filteredCloset,
-    //   condition: condition.condition,
-    //   sku: this.firstItemInObjectKey,
-    // }).subscribe((response) => {
-    //   console.log(response);
-    // });
+// Should be post
+    this.http.put(`${this.apiURL}/ebayPost`, {
+      title: this.title,
+      description: this.description,
+      image: this.filteredCloset,
+      condition: condition.condition,
+      sku: this.firstItemInObjectKey,
+    }).subscribe((response) => {
+      console.log(response);
+    });
 
 
     // Adding information to the localstorage
-    this.parsedPostedList[this.firstItemInObjectKey] = {
+    this.parsedPostedListBackup[this.firstItemInObjectKey] = {
         title: this.title,
         description: this.description,
         image: this.filteredCloset,
@@ -127,15 +131,15 @@ export class Tab3Sell implements OnInit {
     };
 
     // Adds item to the local storage
-    localStorage.setItem('postedList', JSON.stringify(this.parsedPostedList));
+    localStorage.setItem('posted-list', JSON.stringify(this.parsedPostedListBackup));
 
-    // Add items to the posted-list property
+    // Add items to the postedList property in outfitselect service
     this.outfitSelectService.add('postedList', {
       title: this.title,
       description: this.description,
       image: this.filteredCloset,
       pricePosted: this.listingPrice,
-      id: this.firstItemInObjectKey,
+      id_clothing_item: this.firstItemInObjectKey,
     });
 
     if(Object.keys(this.parsedSelectedItemsToSell).length === 0 || this.parsedSelectedItemsToSell === undefined || this.parsedSelectedItemsToSell === null){
@@ -146,7 +150,7 @@ export class Tab3Sell implements OnInit {
       // Go back to the sell page to sell the rest of the clothes
       console.log(Object.keys(this.parsedSelectedItemsToSell).length, '11111111111111111');
       this.ngOnInit();
-      this.router.navigate(['/sell-on-ebay']);
+      this.router.navigate(['home/tabs/tab3/sell-on-ebay']);
     }
   }
 

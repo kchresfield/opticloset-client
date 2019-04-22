@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../services/api/api.service';
 import { LogService } from 'app/services/log/log.service';
 import { Router } from '@angular/router';
+import { OutfitSelectService } from '../services/outfit-select.service';
 
 
 // This is my cheat for adding the data to the db lol
@@ -65,6 +66,7 @@ export class Tab2Attribute {
     private httpClient: HttpClient,
     private logService: LogService,
     private router: Router,
+    private outfitSelectService: OutfitSelectService,
     ) { }
 
   buttonColors = {
@@ -194,17 +196,17 @@ export class Tab2Attribute {
     const price = this.price;
     const clothesData = {
       id_user: 1,
-      id_category: category.category,
-      price: price,
+      id_category: parseInt(category.category),
+      price: parseInt(price),
       id_image: this.imgId,
       count_worn: 0,
-      id_occasion: selectedOccasion,
-      attribute: arrOfAttrId,
-      color: arrOfColors,
+      id_occasion: parseInt(selectedOccasion),
+      attribute: arrOfAttrId.join(', '),
+      color: JSON.stringify(arrOfColors),
     };
     
     // this.logService.log((clothesData));
-    this.httpClient.post('http://172.24.0.217:8080/closet/1', {
+    this.httpClient.post(`${this.apiService.apiURL}/closet/1`, {
       id_user: 1,
       id_category: parseInt(category.category),
       price: parseInt(price),
@@ -214,6 +216,10 @@ export class Tab2Attribute {
       attribute: arrOfAttrId.join(', '),
       color: JSON.stringify(arrOfColors),
     }).toPromise()
+    .then(() => {
+      this.outfitSelectService.add('closet', clothesData);
+      this.logService.log(this.outfitSelectService);
+    })
     .then(() => {
       this.router.navigate(['/home/tabs/tab2'])
     })
