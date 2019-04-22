@@ -1,18 +1,21 @@
 <ion-content>
-  <img [src]="filteredCloset" height="300" class="center">
+  <img [src]="filteredCloset" height="300" class="center" padding-top="10px">
   <div>
-    <h3>Title:</h3><ion-input class="input" [(ngModel)]="title" placeholder="Title"></ion-input>
+    <h3 class="tab3SellLabs">Title:</h3><ion-input class="input" [(ngModel)]="title" placeholder="Title"></ion-input>
   </div>
   <div>
-    <h3>Description:</h3><ion-textarea class="input" [(ngModel)]="description" placeholder="Description..."></ion-textarea>
+    <h3 class="tab3SellLabs">Description:</h3><ion-textarea class="input" [(ngModel)]="description" placeholder="Description..."></ion-textarea>
   </div>
   <div>
-    <h3>Price Paid:</h3>$ {{pricePaid}}
+    <h3 class="tab3SellLabs">Price Paid:<small> ${{pricePaid}} </small></h3> 
+    <!-- <ion-item class="tab3SellLabs">
+    $ {{pricePaid}}
+    </ion-item> -->
   </div>
   <div>
-    <h3>Condition:</h3>
+    <h3 class="tab3SellLabs">Condition:
     <ion-item>
-      <ion-label>Condition</ion-label>
+      <!-- <ion-label>Condition</ion-label> -->
       <ion-select multiple="false" cancelText="Cancel" okText="Done" [(ngModel)]="chosenCondition" (ionChange)="conditionSelected(chosenCondition)">
         <ion-select-option value="New with tags">New With Tags</ion-select-option>
         <ion-select-option value="New without tags">New Without Tags</ion-select-option>
@@ -20,14 +23,15 @@
         <ion-select-option value="Pre-owned">Pre-owned</ion-select-option>
       </ion-select>
     </ion-item>
+    </h3>
   </div>
   <div>
-    <h3>Listing Price:</h3><ion-input class="input" [(ngModel)]="listingPrice" placeholder="$ Listing Price"></ion-input>
+    <h3 class="tab3SellLabs">Listing Price:</h3><ion-input class="input" [(ngModel)]="listingPrice" placeholder="$ Listing Price"></ion-input>
   </div>
 
   <div>
-    <ion-button routerLink='/home/tabs/tab3'>Cancel</ion-button>
-    <ion-button (click)="presentAlert()">Sell</ion-button>
+    <ion-button class="tab3SellButton" routerLink='/home/tabs/tab3'>Cancel</ion-button>
+    <ion-button class="tab3SellButton" (click)="presentAlert()">Sell</ion-button>
   </div>
 
   <!-- <ion-button (click)="test()">Test</ion-button> -->
