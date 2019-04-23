@@ -11,7 +11,8 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 93%
+  width: 93%;
+  padding-left: 6px;
 }
 
 .uploadedPhoto{
@@ -20,3 +21,13 @@
   margin-right: auto;
   transform: rotate(90deg);
 }
+.tab3SellLabs{
+  padding-left: 6px;
+}
+
+.tab3SellButton{
+  padding-top: 10px;
+  padding-right: 6px;
+  font-size: 20px;
+  float: right;
+} 

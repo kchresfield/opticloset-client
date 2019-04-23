@@ -46,7 +46,7 @@ export class TabsPage implements OnInit {
   getWeather() {
     this.apiService.getConditions(data => {
       this.temperature = Math.floor(data.temp);
-      console.log(data.weather);
+      console.log('current weather is', data.weather);
       if (data.weather.includes('rain')) {
         this.conditions = 'rainy';
       }
@@ -58,6 +58,9 @@ export class TabsPage implements OnInit {
       }
       if (data.weather.includes('sun') || data.weather.includes('clear')) {
         this.conditions = 'sunny';
+      }
+      if (data.weather.includes('fog') || data.weather.includes('mist')) {
+        this.conditions = '';
       }
       this.apiService.save('conditions', this.conditions);
       this.apiService.save('temperature', this.temperature);

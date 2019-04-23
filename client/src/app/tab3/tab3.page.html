@@ -2,7 +2,7 @@
 <ion-content>
   <!-- <h1 style="text-align:center" (click)="print()">Sell List for eBay</h1> -->
   <div class="title">
-    <h1 style="text-align:center" (click)="print()">Sell List for</h1>
+    <h1 style="text-align:center">Sell List for</h1>
   </div>
   
 <div id="banner">
@@ -25,11 +25,11 @@
         <ion-label>
           <!-- <ion-img class="displayed" [src]="clothing.imageUrl"></ion-img> -->
           <div *ngIf="clothing.imageUrl[4] === ':'; else elseBlock"><img class="uploadedPhoto" [src]="clothing.imageUrl"></div>
-          <ng-template #elseBlock><img class="images" [src]="clothing.imageUrl"></ng-template>
+          <ng-template #elseBlock><img class="tab3Images" [src]="clothing.imageUrl"></ng-template>
         </ion-label>
       </ion-col>
       <!-- clothing stats -->
-      <ion-col col-6 offset-3 text-center>
+      <ion-col offset-3 text-center>
         <ion-list class="mid">
           <ion-radio-group>
             <ion-item>

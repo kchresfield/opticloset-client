@@ -4,7 +4,13 @@
     <ion-toolbar class="vertical-align"color="tertiary">
       <ion-icon class="customIcons" name="settings"size="large" routerLink="/notifications"></ion-icon>
       <div class="logo"><img src='../assets/OptiCloset-light-grey-logo.png' height="40" (click)="print()"></div>
-      <ion-icon class="customIcons" id="cond" name={{this.conditions}} size="large"></ion-icon>
+      <div *ngIf="this.conditions; then thenBlock else elseBlock"></div>
+      <ng-template #thenBlock>
+        <ion-icon class="customIcons" id="cond" name={{this.conditions}} size="large"></ion-icon>
+      </ng-template>
+      <ng-template #elseBlock>
+        <ion-icon id="cond" class="customIcons" src="../../assets/fog_mist_icon.svg" size="large"></ion-icon>
+      </ng-template>
       <span class="customIcons" id="temp">{{this.temperature}}°</span>
     </ion-toolbar>
   </ion-header>

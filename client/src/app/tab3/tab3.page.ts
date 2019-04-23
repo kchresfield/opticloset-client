@@ -46,6 +46,7 @@ export class Tab3Page implements OnInit {
     if (!Object.keys(selectedItemsToSellObj).length) {
       return this.presentToast();
     }
+    // debugger;
     localStorage.setItem('selectedItemsToSell', JSON.stringify(selectedItemsToSellObj));
     this.router.navigate(['home/tabs/tab3/sell-on-ebay']);
   }

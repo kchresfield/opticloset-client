@@ -7,10 +7,11 @@
 <ion-content padding>
 
   <ion-content>
-    <ion-card-title>Attributes</ion-card-title>
-    <!-- <img class="displayed" [src]="selectedItem.imageUrl"> -->
-    <div *ngIf="selectedItem.imageUrl[4] === ':'; else elseBlock"><img class="uploadedPhoto" [src]="selectedItem.imageUrl"></div>
-    <ng-template #elseBlock><img class="displayed" [src]="selectedItem.imageUrl"></ng-template>
+    <h2>
+      <b>Attributes</b>
+    </h2>
+    <div *ngIf="selectedItem.imageUrl[4] === ':'; else elseBlock"><ion-img class="uploadedPhoto" [src]="selectedItem.imageUrl"></ion-img></div>
+    <ng-template #elseBlock><ion-img class="displayed" [src]="selectedItem.imageUrl"></ion-img></ng-template>
     <div>
       <ion-button #long [color]="this.buttonColors['long']" (click)="attributeItem('1'); toggleNamedColor('long')">Long</ion-button>
       <ion-button #short [color]="this.buttonColors['short']" (click)="attributeItem('2'); toggleNamedColor('short')">Short</ion-button>
@@ -50,19 +51,19 @@
         <ion-select-option [disabled]="chosenColor==false">Orange</ion-select-option>
       </ion-select>
     </ion-item>
-    <h2>Occasion</h2>
+    <h2> <b>Occasion</b> </h2>
     <div>
-      <ion-button [color]="this.buttonColors['casual']" (click)="occasionItem('1'); toggleNamedColor('casual')">Casual</ion-button>
-      <ion-button [color]="this.buttonColors['formal']" (click)="occasionItem('2'); toggleNamedColor('formal')">Formal</ion-button>
-      <ion-button [color]="this.buttonColors['business']" (click)="occasionItem('3'); toggleNamedColor('business')">Business</ion-button>
-      <ion-button [color]="this.buttonColors['goingOut']" (click)="occasionItem('4'); toggleNamedColor('goingOut')">Going Out</ion-button>
-      <ion-button [color]="this.buttonColors['athletic']" (click)="occasionItem('5'); toggleNamedColor('athletic')">Athletic</ion-button>
+      <ion-button [color]="this.buttonColors['casual']" (click)="occasionItem('1', 'casual')">Casual</ion-button>
+      <ion-button [color]="this.buttonColors['formal']" (click)="occasionItem('2', 'formal')">Formal</ion-button>
+      <ion-button [color]="this.buttonColors['business']" (click)="occasionItem('3','business')">Business</ion-button>
+      <ion-button [color]="this.buttonColors['goingOut']" (click)="occasionItem('4', 'goingOut')">Going Out</ion-button>
+      <ion-button [color]="this.buttonColors['athletic']" (click)="occasionItem('5', 'athletic')">Athletic</ion-button>
     </div>
-    <h2>Category</h2>
+    <h2> <b>Category</b></h2>
     <div *ngFor="let category of selectedCategory" (click)="selectCategory(category)">
       <ion-button [color]="buttonColor" class="category">{{category}}</ion-button>
     </div>
-    <div>- or -</div>
+    <div>  - or -</div>
     <ion-item>
       <ion-label>Select One</ion-label>
       <ion-select multiple="false" cancelText="Cancel" okText="Done" [(ngModel)]="chosenCategory"
@@ -77,7 +78,12 @@
       </ion-select>
     </ion-item>
     <div>
-      <ion-card-title>Price</ion-card-title>
+      <h2>
+        <b>
+          Price
+        </b>
+      </h2>
+      <!-- <ion-card-title>Price</ion-card-title> -->
       <ion-item id="rounded">
         <ion-label fixed>$</ion-label>
         <ion-input type="text" [(ngModel)]="price" value="" placeholder="{{initialprice}}" inputmode="numeric"></ion-input>

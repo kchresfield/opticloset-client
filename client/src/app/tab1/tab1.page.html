@@ -39,8 +39,8 @@
               You currently have no Accessory in your closet. Go add some!
             </div>
             <div *ngIf="outfit['accessory']" routerLink="/home/tabs/tab4" (click)="changeClothingItem('accessory')">
-              <div *ngIf="outfit['accessory'].imageUrl[4] === ':'; else elseBlock"><img class="uploadedPhoto" [src]="outfit['accessory'].imageUrl"></div>
-              <ng-template #elseBlock><img class="images" [src]="outfit['accessory'].imageUrl"></ng-template>
+              <div *ngIf="outfit['accessory'].imageUrl[4] === ':'; else elseBlock"><ion-img class="uploadedPhoto" [src]="outfit['accessory'].imageUrl"></ion-img></div>
+              <ng-template #elseBlock><ion-img class="images" [src]="outfit['accessory'].imageUrl"></ion-img></ng-template>
             </div>
           </div>
           <ng-template #elseBlock>Loading</ng-template>
@@ -53,9 +53,8 @@
               You currently have no Top in your closet. Go add some!
             </div>
             <div *ngIf="outfit['top']" routerLink="/home/tabs/tab4" (click)="changeClothingItem('top')">
-              <!-- <ion-img [src]="outfit['top'].imageUrl"></ion-img> -->
-              <div *ngIf="outfit['top'].imageUrl[4] === ':'; else elseBlock"><img class="uploadedPhoto" [src]="outfit['top'].imageUrl"></div>
-              <ng-template #elseBlock><img class="images" [src]="outfit['top'].imageUrl"></ng-template>
+              <div *ngIf="outfit['top'].imageUrl[4] === ':'; else elseBlock"><ion-img class="uploadedPhoto" [src]="outfit['top'].imageUrl"></ion-img></div>
+              <ng-template #elseBlock><ion-img class="images" [src]="outfit['top'].imageUrl"></ion-img></ng-template>
             </div>
           </div>
         </ion-item>
@@ -70,9 +69,8 @@
               You currently have no Outerwear in your closet. Go add some!
             </div>
             <div *ngIf="outfit['outerwear']" routerLink="/home/tabs/tab4" (click)="changeClothingItem('outerwear')">
-              <!-- <ion-img [src]="outfit['outerwear'].imageUrl"></ion-img> -->
-              <div *ngIf="outfit['outerwear'].imageUrl[4] === ':'; else elseBlock"><img class="uploadedPhoto" [src]="outfit['outerwear'].imageUrl"></div>
-              <ng-template #elseBlock><img class="images" [src]="outfit['outerwear'].imageUrl"></ng-template>
+              <div *ngIf="outfit['outerwear'].imageUrl[4] === ':'; else elseBlock"><ion-img class="uploadedPhoto" [src]="outfit['outerwear'].imageUrl"></ion-img></div>
+              <ng-template #elseBlock><ion-img class="images" [src]="outfit['outerwear'].imageUrl"></ion-img></ng-template>
             </div>
           </div>
         </ion-item>
@@ -84,9 +82,8 @@
               You currently have no Bottom in your closet. Go add some!
             </div>
             <div *ngIf="outfit['bottom']" routerLink="/home/tabs/tab4" (click)="changeClothingItem('bottom')">
-              <!-- <ion-img [src]="outfit['bottom'].imageUrl"></ion-img> -->
-              <div *ngIf="outfit['bottom'].imageUrl[4] === ':'; else elseBlock"><img class="uploadedPhoto" [src]="outfit['botom'].imageUrl"></div>
-              <ng-template #elseBlock><img class="images" [src]="outfit['bottom'].imageUrl"></ng-template>
+              <div *ngIf="outfit['bottom'].imageUrl[4] === ':'; else elseBlock"><ion-img class="uploadedPhoto" [src]="outfit['botom'].imageUrl"></ion-img></div>
+              <ng-template #elseBlock><ion-img class="images" [src]="outfit['bottom'].imageUrl"></ion-img></ng-template>
             </div>
           </div>
         </ion-item>
@@ -95,7 +92,7 @@
 
     <ion-row class="ion-align-items-center ion-justify-content-center">
       <ion-col>
-        <ion-button color="tertiary" (click)="presentToast()">{{outfitSelected ? 'Current Outfit' : 'Confirm Outfit'}}
+        <ion-button class="confirmButton" color="tertiary" (click)="presentToast()">{{outfitSelected ? 'Current Outfit' : 'Confirm Outfit'}}
         </ion-button>
         <!-- <ion-button color="secondary" (click)="retrieveOutfit()">
         </ion-button> -->
@@ -104,9 +101,8 @@
         <ion-item>
           <div *ngIf="!isLoading && outfit['shoes']; else elseBlock" routerLink="/home/tabs/tab4"
             (click)="changeClothingItem('shoes')">
-            <!-- <ion-img [src]="outfit['shoes'].imageUrl"></ion-img> -->
-            <div *ngIf="outfit['shoes'].imageUrl[4] === ':'; else elseBlock"><img class="uploadedPhoto" [src]="outfit['shoes'].imageUrl"></div>
-            <ng-template #elseBlock><img class="images" [src]="outfit['shoes'].imageUrl"></ng-template>
+            <div *ngIf="outfit['shoes'].imageUrl[4] === ':'; else elseBlock"><ion-img class="uploadedPhoto" [src]="outfit['shoes'].imageUrl"></ion-img></div>
+            <ng-template #elseBlock><ion-img class="images" [src]="outfit['shoes'].imageUrl"></ion-img></ng-template>
           </div>
         </ion-item>
       </ion-col>

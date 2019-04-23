@@ -44,5 +44,16 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
+  height: 180px;
   transform: rotate(90deg);
+}
+
+.list-ios {
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 8px;
+  margin-bottom: 0px;
+  display: grid;
+  align-items: center;
+  grid-template-rows: 52px 52px 52px 52px;
 }

@@ -65,7 +65,7 @@ export class Tab3Sell implements OnInit {
     delete this.parsedSelectedItemsToSell[this.firstItemInObjectKey];
     localStorage.setItem('itemsToSell', JSON.stringify(this.parsedLocalStorage));
     localStorage.setItem('selectedItemsToSell', JSON.stringify(this.parsedSelectedItemsToSell));
-    
+
     // Deletes the clothing item from the tab3 page
     for (let i = 0; i < this.outfitSelectService.get('sellArr').length; i++) {
       if ((this.outfitSelectService.get('sellArr')[i].id_clothing_item).toString() === this.firstItemInObjectKey) {
@@ -96,6 +96,7 @@ export class Tab3Sell implements OnInit {
 
 
     this.userService.getUser().then((profile) => {
+      // debugger;
       this.http.patch(`${this.apiURL}/closet/${profile['nickname']}/sell`, {
         "clothingId" : this.firstItemInObjectKey,
       })
@@ -105,7 +106,7 @@ export class Tab3Sell implements OnInit {
       .catch((err) => {
         console.log(err)})
     })
-  
+
 //sku, title, description, condition, image
 // Should be post
     this.http.put(`${this.apiURL}/ebayPost`, {

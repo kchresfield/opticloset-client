@@ -37,7 +37,7 @@ export class ApiService {
       });
     }
     if (this.location) {
-      console.log('here');
+      // console.log('here');
       this.httpClient
         .get(`${this.apiURL}/weather`, {
           params: {
