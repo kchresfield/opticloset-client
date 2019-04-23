@@ -51,7 +51,13 @@ export class Tab3Page implements OnInit {
     this.router.navigate(['home/tabs/tab3/sell-on-ebay']);
   }
 
-  sellAll() {}
+  sellAll() {
+    this.outfitSelectService.get('sellArr').forEach((item) => {
+      selectedItemsToSellObj[item.id_clothing_item] = item;
+    })
+    localStorage.setItem('selectedItemsToSell', JSON.stringify(selectedItemsToSellObj));
+    this.router.navigate(['home/tabs/tab3/sell-on-ebay']);
+  }
 
   reset() {
     selectedItemsToSellObj = {};
