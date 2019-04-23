@@ -82,7 +82,7 @@
               You currently have no Bottom in your closet. Go add some!
             </div>
             <div *ngIf="outfit['bottom']" routerLink="/home/tabs/tab4" (click)="changeClothingItem('bottom')">
-              <div *ngIf="outfit['bottom'].imageUrl[4] === ':'; else elseBlock"><ion-img class="uploadedPhoto" [src]="outfit['botom'].imageUrl"></ion-img></div>
+              <div *ngIf="outfit['bottom'].imageUrl[4] === ':'; else elseBlock"><ion-img class="uploadedPhoto" [src]="outfit['bottom'].imageUrl"></ion-img></div>
               <ng-template #elseBlock><ion-img class="images" [src]="outfit['bottom'].imageUrl"></ion-img></ng-template>
             </div>
           </div>
