@@ -8,22 +8,22 @@
     <h3 class="tab3SellLabs">Description:</h3><ion-textarea class="input" [(ngModel)]="description" placeholder="Description..."></ion-textarea>
   </div>
   <div>
-    <h3 class="tab3SellLabs">Price Paid:<small> ${{pricePaid}} </small></h3> 
+    <h3 class="tab3SellLabs">Price Paid:<small class="light"> ${{pricePaid}}</small></h3> 
     <!-- <ion-item class="tab3SellLabs">
     $ {{pricePaid}}
     </ion-item> -->
   </div>
   <div>
     <h3 class="tab3SellLabs">Condition:
-    <ion-item>
+    <!-- <ion-item> -->
       <!-- <ion-label>Condition</ion-label> -->
-      <ion-select multiple="false" cancelText="Cancel" okText="Done" [(ngModel)]="chosenCondition" (ionChange)="conditionSelected(chosenCondition)">
+      <ion-select class="light" multiple="false" cancelText="Cancel" okText="Done" [(ngModel)]="chosenCondition" (ionChange)="conditionSelected(chosenCondition)">
         <ion-select-option value="New with tags">New With Tags</ion-select-option>
         <ion-select-option value="New without tags">New Without Tags</ion-select-option>
         <ion-select-option value="New with defects">New with defects</ion-select-option>
         <ion-select-option value="Pre-owned">Pre-owned</ion-select-option>
       </ion-select>
-    </ion-item>
+    <!-- </ion-item> -->
     </h3>
   </div>
   <div>

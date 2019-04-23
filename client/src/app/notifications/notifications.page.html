@@ -24,23 +24,28 @@
     <ion-item>
       <ion-text>{{this.location}}</ion-text>
     </ion-item>
+    <ion-item>
+      <ion-text>
+        eBay credentials
+        <ion-icon class="blueIcons" name="checkmark-circle"></ion-icon>
+      </ion-text>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
 
-<!-- <ion-item>
-  <ion-avatar slot="start">
-    <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-  </ion-avatar>
-  <ion-label>Item Avatar</ion-label>
-</ion-item> -->
 
 <ion-content padding>
 
 <!-- <ion-item-divider> -->
 
-  <ion-item>
-    <ion-label>Select time for your daily notifications</ion-label>
-    <ion-datetime [(ngModel)]="time" displayFormat="h:mm A" minuteValues="0,15,30,45"></ion-datetime>
+  <ion-item justify-content="center">
+    <!-- <ion-label>Select time for your daily notifications</ion-label> -->
+    <ion-datetime 
+      [(ngModel)]="time" 
+      displayFormat="h:mm A" 
+      minuteValues="0,15,30,45" 
+      placeholder="Select time for your daily notifications">
+    </ion-datetime>
   </ion-item>
   <!-- <ion-button expand="block" (click)="scheduleNotification()">Schedule</ion-button> -->
   <ion-button expand="block" (click)="repeatingDaily()">Set up your daily notification</ion-button>
