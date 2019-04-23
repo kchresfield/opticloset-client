@@ -13,7 +13,7 @@ import { AUTH_CONFIG } from '../services/auth/auth.config';
 
 const api_URL = `http://${AUTH_CONFIG.host}:8080`;
 const URL = 'https://api.cloudinary.com/v1_1/opticloset/auto/upload';
-const wait = (ms = 6000) => new Promise(res => setTimeout(res, ms));
+const wait = (ms = 4000) => new Promise(res => setTimeout(res, ms));
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -85,12 +85,17 @@ export class Tab2Page {
       })
       .then((response) => {
         localStorage.setItem('response', response);
+        // this.logService.log(JSON.parse(response));
       })
       .then(() => {
         this.loadingController.dismiss();
       })
       .then(() => {
+        wait();
+      })
+      .then(() => {
         this.router.navigate(['home/tabs/tab2/attributes']);
+        // this.logService.log('after');
       })
       .catch((err) => {
         this.logService.log(err);

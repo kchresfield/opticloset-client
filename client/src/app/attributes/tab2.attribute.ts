@@ -18,7 +18,7 @@ const allAttributes = {
   basic: false,
   shiny: false,
   solid: false,
-  patterned: false
+  patterned: false,
 };
 
 const allColors = {
@@ -33,6 +33,8 @@ const allColors = {
   Black: false,
   Brown: false,
   Gray: false,
+  Beige: false, 
+  Cyan: false,
 };
 
 
@@ -92,6 +94,8 @@ export class Tab2Attribute {
     Black: 'light',
     Brown: 'light',
     Gray: 'light',
+    Beige: 'light',
+    Cyan: 'light',
   };
 
   buttonOccasion = {
@@ -123,7 +127,7 @@ export class Tab2Attribute {
       allPossibilities.push('shoes');
     }
     if (this.info.includes("jewelry") || this.info.includes("hat") || this.info.includes("sneaker") || this.info.includes("flats") || this.info.includes("boots") || this.info.includes("footware") || this.info.includes("foot")) {
-      allPossibilities.push('acc');
+      allPossibilities.push('accessories');
     }
     this.colors = JSON.parse(localStorage.getItem('response')).colorsOptions;
     this.colors.map((color) => {
